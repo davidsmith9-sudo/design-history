@@ -1,13 +1,18 @@
 ---
 title: Helvetica
 type: 作品
-designer: []
-year: null
-field: null
-movement: null
-medium: null
-location: null
-related: []
+designer:
+  - "[[馬克斯·米丁格]]"
+  - 愛德華·霍夫曼
+year: 1957
+field: 字體設計
+movement: "[[瑞士國際主義]]"
+medium: 無襯線字體
+location: 瑞士
+related:
+  - "[[馬克斯·米丁格]]"
+  - "[[Univers]]"
+  - "[[瑞士國際主義]]"
 images: []
 tags:
 - 作品
@@ -37,3 +42,6 @@ Helvetica 是一種廣泛使用於拉丁字母的無襯線字體，由瑞士設�
 
 ## 延伸閱讀
 - 維基百科：https://zh.wikipedia.org/wiki/Helvetica
+
+## 主圖
+![[99-素材/images/作品/Helvetica.png]]

@@ -1,13 +1,16 @@
 ---
 title: Univers
 type: 作品
-designer: []
-year: null
-field: null
-movement: null
-medium: null
-location: null
-related: []
+designer:
+  - 阿德里安·弗魯提格
+year: 1957
+field: 字體設計
+movement: "[[瑞士國際主義]]"
+medium: 無襯線字體
+location: 瑞士
+related:
+  - "[[Helvetica]]"
+  - "[[瑞士國際主義]]"
 images: []
 tags:
 - 作品
@@ -35,3 +38,6 @@ Univers 是1957年瑞士設計師阿德里安·弗魯提格設計的一種西文
 
 ## 延伸閱讀
 - 維基百科：https://zh.wikipedia.org/wiki/Univers
+
+## 主圖
+![[99-素材/images/作品/Univers.png]]
