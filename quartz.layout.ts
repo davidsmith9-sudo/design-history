@@ -38,9 +38,7 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer({
-      filterFn: (node) => !["tags", "60-作品", "70-理論"].includes(node.slugSegment),
-    }),
+    Component.Explorer(),
   ],
   right: [
     Component.Graph(),
@@ -64,9 +62,7 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer({
-      filterFn: (node) => !["tags", "60-作品", "70-理論"].includes(node.slugSegment),
-    }),
+    Component.Explorer(),
   ],
   right: [],
 }
