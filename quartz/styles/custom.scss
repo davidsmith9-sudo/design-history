@@ -1,3 +1,195 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// ─────────────────────────────────────────────────────────
+// 設計史筆記 — eyecannndy-inspired styles
+//   配色靠 quartz.config.ts 的 colors 變數,這裡只動 layout / typography
+// ─────────────────────────────────────────────────────────
+
+// ── Display typography ──
+//   標題加重粗、字距收緊,給設計類網站該有的 visual weight
+
+article > h1,
+article > h2,
+article > h3 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+article > h1 {
+  font-size: 2.4rem;
+  line-height: 1.1;
+}
+
+// ── Hero block (landing page 用) ──
+
+.eye-hero {
+  margin: 1rem 0 4rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+.eye-hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0 0 1rem;
+}
+
+.eye-hero p {
+  font-size: 1.1rem;
+  max-width: 52ch;
+  color: var(--darkgray);
+  line-height: 1.55;
+}
+
+.eye-hero .eye-stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.eye-hero .eye-stats > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.eye-hero .eye-stats strong {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--headerFont);
+  color: var(--secondary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.eye-hero .eye-stats span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gray);
+  margin-top: 0.4rem;
+}
+
+// ── Section labels (大寫粗體小標) ──
+
+.eye-section-label {
+  display: block;
+  font-family: var(--headerFont);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gray);
+  margin: 3rem 0 1rem;
+  font-weight: 600;
+}
+
+.eye-section-label::before {
+  content: "—— ";
+  color: var(--secondary);
+}
+
+// ── Category card grid (分類入口) ──
+
+.eye-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 3rem;
+  padding: 0;
+  list-style: none;
+}
+
+.eye-grid li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eye-grid a {
+  display: block;
+  background: transparent;
+  border: 1px solid var(--lightgray);
+  border-radius: 4px;
+  padding: 1.25rem 1.25rem 1.5rem;
+  text-decoration: none;
+  color: var(--dark);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.eye-grid a::after {
+  content: "→";
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 1.1rem;
+  color: var(--gray);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.eye-grid a:hover {
+  border-color: var(--secondary);
+  background: var(--highlight);
+  transform: translateY(-2px);
+}
+
+.eye-grid a:hover::after {
+  transform: translate(4px, -2px);
+  color: var(--secondary);
+}
+
+.eye-grid a strong {
+  display: block;
+  font-family: var(--headerFont);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.4rem;
+}
+
+.eye-grid a strong .eye-count {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--gray);
+  margin-left: 0.4rem;
+  letter-spacing: 0;
+  font-family: var(--bodyFont);
+}
+
+.eye-grid a span.eye-desc {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--darkgray);
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+// ── Mermaid container 微調 ──
+
+.expand {
+  background: var(--lightgray);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+// ── 全域連結 hover 細調 ──
+
+a.internal:hover,
+a:not(.internal):hover {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+// ── Article meta(分類頁) ──
+
+article .meta {
+  font-family: var(--headerFont);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.78rem;
+  color: var(--gray);
+}

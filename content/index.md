@@ -2,26 +2,36 @@
 title: 設計史筆記
 ---
 
+<div class="eye-hero">
+
 # 設計史筆記
 
-> 一套涵蓋全時間軸、全地理範圍的設計演變視覺化筆記系統。
+從 1860 年的紅屋,到 2010 年代的中央電視台總部 — 一套依時代、地區、領域、流派、人物、作品交叉索引的設計演變視覺化筆記。
 
-![[流派拼貼地圖.svg]]
+<div class="eye-stats">
+<div><strong>13</strong><span>流派</span></div>
+<div><strong>26</strong><span>人物</span></div>
+<div><strong>22</strong><span>作品</span></div>
+<div><strong>2</strong><span>理論</span></div>
+<div><strong>7</strong><span>時代</span></div>
+</div>
 
-## 入口
+</div>
 
-### 🕰️ 依時代瀏覽
-- [[古代設計]] · [[中世紀設計]] · [[文藝復興設計]] · [[工業革命與設計]]
-- [[現代主義]] · [[後現代主義]] · [[當代設計]]
+<span class="eye-section-label">分類入口</span>
 
-### 🌏 依地區瀏覽
-- [[東亞設計史]] · [[歐洲設計史]] · [[美洲設計史]] · [[其他地區設計史]]
+<ul class="eye-grid">
+<li><a href="40-流派"><strong>流派<span class="eye-count">13</span></strong><span class="eye-desc">包浩斯、風格派、國際樣式、解構主義 等</span></a></li>
+<li><a href="50-人物"><strong>人物<span class="eye-count">26</span></strong><span class="eye-desc">莫里斯、葛羅培斯、密斯、柯比意 等</span></a></li>
+<li><a href="60-作品"><strong>作品<span class="eye-count">22</span></strong><span class="eye-desc">紅屋、聖家堂、薩伏伊別墅、Helvetica 等</span></a></li>
+<li><a href="70-理論"><strong>理論<span class="eye-count">2</span></strong><span class="eye-desc">形式追隨功能、裝飾與罪惡</span></a></li>
+<li><a href="10-時代"><strong>時代<span class="eye-count">7</span></strong><span class="eye-desc">古代 → 現代主義 → 當代</span></a></li>
+<li><a href="20-地區"><strong>地區<span class="eye-count">4</span></strong><span class="eye-desc">東亞、歐洲、美洲、其他</span></a></li>
+<li><a href="30-領域"><strong>領域<span class="eye-count">6</span></strong><span class="eye-desc">平面、工業、建築、家具、字體、UI/UX</span></a></li>
+<li><a href="00-總覽/時間軸"><strong>時間軸 →</strong><span class="eye-desc">Mermaid gantt + 年代序表</span></a></li>
+</ul>
 
-### 🎨 依領域瀏覽
-- [[平面設計史]] · [[工業設計史]] · [[建築史]]
-- [[家具設計史]] · [[字體設計史]] · [[UI/UX 設計史]]
-
-## 流派影響譜系
+<span class="eye-section-label">流派影響譜系</span>
 
 ```mermaid
 flowchart TD
@@ -63,9 +73,8 @@ flowchart TD
 
 > 顏色分組:工業革命末期 / 現代主義 / 後現代
 
----
+<span class="eye-section-label">視覺化資源</span>
 
-## 進一步瀏覽
-
-- [[時間軸|完整時間軸 →]] (含 Mermaid gantt 與年代表)
-- [[首頁|全站索引 →]] (流派 13 / 人物 26 / 作品 22 / 理論 2)
+- [[流派影響譜系|Excalidraw 流派譜系圖]]
+- [[流派拼貼地圖|SVG 圓形拼貼地圖]]
+- [[首頁|完整全站索引]]
