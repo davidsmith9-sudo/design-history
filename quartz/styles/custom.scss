@@ -212,6 +212,20 @@ article :not(pre) > code {
   ry: 5px;
 }
 
+// flowchart 節點掛了 click → 給滑鼠提示 + hover 高亮
+.mermaid g.node {
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.mermaid g.node:hover {
+  filter: brightness(1.15) saturate(1.1);
+}
+
+.mermaid g.node:hover rect {
+  stroke-width: 3px;
+}
+
 // flowchart 用 classDef 指定的 fill 是深色,文字強制米白以確保對比
 .mermaid {
   // foreignObject 內的 HTML span(Mermaid 10+ flowchart 預設)

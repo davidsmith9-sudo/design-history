@@ -69,6 +69,20 @@ flowchart TD
     class AC,AN,VS pre
     class CO,DD,DS,BH,AD,IS,SI mod
     class PA,DE,ME pomo
+
+    click AC "/40-流派/工藝美術運動" "工藝美術運動"
+    click AN "/40-流派/新藝術運動" "新藝術運動"
+    click VS "/40-流派/維也納分離派" "維也納分離派"
+    click CO "/40-流派/構成主義" "構成主義"
+    click DD "/40-流派/達達主義" "達達主義"
+    click DS "/40-流派/風格派" "風格派"
+    click BH "/40-流派/包浩斯" "包浩斯"
+    click AD "/40-流派/裝飾藝術" "裝飾藝術"
+    click IS "/40-流派/國際樣式" "國際樣式"
+    click SI "/40-流派/瑞士國際主義" "瑞士國際主義"
+    click PA "/40-流派/普普藝術" "普普藝術"
+    click DE "/40-流派/解構主義" "解構主義"
+    click ME "/40-流派/孟菲斯設計" "孟菲斯設計"
 ```
 
 > 顏色分組:工業革命末期 / 現代主義 / 後現代
