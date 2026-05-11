@@ -167,13 +167,44 @@ article > h1 {
   opacity: 0.85;
 }
 
-// ── Mermaid container 微調 ──
+// ── Mermaid container 微調 + 文字對比修正 ──
 
 .expand {
   background: var(--lightgray);
   border-radius: 6px;
   padding: 1.5rem;
   margin: 1.5rem 0;
+}
+
+// flowchart 用 classDef 指定的 fill 是深色,文字強制米白以確保對比
+.mermaid {
+  // foreignObject 內的 HTML span(Mermaid 10+ flowchart 預設)
+  g.node.pre foreignObject span,
+  g.node.mod foreignObject span,
+  g.node.pomo foreignObject span,
+  g.node.pre .nodeLabel,
+  g.node.mod .nodeLabel,
+  g.node.pomo .nodeLabel,
+  g.node.pre .nodeLabel p,
+  g.node.mod .nodeLabel p,
+  g.node.pomo .nodeLabel p {
+    color: #fafaf7 !important;
+    fill: #fafaf7 !important;
+  }
+
+  // 確保所有 mermaid 文字至少有最低對比
+  .edgeLabel,
+  .edgeLabel p,
+  .edgeLabel span,
+  .cluster-label,
+  .cluster-label p,
+  .titleText,
+  .sectionTitle,
+  text.actor,
+  text {
+    fill: var(--dark);
+    color: var(--dark);
+  }
 }
 
 // ── 全域連結 hover 細調 ──

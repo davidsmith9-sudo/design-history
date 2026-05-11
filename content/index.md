@@ -62,9 +62,9 @@ flowchart TD
     IS --> DE
     PA --> ME
 
-    classDef pre fill:#f4e4d4,stroke:#8b6f47,color:#3d2817
-    classDef mod fill:#d4e4f4,stroke:#476f8b,color:#17283d
-    classDef pomo fill:#f4d4e4,stroke:#8b476f,color:#3d1728
+    classDef pre fill:#8b6f47,stroke:#5a4a2f,color:#fafaf7,stroke-width:2px
+    classDef mod fill:#476f8b,stroke:#2d4a5f,color:#fafaf7,stroke-width:2px
+    classDef pomo fill:#8b476f,stroke:#5f2d4a,color:#fafaf7,stroke-width:2px
 
     class AC,AN,VS pre
     class CO,DD,DS,BH,AD,IS,SI mod
