@@ -111,7 +111,7 @@ article > h1 {
   display: block;
   background: transparent;
   border: 1px solid var(--lightgray);
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 1.25rem 1.25rem 1.5rem;
   text-decoration: none;
   color: var(--dark);
@@ -171,9 +171,45 @@ article > h1 {
 
 .expand {
   background: var(--lightgray);
-  border-radius: 6px;
+  border-radius: 5px;
   padding: 1.5rem;
   margin: 1.5rem 0;
+}
+
+// ── 統一所有矩形 5px 圓角 ──
+
+article img,
+article pre,
+article table,
+.callout,
+.popover-inner,
+.popover {
+  border-radius: 5px;
+}
+
+article :not(pre) > code {
+  border-radius: 3px;
+}
+
+// Mermaid SVG rect 直接用 rx/ry 屬性圓角
+.mermaid .node rect,
+.mermaid .node polygon,
+.mermaid .cluster rect,
+.mermaid .task,
+.mermaid .grid .tick line {
+  rx: 5px;
+  ry: 5px;
+}
+
+// Gantt task bar 圓角
+.mermaid .task0,
+.mermaid .task1,
+.mermaid .task2,
+.mermaid .task3,
+.mermaid .taskText,
+.mermaid rect.task {
+  rx: 5px;
+  ry: 5px;
 }
 
 // flowchart 用 classDef 指定的 fill 是深色,文字強制米白以確保對比
@@ -247,7 +283,7 @@ article .meta {
   text-decoration: none;
   color: inherit;
   background: var(--lightgray);
-  border-radius: 4px;
+  border-radius: 5px;
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   border: 1px solid transparent;
