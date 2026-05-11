@@ -1,0 +1,51 @@
+// Custom cursor — dot + ring with lerp-followed delay
+
+#cursor-follower {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+#cursor-dot,
+#cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  will-change: transform;
+  mix-blend-mode: difference;
+}
+
+#cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+#cursor-ring {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+#cursor-ring.hover {
+  border-color: var(--secondary);
+  background: rgba(0, 85, 255, 0.12);
+}
+
+// Touch / coarse pointer 裝置完全隱藏
+@media (hover: none), (pointer: coarse) {
+  #cursor-follower {
+    display: none !important;
+  }
+}
