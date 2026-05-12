@@ -1,8 +1,7 @@
-// Custom cursor indicator:雙層(dot + ring),ring 用 lerp 跟隨產生延遲拖曳感
-// hover 在連結/卡片/Mermaid 節點上時 ring 放大、變成 hollow
+// Custom cursor indicator:雙層(dot + ring),兩者同步即時跟隨(無 lerp 延遲)
+// hover 在連結/卡片/Mermaid 節點上時 ring 放大 + 變藍色提示
 
 const HOVER_SELECTOR = "a, button, [role=button], .eye-grid li, .eye-works-grid li, .mermaid g.node"
-const LERP = 0.18
 
 function init() {
   const wrapper = document.getElementById("cursor-follower")
@@ -16,31 +15,16 @@ function init() {
     return
   }
 
-  let mouseX = window.innerWidth / 2
-  let mouseY = window.innerHeight / 2
-  let ringX = mouseX
-  let ringY = mouseY
-  let raf: number | null = null
   let hovering = false
 
-  const animate = () => {
-    ringX += (mouseX - ringX) * LERP
-    ringY += (mouseY - ringY) * LERP
-    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`
-    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)${hovering ? " scale(1.8)" : ""}`
-    const dx = Math.abs(mouseX - ringX)
-    const dy = Math.abs(mouseY - ringY)
-    if (dx > 0.1 || dy > 0.1) {
-      raf = requestAnimationFrame(animate)
-    } else {
-      raf = null
-    }
-  }
-
   const onMove = (e: MouseEvent) => {
-    mouseX = e.clientX
-    mouseY = e.clientY
-    if (!raf) raf = requestAnimationFrame(animate)
+    const x = e.clientX
+    const y = e.clientY
+    const ringTransform = hovering
+      ? `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) scale(1.8)`
+      : `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`
+    dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`
+    ring.style.transform = ringTransform
   }
 
   const onOver = (e: MouseEvent) => {
@@ -50,25 +34,16 @@ function init() {
     if (next !== hovering) {
       hovering = next
       ring.classList.toggle("hover", hovering)
-      if (!raf) raf = requestAnimationFrame(animate)
     }
   }
 
-  const onLeave = () => {
-    wrapper.classList.add("hidden")
-  }
-  const onEnter = () => {
-    wrapper.classList.remove("hidden")
-  }
+  const onLeave = () => wrapper.classList.add("hidden")
+  const onEnter = () => wrapper.classList.remove("hidden")
 
   document.addEventListener("mousemove", onMove, { passive: true })
   document.addEventListener("mouseover", onOver, { passive: true })
   document.addEventListener("mouseleave", onLeave)
   document.addEventListener("mouseenter", onEnter)
-
-  // SPA navigation:Quartz uses micromorph,重新觸發 mouse listener 不必,但
-  // 元件 DOM 仍在,initial position 預設 center 即可
-  animate()
 }
 
 if (document.readyState === "loading") {

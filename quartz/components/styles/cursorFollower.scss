@@ -35,7 +35,8 @@
   height: 30px;
   border-radius: 50%;
   border: 1.5px solid #ffffff;
-  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  // 不對 transform 加 transition,確保 cursor 跟隨完全即時無延遲
+  transition: border-color 0.18s ease, background 0.18s ease;
 }
 
 #cursor-ring.hover {
