@@ -1,0 +1,76 @@
+// 文章末尾「引用此頁」區塊
+
+.eye-backlinks {
+  max-width: 800px;
+  margin: 3rem auto 1rem;
+  padding: 2rem 1.5rem 0.5rem;
+  border-top: 1px solid var(--lightgray);
+}
+
+.eye-backlinks h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0.4rem 0 1.6rem;
+  color: var(--dark);
+}
+
+.eye-bl-group {
+  margin-bottom: 1.6rem;
+}
+
+.eye-bl-type {
+  display: inline-block;
+  font-family: var(--headerFont);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  font-weight: 600;
+  margin: 0 0 0.65rem;
+}
+
+.eye-bl-count {
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--secondary);
+  letter-spacing: 0;
+  font-family: var(--bodyFont);
+  font-weight: 700;
+}
+
+.eye-bl-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0;
+  margin: 0;
+}
+
+.eye-bl-list > li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eye-bl-pill {
+  display: inline-block;
+  background: var(--light);
+  color: var(--darkgray);
+  border: 1px solid var(--lightgray);
+  border-radius: 5px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    background 0.15s ease;
+}
+
+.eye-bl-pill:hover {
+  border-color: var(--secondary);
+  color: var(--secondary);
+  background: var(--highlight);
+}

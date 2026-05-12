@@ -25,6 +25,7 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import CursorFollower from "./CursorFollower"
 import EyeMeta from "./EyeMeta"
+import EyeBacklinks from "./EyeBacklinks"
 
 export {
   ArticleTitle,
@@ -54,4 +55,5 @@ export {
   ConditionalRender,
   CursorFollower,
   EyeMeta,
+  EyeBacklinks,
 }
