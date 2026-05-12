@@ -1,0 +1,53 @@
+// 詳情頁 metadata pill 表 — 標題下方,正文之前
+
+.eye-meta {
+  display: grid;
+  grid-template-columns: minmax(5rem, max-content) 1fr;
+  gap: 0.55rem 1.5rem;
+  margin: 0.5rem 0 2.5rem;
+  padding: 1.1rem 1.4rem;
+  background: var(--lightgray);
+  border-left: 3px solid var(--secondary);
+  border-radius: 0 5px 5px 0;
+  font-size: 0.92rem;
+
+  // 確保 dl 樣式 reset
+  dt,
+  dd {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.eye-meta-row {
+  display: contents;
+}
+
+.eye-meta dt {
+  font-family: var(--headerFont);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--gray);
+  padding-top: 0.3rem;
+  align-self: start;
+}
+
+.eye-meta dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.eye-meta-pill {
+  display: inline-block;
+  font-size: 0.82rem;
+  color: var(--darkgray);
+  background: var(--light);
+  padding: 0.18rem 0.6rem;
+  border-radius: 3px;
+  border: 1px solid var(--lightgray);
+  line-height: 1.4;
+}

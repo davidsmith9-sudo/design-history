@@ -187,6 +187,25 @@ article table,
   border-radius: 5px;
 }
 
+// 主圖加大 + 視覺強化
+article img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  border: 1px solid var(--lightgray);
+  transition: filter 0.3s ease;
+}
+
+article img:hover {
+  filter: saturate(1.08) brightness(1.02);
+}
+
+// 主圖 section 標題下方那張圖直接給更大的視覺空間
+article h2 + p > img,
+article h2 + img {
+  margin-top: 0.5rem;
+}
+
 article :not(pre) > code {
   border-radius: 3px;
 }
