@@ -1,7 +1,8 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import styles from "./styles/eyeMeta.scss"
+import { resolveRelative } from "../util/path"
 
-// 從 frontmatter 抓 type 對應欄位顯示成 pill 表,只在「作品/人物/理論/流派」頁出現
+// 從 frontmatter 抓 type 對應欄位顯示成 pill 表;能對到 vault 內筆記的 pill 自動變連結
 
 type Item = { label: string; values: string[] }
 
@@ -24,10 +25,17 @@ function yearRange(start: any, end: any): string {
   return `${s} – ${e}`
 }
 
-const EyeMeta: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
+const EyeMeta: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProps) => {
   const fm: any = fileData.frontmatter ?? {}
   const type = fm.type as string | undefined
   if (!type) return null
+
+  // 建 title → file 索引,讓 pill 能解析到對應頁
+  const titleIndex = new Map<string, (typeof allFiles)[number]>()
+  for (const f of allFiles) {
+    const t = (f.frontmatter as any)?.title
+    if (typeof t === "string") titleIndex.set(t, f)
+  }
 
   const items: Item[] = []
 
@@ -81,16 +89,24 @@ const EyeMeta: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
 
   if (items.length === 0) return null
 
+  const renderPill = (v: string) => {
+    const target = titleIndex.get(v)
+    if (target && target.slug && target.slug !== fileData.slug) {
+      return (
+        <a class="eye-meta-pill eye-meta-pill--link" href={resolveRelative(fileData.slug!, target.slug)}>
+          {v}
+        </a>
+      )
+    }
+    return <span class="eye-meta-pill">{v}</span>
+  }
+
   return (
     <dl class="eye-meta">
       {items.map(({ label, values }) => (
         <div class="eye-meta-row">
           <dt>{label}</dt>
-          <dd>
-            {values.map((v) => (
-              <span class="eye-meta-pill">{v}</span>
-            ))}
-          </dd>
+          <dd>{values.map(renderPill)}</dd>
         </div>
       ))}
     </dl>
