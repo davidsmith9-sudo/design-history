@@ -176,6 +176,97 @@ article > h1 {
   margin: 1.5rem 0;
 }
 
+// ── Sidebar 樣式微調 — 配新 Adobe 色票 ──
+
+// PageTitle:站台標題加粗 + 字距收緊
+.page-title,
+h2.page-title a {
+  font-family: var(--headerFont);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+}
+
+// Sidebar h3 / Explorer 「目錄」標題 等小標都用 eye-section-label 風格
+.sidebar h3,
+button.desktop-explorer h2,
+button.mobile-explorer h2 {
+  font-family: var(--headerFont);
+  font-size: 0.72rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  color: var(--gray);
+}
+
+// Explorer:資料夾名收斂、檔案連結縮緊
+.folder-container > div > a,
+.folder-container > div > button > span {
+  color: var(--darkgray) !important;
+  font-weight: 600;
+  font-size: 0.88rem !important;
+}
+
+.folder-container > div > a:hover,
+.folder-container > div > button:hover > span {
+  color: var(--secondary) !important;
+}
+
+.folder-icon {
+  color: var(--gray) !important;
+}
+
+.folder-icon:hover {
+  color: var(--secondary) !important;
+}
+
+.explorer-content ul li > a {
+  font-size: 0.85rem;
+  padding: 1px 0;
+  display: inline-block;
+
+  &.active {
+    color: var(--secondary) !important;
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  &:hover {
+    color: var(--secondary);
+    opacity: 1;
+  }
+}
+
+// Search 輸入框
+.search-button {
+  background: transparent !important;
+  border: 1px solid var(--lightgray) !important;
+  border-radius: 5px;
+  color: var(--gray) !important;
+  transition: border-color 0.18s ease;
+
+  &:hover {
+    border-color: var(--secondary) !important;
+    color: var(--dark) !important;
+  }
+
+  & p {
+    color: var(--gray) !important;
+    font-size: 0.85rem;
+  }
+}
+
+// Search modal — 結果用主題色
+.search-result {
+  border-radius: 5px;
+}
+
+// ToC active 連結
+.toc-content ul li > a.in-view {
+  color: var(--secondary) !important;
+  font-weight: 600;
+}
+
 // ── 統一所有矩形 5px 圓角 ──
 
 article img,
