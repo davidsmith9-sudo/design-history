@@ -21,7 +21,7 @@ title: 作品
 <ul class="eye-works-grid">
 
 <li><a href="紅屋">
-<div class="eye-work-image eye-work-image--placeholder"><span>1859</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/紅屋.jpg" alt="紅屋" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>紅屋</h3>
 <span class="eye-work-byline">韋伯 + 莫里斯 · 1859</span>
@@ -57,7 +57,7 @@ title: 作品
 </a></li>
 
 <li><a href="桂爾公園">
-<div class="eye-work-image eye-work-image--placeholder"><span>1914</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/桂爾公園.jpg" alt="桂爾公園" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>桂爾公園</h3>
 <span class="eye-work-byline">高第 · 1914</span>
@@ -75,7 +75,7 @@ title: 作品
 </a></li>
 
 <li><a href="第三國際紀念塔">
-<div class="eye-work-image eye-work-image--placeholder"><span>1919</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/第三國際紀念塔.jpg" alt="第三國際紀念塔" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>第三國際紀念塔</h3>
 <span class="eye-work-byline">塔特林 · 1919(未實現)</span>
@@ -84,7 +84,7 @@ title: 作品
 </a></li>
 
 <li><a href="里特費爾德施羅德住宅">
-<div class="eye-work-image eye-work-image--placeholder"><span>1924</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/里特費爾德施羅德住宅.jpg" alt="里特費爾德施羅德住宅" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>里特費爾德施羅德住宅</h3>
 <span class="eye-work-byline">里特費爾德 · 1924</span>
@@ -93,7 +93,7 @@ title: 作品
 </a></li>
 
 <li><a href="瓦西里椅">
-<div class="eye-work-image eye-work-image--placeholder"><span>1925</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/瓦西里椅.png" alt="瓦西里椅" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>瓦西里椅</h3>
 <span class="eye-work-byline">布勞耶 · 1925</span>
@@ -129,7 +129,7 @@ title: 作品
 </a></li>
 
 <li><a href="帝國大廈">
-<div class="eye-work-image eye-work-image--placeholder"><span>1931</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/帝國大廈.jpg" alt="帝國大廈" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>帝國大廈</h3>
 <span class="eye-work-byline">什裡夫·蘭姆·哈蒙 · 1931</span>
@@ -156,7 +156,7 @@ title: 作品
 </a></li>
 
 <li><a href="馬賽公寓">
-<div class="eye-work-image eye-work-image--placeholder"><span>1952</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/馬賽公寓.jpg" alt="馬賽公寓" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>馬賽公寓</h3>
 <span class="eye-work-byline">柯比意 · 1952</span>

@@ -39,7 +39,7 @@ title: 人物
 </a></li>
 
 <li><a href="高第">
-<div class="eye-work-image eye-work-image--placeholder"><span>1852</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/高第.jpg" alt="高第" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>高第</h3>
 <span class="eye-work-byline">西班牙 · 1852–1926</span>
@@ -93,7 +93,7 @@ title: 人物
 </a></li>
 
 <li><a href="弗蘭克·洛伊·萊特">
-<div class="eye-work-image eye-work-image--placeholder"><span>1867</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/弗蘭克·洛伊·萊特.jpg" alt="弗蘭克·洛伊·萊特" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>弗蘭克·洛伊·萊特</h3>
 <span class="eye-work-byline">美國 · 1867–1959</span>
@@ -120,7 +120,7 @@ title: 人物
 </a></li>
 
 <li><a href="蒙德里安">
-<div class="eye-work-image eye-work-image--placeholder"><span>1872</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/蒙德里安.jpg" alt="蒙德里安" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>蒙德里安</h3>
 <span class="eye-work-byline">荷蘭 · 1872–1944</span>
@@ -138,7 +138,7 @@ title: 人物
 </a></li>
 
 <li><a href="特奧·凡·杜斯伯格">
-<div class="eye-work-image eye-work-image--placeholder"><span>1883</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/特奧·凡·杜斯伯格.jpg" alt="特奧·凡·杜斯伯格" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>特奧·凡·杜斯伯格</h3>
 <span class="eye-work-byline">荷蘭 · 1883–1931</span>
@@ -174,7 +174,7 @@ title: 人物
 </a></li>
 
 <li><a href="馬塞爾·布勞耶">
-<div class="eye-work-image eye-work-image--placeholder"><span>1902</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/馬塞爾·布勞耶.png" alt="馬塞爾·布勞耶" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>馬塞爾·布勞耶</h3>
 <span class="eye-work-byline">匈牙利 · 1902–1981</span>
@@ -192,7 +192,7 @@ title: 人物
 </a></li>
 
 <li><a href="馬克斯·米丁格">
-<div class="eye-work-image eye-work-image--placeholder"><span>1910</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/馬克斯·米丁格.jpg" alt="馬克斯·米丁格" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>馬克斯·米丁格</h3>
 <span class="eye-work-byline">瑞士 · 1910–1980</span>
@@ -219,7 +219,7 @@ title: 人物
 </a></li>
 
 <li><a href="索爾·巴斯">
-<div class="eye-work-image eye-work-image--placeholder"><span>1920</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/索爾·巴斯.jpg" alt="索爾·巴斯" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>索爾·巴斯</h3>
 <span class="eye-work-byline">美國 · 1920–1996</span>
