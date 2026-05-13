@@ -10,9 +10,9 @@ title: 設計史筆記
 
 <div class="eye-stats">
 <div><strong>13</strong><span>流派</span></div>
-<div><strong>26</strong><span>人物</span></div>
-<div><strong>22</strong><span>作品</span></div>
-<div><strong>2</strong><span>理論</span></div>
+<div><strong>30</strong><span>人物</span></div>
+<div><strong>25</strong><span>作品</span></div>
+<div><strong>3</strong><span>理論</span></div>
 <div><strong>7</strong><span>時代</span></div>
 </div>
 
@@ -92,3 +92,4 @@ flowchart TD
 - [[流派影響譜系|Excalidraw 流派譜系圖]]
 - [[流派拼貼地圖|SVG 圓形拼貼地圖]]
 - [[首頁|完整全站索引]]
+- [[關於|關於本站]] — 範圍、方法論、資料來源、引用方式
