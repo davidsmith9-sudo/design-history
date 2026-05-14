@@ -40,9 +40,9 @@ title: 作品
 
 <ul class="eye-works-grid">
 
-<li data-era="ancient" data-field="建築"><a href="阿罕布拉宮"><div class="eye-work-image eye-work-image--placeholder"><span>1238</span></div><div class="eye-work-meta"><h3>阿罕布拉宮</h3><span class="eye-work-byline">奈斯爾王朝 · 1238–1492</span><span class="eye-work-tag">伊斯蘭幾何</span></div></a></li>
+<li data-era="ancient" data-field="建築"><a href="阿罕布拉宮"><div class="eye-work-image"><img src="/99-素材/images/作品/阿罕布拉宮.jpg" alt="阿罕布拉宮" loading="lazy" /></div><div class="eye-work-meta"><h3>阿罕布拉宮</h3><span class="eye-work-byline">奈斯爾王朝 · 1238–1492</span><span class="eye-work-tag">伊斯蘭幾何</span></div></a></li>
 
-<li data-era="industrial" data-field="平面"><a href="神奈川衝浪裏"><div class="eye-work-image eye-work-image--placeholder"><span>1831</span></div><div class="eye-work-meta"><h3>神奈川衝浪裏</h3><span class="eye-work-byline">葛飾北齋 · 1831</span><span class="eye-work-tag">浮世繪</span></div></a></li>
+<li data-era="industrial" data-field="平面"><a href="神奈川衝浪裏"><div class="eye-work-image"><img src="/99-素材/images/作品/神奈川衝浪裏.jpg" alt="神奈川衝浪裏" loading="lazy" /></div><div class="eye-work-meta"><h3>神奈川衝浪裏</h3><span class="eye-work-byline">葛飾北齋 · 1831</span><span class="eye-work-tag">浮世繪</span></div></a></li>
 
 <li data-era="industrial" data-field="建築"><a href="紅屋"><div class="eye-work-image"><img src="/99-素材/images/作品/紅屋.jpg" alt="紅屋" loading="lazy" /></div><div class="eye-work-meta"><h3>紅屋</h3><span class="eye-work-byline">韋伯 + 莫里斯 · 1859</span><span class="eye-work-tag">工藝美術運動</span></div></a></li>
 
@@ -72,7 +72,7 @@ title: 作品
 
 <li data-era="modern" data-field="建築"><a href="薩伏伊別墅"><div class="eye-work-image"><img src="/99-素材/images/作品/薩伏伊別墅.jpg" alt="薩伏伊別墅" loading="lazy" /></div><div class="eye-work-meta"><h3>薩伏伊別墅</h3><span class="eye-work-byline">柯比意 · 1931</span><span class="eye-work-tag">國際樣式</span></div></a></li>
 
-<li data-era="modern" data-field="建築"><a href="落水山莊"><div class="eye-work-image eye-work-image--placeholder"><span>1939</span></div><div class="eye-work-meta"><h3>落水山莊</h3><span class="eye-work-byline">弗蘭克·洛伊·萊特 · 1935–39</span><span class="eye-work-tag">有機建築</span></div></a></li>
+<li data-era="modern" data-field="建築"><a href="落水山莊"><div class="eye-work-image"><img src="/99-素材/images/作品/落水山莊.jpg" alt="落水山莊" loading="lazy" /></div><div class="eye-work-meta"><h3>落水山莊</h3><span class="eye-work-byline">弗蘭克·洛伊·萊特 · 1935–39</span><span class="eye-work-tag">有機建築</span></div></a></li>
 
 <li data-era="modern" data-field="建築"><a href="范斯沃斯住宅"><div class="eye-work-image"><img src="/99-素材/images/作品/范斯沃斯住宅.jpg" alt="范斯沃斯住宅" loading="lazy" /></div><div class="eye-work-meta"><h3>范斯沃斯住宅</h3><span class="eye-work-byline">密斯·凡德羅 · 1951</span><span class="eye-work-tag">國際樣式</span></div></a></li>
 
@@ -82,7 +82,7 @@ title: 作品
 
 <li data-era="modern" data-field="建築"><a href="朗香教堂"><div class="eye-work-image"><img src="/99-素材/images/作品/朗香教堂.jpg" alt="朗香教堂" loading="lazy" /></div><div class="eye-work-meta"><h3>朗香教堂</h3><span class="eye-work-byline">柯比意 · 1955</span><span class="eye-work-tag">雕塑式建築</span></div></a></li>
 
-<li data-era="modern" data-field="家具"><a href="Eames Lounge Chair"><div class="eye-work-image eye-work-image--placeholder"><span>1956</span></div><div class="eye-work-meta"><h3>Eames Lounge Chair</h3><span class="eye-work-byline">伊姆斯夫婦 · 1956</span><span class="eye-work-tag">Mid-century Modern</span></div></a></li>
+<li data-era="modern" data-field="家具"><a href="Eames Lounge Chair"><div class="eye-work-image"><img src="/99-素材/images/作品/Eames Lounge Chair.jpg" alt="Eames Lounge Chair" loading="lazy" /></div><div class="eye-work-meta"><h3>Eames Lounge Chair</h3><span class="eye-work-byline">伊姆斯夫婦 · 1956</span><span class="eye-work-tag">Mid-century Modern</span></div></a></li>
 
 <li data-era="modern" data-field="字體"><a href="Helvetica"><div class="eye-work-image"><img src="/99-素材/images/作品/Helvetica.png" alt="Helvetica" loading="lazy" /></div><div class="eye-work-meta"><h3>Helvetica</h3><span class="eye-work-byline">米丁格 + 霍夫曼 · 1957</span><span class="eye-work-tag">瑞士國際主義</span></div></a></li>
 

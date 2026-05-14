@@ -118,7 +118,7 @@ title: 人物
 
 <li data-region="europe" data-era="early20c"><a href="迪特·拉姆斯"><div class="eye-work-image"><img src="/99-素材/images/人物/迪特·拉姆斯.jpg" alt="迪特·拉姆斯" loading="lazy" /></div><div class="eye-work-meta"><h3>迪特·拉姆斯</h3><span class="eye-work-byline">德國 · 1932–</span><span class="eye-work-tag">機能主義</span></div></a></li>
 
-<li data-region="east-asia" data-era="early20c"><a href="倉俁史朗"><div class="eye-work-image eye-work-image--placeholder"><span>1934</span></div><div class="eye-work-meta"><h3>倉俁史朗</h3><span class="eye-work-byline">日本 · 1934–1991</span><span class="eye-work-tag">日本後現代設計</span></div></a></li>
+<li data-region="east-asia" data-era="early20c"><a href="倉俁史朗"><div class="eye-work-image"><img src="/99-素材/images/人物/倉俁史朗.jpg" alt="倉俁史朗" loading="lazy" /></div><div class="eye-work-meta"><h3>倉俁史朗</h3><span class="eye-work-byline">日本 · 1934–1991</span><span class="eye-work-tag">日本後現代設計</span></div></a></li>
 
 <li data-region="east-asia" data-era="late20c"><a href="安藤忠雄"><div class="eye-work-image"><img src="/99-素材/images/人物/安藤忠雄.jpg" alt="安藤忠雄" loading="lazy" /></div><div class="eye-work-meta"><h3>安藤忠雄</h3><span class="eye-work-byline">日本 · 1941–</span><span class="eye-work-tag">當代日本建築</span></div></a></li>
 
@@ -126,7 +126,7 @@ title: 人物
 
 <li data-region="east-asia" data-era="late20c"><a href="隈研吾"><div class="eye-work-image"><img src="/99-素材/images/人物/隈研吾.jpg" alt="隈研吾" loading="lazy" /></div><div class="eye-work-meta"><h3>隈研吾</h3><span class="eye-work-byline">日本 · 1954–</span><span class="eye-work-tag">當代日本建築</span></div></a></li>
 
-<li data-region="east-asia" data-era="late20c"><a href="深澤直人"><div class="eye-work-image eye-work-image--placeholder"><span>1956</span></div><div class="eye-work-meta"><h3>深澤直人</h3><span class="eye-work-byline">日本 · 1956–</span><span class="eye-work-tag">當代日本設計</span></div></a></li>
+<li data-region="east-asia" data-era="late20c"><a href="深澤直人"><div class="eye-work-image"><img src="/99-素材/images/人物/深澤直人.jpg" alt="深澤直人" loading="lazy" /></div><div class="eye-work-meta"><h3>深澤直人</h3><span class="eye-work-byline">日本 · 1956–</span><span class="eye-work-tag">當代日本設計</span></div></a></li>
 
 <li data-region="east-asia" data-era="late20c"><a href="原研哉"><div class="eye-work-image"><img src="/99-素材/images/人物/原研哉.jpg" alt="原研哉" loading="lazy" /></div><div class="eye-work-meta"><h3>原研哉</h3><span class="eye-work-byline">日本 · 1958–</span><span class="eye-work-tag">當代日本設計</span></div></a></li>
 

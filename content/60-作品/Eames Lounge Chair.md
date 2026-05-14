@@ -65,3 +65,7 @@ Eames Lounge Chair(編號 670 椅 + 671 腳凳)是 20 世紀美國設計最具�
 - Pat Kirkham, *Charles and Ray Eames: Designers of the Twentieth Century*
 - Herman Miller 線上典藏 — https://www.hermanmiller.com/
 - *Eames Demetrios* (孫子) 多本回憶錄
+
+
+## 主圖
+![[99-素材/images/作品/Eames Lounge Chair.jpg]]
