@@ -8,8 +8,9 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [Component.EyeBacklinks(), Component.CursorFollower(), Component.GridFilter()],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
+      GitHub: "https://github.com/davidsmith9-sudo/design-history",
+      RSS: "/index.xml",
+      "關於本站": "/00-總覽/關於",
     },
   }),
 }
