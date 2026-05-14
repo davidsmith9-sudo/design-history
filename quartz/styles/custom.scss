@@ -394,6 +394,73 @@ article .meta {
   color: var(--gray);
 }
 
+// ── Grid 篩選器 ──
+
+.eye-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+.eye-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.eye-filter-label {
+  font-family: var(--headerFont);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+
+.eye-filter-btn {
+  font-family: inherit;
+  font-size: 0.82rem;
+  background: transparent;
+  border: 1px solid var(--lightgray);
+  color: var(--darkgray);
+  padding: 0.25rem 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.eye-filter-btn:hover {
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+
+.eye-filter-btn.active {
+  background: var(--secondary);
+  color: #fafaf6;
+  border-color: var(--secondary);
+}
+
+.eye-works-grid > li.eye-filter-hidden {
+  display: none;
+}
+
+.eye-filter-empty {
+  color: var(--gray);
+  font-size: 0.9rem;
+  padding: 2rem;
+  text-align: center;
+  display: none;
+}
+
+.eye-filter-empty.show {
+  display: block;
+}
+
 // ── 作品 / 人物 grid 卡片(視覺技法庫核心格) ──
 
 .eye-works-grid {

@@ -26,6 +26,7 @@ import ConditionalRender from "./ConditionalRender"
 import CursorFollower from "./CursorFollower"
 import EyeMeta from "./EyeMeta"
 import EyeBacklinks from "./EyeBacklinks"
+import GridFilter from "./GridFilter"
 
 export {
   ArticleTitle,
@@ -56,4 +57,5 @@ export {
   CursorFollower,
   EyeMeta,
   EyeBacklinks,
+  GridFilter,
 }
