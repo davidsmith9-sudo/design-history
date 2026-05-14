@@ -78,7 +78,7 @@ title: 人物
 
 <li data-region="east-asia" data-era="19c"><a href="柳宗悅"><div class="eye-work-image"><img src="/99-素材/images/人物/柳宗悅.jpg" alt="柳宗悅" loading="lazy" /></div><div class="eye-work-meta"><h3>柳宗悅</h3><span class="eye-work-byline">日本 · 1889–1961</span><span class="eye-work-tag">日本民藝運動</span></div></a></li>
 
-<li data-region="europe" data-era="19c"><a href="阿爾瓦·阿爾托"><div class="eye-work-image eye-work-image--placeholder"><span>1898</span></div><div class="eye-work-meta"><h3>阿爾瓦·阿爾托</h3><span class="eye-work-byline">芬蘭 · 1898–1976</span><span class="eye-work-tag">北歐功能主義</span></div></a></li>
+<li data-region="europe" data-era="19c"><a href="阿爾瓦·阿爾托"><div class="eye-work-image"><img src="/99-素材/images/人物/阿爾瓦·阿爾托.jpg" alt="阿爾瓦·阿爾托" loading="lazy" /></div><div class="eye-work-meta"><h3>阿爾瓦·阿爾托</h3><span class="eye-work-byline">芬蘭 · 1898–1976</span><span class="eye-work-tag">北歐功能主義</span></div></a></li>
 
 <li data-region="europe" data-era="early20c"><a href="馬塞爾·布勞耶"><div class="eye-work-image"><img src="/99-素材/images/人物/馬塞爾·布勞耶.png" alt="馬塞爾·布勞耶" loading="lazy" /></div><div class="eye-work-meta"><h3>馬塞爾·布勞耶</h3><span class="eye-work-byline">匈牙利 · 1902–1981</span><span class="eye-work-tag">包浩斯</span></div></a></li>
 
@@ -88,9 +88,9 @@ title: 人物
 
 <li data-region="americas" data-era="early20c"><a href="路易斯·巴拉甘"><div class="eye-work-image"><img src="/99-素材/images/人物/路易斯·巴拉甘.jpg" alt="路易斯·巴拉甘" loading="lazy" /></div><div class="eye-work-meta"><h3>路易斯·巴拉甘</h3><span class="eye-work-byline">墨西哥 · 1902–1988</span><span class="eye-work-tag">墨西哥現代主義</span></div></a></li>
 
-<li data-region="europe" data-era="early20c"><a href="夏綠蒂·貝里安"><div class="eye-work-image eye-work-image--placeholder"><span>1903</span></div><div class="eye-work-meta"><h3>夏綠蒂·貝里安</h3><span class="eye-work-byline">法國 · 1903–1999</span><span class="eye-work-tag">國際樣式</span></div></a></li>
+<li data-region="europe" data-era="early20c"><a href="夏綠蒂·貝里安"><div class="eye-work-image"><img src="/99-素材/images/人物/夏綠蒂·貝里安.jpg" alt="夏綠蒂·貝里安" loading="lazy" /></div><div class="eye-work-meta"><h3>夏綠蒂·貝里安</h3><span class="eye-work-byline">法國 · 1903–1999</span><span class="eye-work-tag">國際樣式</span></div></a></li>
 
-<li data-region="americas" data-era="early20c"><a href="伊姆斯夫婦"><div class="eye-work-image eye-work-image--placeholder"><span>1907</span></div><div class="eye-work-meta"><h3>伊姆斯夫婦</h3><span class="eye-work-byline">美國 · 1907/1912–1978/1988</span><span class="eye-work-tag">Mid-century Modern</span></div></a></li>
+<li data-region="americas" data-era="early20c"><a href="伊姆斯夫婦"><div class="eye-work-image"><img src="/99-素材/images/人物/伊姆斯夫婦.jpg" alt="伊姆斯夫婦" loading="lazy" /></div><div class="eye-work-meta"><h3>伊姆斯夫婦</h3><span class="eye-work-byline">美國 · 1907/1912–1978/1988</span><span class="eye-work-tag">Mid-century Modern</span></div></a></li>
 
 <li data-region="americas" data-era="early20c"><a href="奧斯卡·尼邁耶"><div class="eye-work-image"><img src="/99-素材/images/人物/奧斯卡·尼邁耶.jpg" alt="奧斯卡·尼邁耶" loading="lazy" /></div><div class="eye-work-meta"><h3>奧斯卡·尼邁耶</h3><span class="eye-work-byline">巴西 · 1907–2012</span><span class="eye-work-tag">拉丁美洲現代主義</span></div></a></li>
 
@@ -100,9 +100,9 @@ title: 人物
 
 <li data-region="europe" data-era="early20c"><a href="漢斯·韋格納"><div class="eye-work-image eye-work-image--placeholder"><span>1914</span></div><div class="eye-work-meta"><h3>漢斯·韋格納</h3><span class="eye-work-byline">丹麥 · 1914–2007</span><span class="eye-work-tag">北歐功能主義</span></div></a></li>
 
-<li data-region="east-asia" data-era="early20c"><a href="柳宗理"><div class="eye-work-image eye-work-image--placeholder"><span>1915</span></div><div class="eye-work-meta"><h3>柳宗理</h3><span class="eye-work-byline">日本 · 1915–2011</span><span class="eye-work-tag">日本工業設計</span></div></a></li>
+<li data-region="east-asia" data-era="early20c"><a href="柳宗理"><div class="eye-work-image"><img src="/99-素材/images/人物/柳宗理.jpg" alt="柳宗理" loading="lazy" /></div><div class="eye-work-meta"><h3>柳宗理</h3><span class="eye-work-byline">日本 · 1915–2011</span><span class="eye-work-tag">日本工業設計</span></div></a></li>
 
-<li data-region="east-asia" data-era="early20c"><a href="龜倉雄策"><div class="eye-work-image eye-work-image--placeholder"><span>1915</span></div><div class="eye-work-meta"><h3>龜倉雄策</h3><span class="eye-work-byline">日本 · 1915–1997</span><span class="eye-work-tag">戰後日本平面設計</span></div></a></li>
+<li data-region="east-asia" data-era="early20c"><a href="龜倉雄策"><div class="eye-work-image"><img src="/99-素材/images/人物/龜倉雄策.jpg" alt="龜倉雄策" loading="lazy" /></div><div class="eye-work-meta"><h3>龜倉雄策</h3><span class="eye-work-byline">日本 · 1915–1997</span><span class="eye-work-tag">戰後日本平面設計</span></div></a></li>
 
 <li data-region="europe" data-era="early20c"><a href="埃托雷·索特薩斯"><div class="eye-work-image"><img src="/99-素材/images/人物/埃托雷·索特薩斯.jpg" alt="埃托雷·索特薩斯" loading="lazy" /></div><div class="eye-work-meta"><h3>埃托雷·索特薩斯</h3><span class="eye-work-byline">義大利 · 1917–2007</span><span class="eye-work-tag">孟菲斯設計</span></div></a></li>
 
@@ -114,7 +114,7 @@ title: 人物
 
 <li data-region="east-asia" data-era="early20c"><a href="田中一光"><div class="eye-work-image eye-work-image--placeholder"><span>1930</span></div><div class="eye-work-meta"><h3>田中一光</h3><span class="eye-work-byline">日本 · 1930–2002</span><span class="eye-work-tag">戰後日本平面設計</span></div></a></li>
 
-<li data-region="europe" data-era="early20c"><a href="馬西莫·維涅利"><div class="eye-work-image eye-work-image--placeholder"><span>1931</span></div><div class="eye-work-meta"><h3>馬西莫·維涅利</h3><span class="eye-work-byline">義大利-美國 · 1931–2014</span><span class="eye-work-tag">瑞士國際主義</span></div></a></li>
+<li data-region="europe" data-era="early20c"><a href="馬西莫·維涅利"><div class="eye-work-image"><img src="/99-素材/images/人物/馬西莫·維涅利.jpg" alt="馬西莫·維涅利" loading="lazy" /></div><div class="eye-work-meta"><h3>馬西莫·維涅利</h3><span class="eye-work-byline">義大利-美國 · 1931–2014</span><span class="eye-work-tag">瑞士國際主義</span></div></a></li>
 
 <li data-region="europe" data-era="early20c"><a href="迪特·拉姆斯"><div class="eye-work-image"><img src="/99-素材/images/人物/迪特·拉姆斯.jpg" alt="迪特·拉姆斯" loading="lazy" /></div><div class="eye-work-meta"><h3>迪特·拉姆斯</h3><span class="eye-work-byline">德國 · 1932–</span><span class="eye-work-tag">機能主義</span></div></a></li>
 
@@ -124,7 +124,7 @@ title: 人物
 
 <li data-region="europe" data-era="late20c"><a href="雷姆·庫哈斯"><div class="eye-work-image"><img src="/99-素材/images/人物/雷姆·庫哈斯.jpg" alt="雷姆·庫哈斯" loading="lazy" /></div><div class="eye-work-meta"><h3>雷姆·庫哈斯</h3><span class="eye-work-byline">荷蘭 · 1944–</span><span class="eye-work-tag">解構主義</span></div></a></li>
 
-<li data-region="east-asia" data-era="late20c"><a href="隈研吾"><div class="eye-work-image eye-work-image--placeholder"><span>1954</span></div><div class="eye-work-meta"><h3>隈研吾</h3><span class="eye-work-byline">日本 · 1954–</span><span class="eye-work-tag">當代日本建築</span></div></a></li>
+<li data-region="east-asia" data-era="late20c"><a href="隈研吾"><div class="eye-work-image"><img src="/99-素材/images/人物/隈研吾.jpg" alt="隈研吾" loading="lazy" /></div><div class="eye-work-meta"><h3>隈研吾</h3><span class="eye-work-byline">日本 · 1954–</span><span class="eye-work-tag">當代日本建築</span></div></a></li>
 
 <li data-region="east-asia" data-era="late20c"><a href="深澤直人"><div class="eye-work-image eye-work-image--placeholder"><span>1956</span></div><div class="eye-work-meta"><h3>深澤直人</h3><span class="eye-work-byline">日本 · 1956–</span><span class="eye-work-tag">當代日本設計</span></div></a></li>
 

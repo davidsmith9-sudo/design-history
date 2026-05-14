@@ -6,12 +6,12 @@ title: 設計史筆記
 
 # 設計史筆記
 
-從 1860 年的紅屋,到 2010 年代的中央電視台總部 — 一套依時代、地區、領域、流派、人物、作品交叉索引的設計演變視覺化筆記。
+從 1238 年的阿罕布拉宮,到 2012 年的中央電視台總部 — 一套跨越 774 年、依時代/地區/領域/流派/人物/作品交叉索引的設計演變視覺化筆記。21 流派 × 47 人物 × 34 作品 × 6 條跨領域影響鏈。
 
 <div class="eye-stats">
-<div><strong>13</strong><span>流派</span></div>
-<div><strong>30</strong><span>人物</span></div>
-<div><strong>25</strong><span>作品</span></div>
+<div><strong>21</strong><span>流派</span></div>
+<div><strong>47</strong><span>人物</span></div>
+<div><strong>34</strong><span>作品</span></div>
 <div><strong>3</strong><span>理論</span></div>
 <div><strong>7</strong><span>時代</span></div>
 </div>
@@ -21,14 +21,14 @@ title: 設計史筆記
 <span class="eye-section-label">分類入口</span>
 
 <ul class="eye-grid">
-<li><a href="40-流派"><strong>流派<span class="eye-count">13</span></strong><span class="eye-desc">包浩斯、風格派、國際樣式、解構主義 等</span></a></li>
-<li><a href="50-人物"><strong>人物<span class="eye-count">26</span></strong><span class="eye-desc">莫里斯、葛羅培斯、密斯、柯比意 等</span></a></li>
-<li><a href="60-作品"><strong>作品<span class="eye-count">22</span></strong><span class="eye-desc">紅屋、聖家堂、薩伏伊別墅、Helvetica 等</span></a></li>
-<li><a href="70-理論"><strong>理論<span class="eye-count">2</span></strong><span class="eye-desc">形式追隨功能、裝飾與罪惡</span></a></li>
-<li><a href="10-時代"><strong>時代<span class="eye-count">7</span></strong><span class="eye-desc">古代 → 現代主義 → 當代</span></a></li>
-<li><a href="20-地區"><strong>地區<span class="eye-count">4</span></strong><span class="eye-desc">東亞、歐洲、美洲、其他</span></a></li>
-<li><a href="30-領域"><strong>領域<span class="eye-count">6</span></strong><span class="eye-desc">平面、工業、建築、家具、字體、UI/UX</span></a></li>
-<li><a href="00-總覽/時間軸"><strong>時間軸 →</strong><span class="eye-desc">Mermaid gantt + 年代序表</span></a></li>
+<li><a href="40-流派"><strong>流派<span class="eye-count">21</span></strong><span class="eye-desc">古希臘 / 哥德式 / 包浩斯 / 國際樣式 / 解構主義 等</span></a></li>
+<li><a href="50-人物"><strong>人物<span class="eye-count">47</span></strong><span class="eye-desc">莫里斯 / 葛羅培斯 / 密斯 / 柯比意 / 安藤忠雄 等</span></a></li>
+<li><a href="60-作品"><strong>作品<span class="eye-count">34</span></strong><span class="eye-desc">阿罕布拉宮 / 紅屋 / 薩伏伊別墅 / Helvetica / iPhone 等</span></a></li>
+<li><a href="70-理論"><strong>理論<span class="eye-count">3</span></strong><span class="eye-desc">形式追隨功能 / 裝飾與罪惡 / 有機建築</span></a></li>
+<li><a href="10-時代"><strong>時代<span class="eye-count">7</span></strong><span class="eye-desc">古代 → 中世紀 → 文藝復興 → 現代 → 當代</span></a></li>
+<li><a href="20-地區"><strong>地區<span class="eye-count">4</span></strong><span class="eye-desc">歐洲 / 美洲 / 東亞 / 其他地區</span></a></li>
+<li><a href="30-領域"><strong>領域<span class="eye-count">6</span></strong><span class="eye-desc">平面 / 工業 / 建築 / 家具 / 字體 / UI/UX</span></a></li>
+<li><a href="80-視覺化"><strong>視覺化<span class="eye-count">5</span></strong><span class="eye-desc">時間軸 / 譜系 / 拼貼地圖 / 跨領域連結</span></a></li>
 </ul>
 
 <span class="eye-section-label">流派影響譜系</span>
@@ -87,10 +87,17 @@ flowchart TD
 
 > 顏色分組:工業革命末期 / 現代主義 / 後現代
 
-<span class="eye-section-label">視覺化資源</span>
+<span class="eye-section-label">深入探索</span>
 
-- [[流派影響譜系|Excalidraw 流派譜系圖]]
-- [[流派拼貼地圖|SVG 圓形拼貼地圖]]
+**視覺化**:
+- [[時間軸]] — Mermaid gantt + 年代序表
+- [[流派譜系]] — 13 節點可點 flowchart
+- [[流派拼貼地圖|拼貼地圖]] — SVG 圓形拼貼
+- [[跨領域連結]] — 6 條重要設計史影響鏈 **★ 新**
+
+**參考**:
 - [[首頁|完整全站索引]]
 - [[關於|關於本站]] — 範圍、方法論、資料來源、引用方式
 - [[參考書目]] — 全站書籍、論文、博物館、線上資源整理
+
+> 持續更新中。最新進展見 [GitHub repo](https://github.com/davidsmith9-sudo/design-history) 或訂閱 [RSS](/index.xml)。
