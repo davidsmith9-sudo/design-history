@@ -9,7 +9,7 @@ title: 人物
 47 位形塑現代設計史的設計師、建築師與理論家 — 從 1819 年的拉斯金到 1966 年出生的阿賈耶,跨越 147 年的世代與大陸。可用上方篩選器切換地區/年代。
 
 <div class="eye-stats">
-<div><strong>47</strong><span>人物</span></div>
+<div><strong>48</strong><span>人物</span></div>
 <div><strong>147</strong><span>年代跨度</span></div>
 <div><strong>4</strong><span>大洲</span></div>
 </div>
@@ -105,6 +105,8 @@ title: 人物
 <li data-region="east-asia" data-era="early20c"><a href="龜倉雄策"><div class="eye-work-image"><img src="/99-素材/images/人物/龜倉雄策.jpg" alt="龜倉雄策" loading="lazy" /></div><div class="eye-work-meta"><h3>龜倉雄策</h3><span class="eye-work-byline">日本 · 1915–1997</span><span class="eye-work-tag">戰後日本平面設計</span></div></a></li>
 
 <li data-region="europe" data-era="early20c"><a href="埃托雷·索特薩斯"><div class="eye-work-image"><img src="/99-素材/images/人物/埃托雷·索特薩斯.jpg" alt="埃托雷·索特薩斯" loading="lazy" /></div><div class="eye-work-meta"><h3>埃托雷·索特薩斯</h3><span class="eye-work-byline">義大利 · 1917–2007</span><span class="eye-work-tag">孟菲斯設計</span></div></a></li>
+
+<li data-region="europe" data-era="early20c"><a href="約恩·烏松"><div class="eye-work-image eye-work-image--placeholder"><span>1918</span></div><div class="eye-work-meta"><h3>約恩·烏松</h3><span class="eye-work-byline">丹麥 · 1918–2008</span><span class="eye-work-tag">北歐現代主義</span></div></a></li>
 
 <li data-region="americas" data-era="early20c"><a href="索爾·巴斯"><div class="eye-work-image"><img src="/99-素材/images/人物/索爾·巴斯.jpg" alt="索爾·巴斯" loading="lazy" /></div><div class="eye-work-meta"><h3>索爾·巴斯</h3><span class="eye-work-byline">美國 · 1920–1996</span><span class="eye-work-tag">瑞士國際主義</span></div></a></li>
 

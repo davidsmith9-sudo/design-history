@@ -9,7 +9,7 @@ title: 作品
 34 件設計史代表作,從 1238 年的阿罕布拉宮到 2012 年的中央電視台總部 — 跨越 774 年的視覺證據。可用上方篩選器切換時代/領域。
 
 <div class="eye-stats">
-<div><strong>34</strong><span>作品</span></div>
+<div><strong>35</strong><span>作品</span></div>
 <div><strong>774</strong><span>年代跨度</span></div>
 <div><strong>13</strong><span>流派</span></div>
 </div>
@@ -96,7 +96,9 @@ title: 作品
 
 <li data-era="modern" data-field="建築"><a href="巴西利亞主教座堂"><div class="eye-work-image"><img src="/99-素材/images/作品/巴西利亞主教座堂.jpg" alt="巴西利亞主教座堂" loading="lazy" /></div><div class="eye-work-meta"><h3>巴西利亞主教座堂</h3><span class="eye-work-byline">尼邁耶 · 1970</span><span class="eye-work-tag">拉丁美洲現代主義</span></div></a></li>
 
-<li data-era="postmodern" data-field="建築"><a href="住吉的長屋"><div class="eye-work-image eye-work-image--placeholder"><span>1976</span></div><div class="eye-work-meta"><h3>住吉的長屋</h3><span class="eye-work-byline">安藤忠雄 · 1976</span><span class="eye-work-tag">當代日本建築</span></div></a></li>
+<li data-era="postmodern" data-field="建築"><a href="雪梨歌劇院"><div class="eye-work-image"><img src="/99-素材/images/作品/雪梨歌劇院.jpg" alt="雪梨歌劇院" loading="lazy" /></div><div class="eye-work-meta"><h3>雪梨歌劇院</h3><span class="eye-work-byline">烏松 · 1957–1973</span><span class="eye-work-tag">雕塑式建築</span></div></a></li>
+
+<li data-era="postmodern" data-field="建築"><a href="住吉的長屋"><div class="eye-work-image"><img src="/99-素材/images/作品/住吉的長屋.jpg" alt="住吉的長屋" loading="lazy" /></div><div class="eye-work-meta"><h3>住吉的長屋</h3><span class="eye-work-byline">安藤忠雄 · 1976</span><span class="eye-work-tag">當代日本建築</span></div></a></li>
 
 <li data-era="postmodern" data-field="科技"><a href="Macintosh"><div class="eye-work-image"><img src="/99-素材/images/作品/Macintosh.png" alt="Macintosh" loading="lazy" /></div><div class="eye-work-meta"><h3>Macintosh</h3><span class="eye-work-byline">Apple · 1984</span><span class="eye-work-tag">個人電腦時代</span></div></a></li>
 
