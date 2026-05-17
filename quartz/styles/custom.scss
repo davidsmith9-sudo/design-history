@@ -1422,10 +1422,10 @@ body[data-slug="index"] {
 // ═══════════════════════════════════════════════════════
 
 :root {
-  --r-xs: 3px;
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 16px;
+  --r-xs: 8px;    // chips / badges / kbd / pills
+  --r-sm: 14px;   // buttons / inputs / small cells
+  --r-md: 20px;   // cards / images / modals 內框
+  --r-lg: 28px;   // hero / 大 block / pull-quote
 }
 
 // XS — tiny chips / badges / kbd / inline pills
