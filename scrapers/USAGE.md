@@ -7,14 +7,17 @@ cd D:\design-history-website\scrapers
 D:\Python\python.exe -m pip install -r requirements.txt
 ```
 
-### 可選:API keys
+### 可選:API keys 與 proxy
 
-複製 `.env.example` 為 `.env` 並填入:
+複製 `.env.example` 為 `.env` 並填入需要的項目:
 
 - `EUROPEANA_API_KEY` — 免費,申請於 https://pro.europeana.eu/page/apis
 - `SMITHSONIAN_API_KEY` — 免費,申請於 https://api.data.gov/signup/
+- `BAIDU_PROXY` — 透過 proxy 走百度百科(境外 IP 直接連會 403)
+  - 範例:`BAIDU_PROXY=http://localhost:7890`
+  - 只有 Baidu 走 proxy,其他來源不受影響
 
-不設就跳過該來源,其他來源照常運作。
+每項都是 optional — 沒設就跳過該來源,其他照常運作。
 
 ### 可選:下載 MoMA 資料(~30 MB)
 

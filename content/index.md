@@ -19,27 +19,9 @@ title: 設計史筆記
 <span class="eye-section-label">Use this site · 怎麼用</span>
 
 <ul class="eye-paths">
-<li><a href="40-流派/包浩斯">
-<span class="eye-path-num">01</span>
-<div class="eye-path-body">
-<h3>有 5 分鐘 → 看招牌</h3>
-<p>直接讀<strong>包浩斯</strong>:14 年定義整個現代設計教育的傳奇學校。</p>
-</div>
-</a></li>
-<li><a href="80-視覺化/時間軸">
-<span class="eye-path-num">02</span>
-<div class="eye-path-body">
-<h3>有 30 分鐘 → 看脈絡</h3>
-<p>逛<strong>互動時間軸</strong>:774 年設計史橫向滑動,點任一節點進入詳述。</p>
-</div>
-</a></li>
-<li><a href="60-作品">
-<span class="eye-path-num">03</span>
-<div class="eye-path-body">
-<h3>來做研究 → 看全索引</h3>
-<p><strong>作品全覽</strong>(可篩選):36 件按時代 / 領域過濾,適合找特定研究素材。</p>
-</div>
-</a></li>
+<li><a href="40-流派/包浩斯"><span class="eye-path-num">01</span><span class="eye-path-body"><strong class="eye-path-title">有 5 分鐘 → 看招牌</strong><span class="eye-path-desc">直接讀<strong>包浩斯</strong>:14 年定義整個現代設計教育的傳奇學校。</span></span></a></li>
+<li><a href="80-視覺化/時間軸"><span class="eye-path-num">02</span><span class="eye-path-body"><strong class="eye-path-title">有 30 分鐘 → 看脈絡</strong><span class="eye-path-desc">逛<strong>互動時間軸</strong>:774 年設計史橫向滑動,點任一節點進入詳述。</span></span></a></li>
+<li><a href="60-作品"><span class="eye-path-num">03</span><span class="eye-path-body"><strong class="eye-path-title">來做研究 → 看全索引</strong><span class="eye-path-desc"><strong>作品全覽</strong>(可篩選):36 件按時代 / 領域過濾,適合找特定研究素材。</span></span></a></li>
 </ul>
 
 <span class="eye-section-label">Stats · 範圍</span>
@@ -55,32 +37,17 @@ title: 設計史筆記
 <span class="eye-section-label">Where to start · 從這裡開始</span>
 
 <ul class="eye-curated">
-<li><a href="40-流派/包浩斯"><span class="eye-curated-num">01</span><div class="eye-curated-body"><h3>包浩斯</h3><span class="eye-curated-meta">流派 · 1919–1933 · 德國</span><p>14 年間在德國集結最關鍵的現代主義師資,把工藝美術運動的手作精神與工業生產合流,形塑了 20 世紀整個設計教育的型態。</p></div></a></li>
-<li><a href="60-作品/薩伏伊別墅"><span class="eye-curated-num">02</span><div class="eye-curated-body"><h3>薩伏伊別墅</h3><span class="eye-curated-meta">作品 · 柯比意 · 1931</span><p>「住屋是用來住的機器」最完整的物理化身。底層架空、屋頂花園、自由平面、橫向長窗、自由立面 — 五項現代建築原則一次到齊。</p></div></a></li>
-<li><a href="50-人物/葛羅培斯"><span class="eye-curated-num">03</span><div class="eye-curated-body"><h3>葛羅培斯</h3><span class="eye-curated-meta">人物 · 1883–1969 · 德國 / 美國</span><p>包浩斯創辦人。把藝術家與工匠重新放在同一條教學線上,後來把這套模式帶到哈佛 GSD,讓現代主義教育在二戰後跨進美國。</p></div></a></li>
+<li><a href="40-流派/包浩斯"><span class="eye-curated-num">01</span><span class="eye-curated-body"><strong class="eye-curated-title">包浩斯</strong><span class="eye-curated-meta">流派 · 1919–1933 · 德國</span><span class="eye-curated-desc">14 年間在德國集結最關鍵的現代主義師資,把工藝美術運動的手作精神與工業生產合流,形塑了 20 世紀整個設計教育的型態。</span></span></a></li>
+<li><a href="60-作品/薩伏伊別墅"><span class="eye-curated-num">02</span><span class="eye-curated-body"><strong class="eye-curated-title">薩伏伊別墅</strong><span class="eye-curated-meta">作品 · 柯比意 · 1931</span><span class="eye-curated-desc">「住屋是用來住的機器」最完整的物理化身。底層架空、屋頂花園、自由平面、橫向長窗、自由立面 — 五項現代建築原則一次到齊。</span></span></a></li>
+<li><a href="50-人物/葛羅培斯"><span class="eye-curated-num">03</span><span class="eye-curated-body"><strong class="eye-curated-title">葛羅培斯</strong><span class="eye-curated-meta">人物 · 1883–1969 · 德國 / 美國</span><span class="eye-curated-desc">包浩斯創辦人。把藝術家與工匠重新放在同一條教學線上,後來把這套模式帶到哈佛 GSD,讓現代主義教育在二戰後跨進美國。</span></span></a></li>
 </ul>
 
 <span class="eye-section-label">Primary · 核心三軸</span>
 
 <ul class="eye-primary-grid">
-<li><a href="40-流派">
-<span class="eye-primary-num">01</span>
-<h2>流派<span class="eye-primary-count">21</span></h2>
-<p>從工藝美術運動到解構主義 — 21 條塑造現代設計的思潮路線。</p>
-<span class="eye-primary-cta">瀏覽全部流派 →</span>
-</a></li>
-<li><a href="50-人物">
-<span class="eye-primary-num">02</span>
-<h2>人物<span class="eye-primary-count">48</span></h2>
-<p>從拉斯金到阿賈耶 — 跨越四大洲、形塑現代設計史的設計師、建築師與理論家。</p>
-<span class="eye-primary-cta">瀏覽全部人物 →</span>
-</a></li>
-<li><a href="60-作品">
-<span class="eye-primary-num">03</span>
-<h2>作品<span class="eye-primary-count">36</span></h2>
-<p>從阿罕布拉宮到 CCTV 大樓 — 774 年間的代表作品,可依時代與領域篩選。</p>
-<span class="eye-primary-cta">瀏覽全部作品 →</span>
-</a></li>
+<li><a href="40-流派"><span class="eye-primary-num">01</span><strong class="eye-primary-title">流派<span class="eye-primary-count">21</span></strong><span class="eye-primary-desc">從工藝美術運動到解構主義 — 21 條塑造現代設計的思潮路線。</span><span class="eye-primary-cta">瀏覽全部流派 →</span></a></li>
+<li><a href="50-人物"><span class="eye-primary-num">02</span><strong class="eye-primary-title">人物<span class="eye-primary-count">48</span></strong><span class="eye-primary-desc">從拉斯金到阿賈耶 — 跨越四大洲、形塑現代設計史的設計師、建築師與理論家。</span><span class="eye-primary-cta">瀏覽全部人物 →</span></a></li>
+<li><a href="60-作品"><span class="eye-primary-num">03</span><strong class="eye-primary-title">作品<span class="eye-primary-count">36</span></strong><span class="eye-primary-desc">從阿罕布拉宮到 CCTV 大樓 — 774 年間的代表作品,可依時代與領域篩選。</span><span class="eye-primary-cta">瀏覽全部作品 →</span></a></li>
 </ul>
 
 <span class="eye-section-label">Index · 次要索引</span>

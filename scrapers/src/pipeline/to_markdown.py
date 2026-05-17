@@ -369,6 +369,7 @@ def to_markdown(record: dict[str, Any]) -> tuple[str, str]:
     extra_sources = record.get("sources") or {}
     body += _render_baidu(extra_sources.get("baidu_baike"))
     body += _render_museum_section(extra_sources)
+    body += _render_exhibitions_section(extra_sources)
     body += _render_academic_section(extra_sources)
 
     body.append("## 來源")
@@ -424,7 +425,8 @@ def _museum_label(key: str) -> str:
 
 
 def _render_museum_section(extra: dict[str, Any]) -> list[str]:
-    keys = ("met_museum", "va", "europeana", "smithsonian", "moma")
+    """博物館典藏 — collection objects (artworks/objects with date/medium/maker)."""
+    keys = ("met_museum", "va", "europeana", "smithsonian", "moma", "vitra")
     populated = [(k, extra.get(k)) for k in keys if extra.get(k)]
     if not populated:
         return []
@@ -458,6 +460,30 @@ def _render_museum_section(extra: dict[str, Any]) -> list[str]:
             if h.get("image"):
                 out.append(f"  ![]({h['image']})")
         out.append("")
+    return out
+
+
+def _render_exhibitions_section(extra: dict[str, Any]) -> list[str]:
+    """展覽 / 活動 / 文章 — search hits from sites focused on events not collections."""
+    hits = extra.get("design_museum_london")
+    if not hits or not isinstance(hits, list):
+        return []
+    out = ["## 相關展覽與活動", "", "### Design Museum London"]
+    for h in hits[:5]:
+        title = h.get("title") or "(無標題)"
+        url = h.get("url")
+        line = f"- **[{title}]({url})**" if url else f"- **{title}**"
+        details = []
+        if h.get("date"):
+            details.append(str(h["date"]))
+        if details:
+            line += "  \n  " + " · ".join(details)
+        out.append(line)
+        if h.get("description"):
+            out.append(f"  > {h['description'][:240]}")
+        if h.get("image"):
+            out.append(f"  ![]({h['image']})")
+    out.append("")
     return out
 
 

@@ -561,10 +561,10 @@ body[data-slug="index"] {
 }
 
 .eye-paths a {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 2.25rem 1.85rem;
+  padding: 2.25rem 1.85rem !important;
   height: 100%;
   background: transparent !important;
   text-decoration: none !important;
@@ -580,7 +580,7 @@ body[data-slug="index"] {
       letter-spacing: 0.18em;
     }
 
-    .eye-path-body h3 {
+    .eye-path-title {
       text-decoration-color: var(--dark);
     }
   }
@@ -597,24 +597,30 @@ body[data-slug="index"] {
   transition: color 0.25s ease, letter-spacing 0.3s ease;
 }
 
-.eye-path-body h3 {
+.eye-path-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.eye-path-title {
+  display: block;
   font-family: var(--headerFont);
   font-size: 1.35rem;
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  margin: 0 0 0.7rem;
+  margin: 0;
   color: var(--dark);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-decoration-color: transparent;
   text-underline-offset: 5px;
   transition: text-decoration-color 0.25s ease;
-  border: none !important;
-  padding: 0 !important;
 }
 
-.eye-path-body p {
+.eye-path-desc {
+  display: block;
   font-family: var(--bodyFont);
   font-size: 0.9rem;
   color: var(--darkgray);
@@ -644,24 +650,30 @@ body[data-slug="index"] {
 }
 
 .eye-curated a {
-  display: grid;
+  display: grid !important;
   grid-template-columns: auto 1fr;
   gap: 2.5rem;
   align-items: start;
-  padding: 2rem 0.5rem;
+  padding: 2rem 0.5rem !important;
   text-decoration: none !important;
   color: var(--dark);
   background: transparent !important;
   transition: padding-left 0.3s ease, background 0.3s ease;
 
   &:hover {
-    padding-left: 1.5rem;
+    padding-left: 1.5rem !important;
     background: linear-gradient(to right, var(--light) 0%, transparent 100%);
 
-    .eye-curated-body h3 {
+    .eye-curated-title {
       text-decoration-color: var(--dark);
     }
   }
+}
+
+.eye-curated-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .eye-curated-num {
@@ -676,12 +688,13 @@ body[data-slug="index"] {
   min-width: 3.5ch;
 }
 
-.eye-curated-body h3 {
+.eye-curated-title {
+  display: block;
   font-family: var(--headerFont);
   font-size: 1.65rem;
   font-weight: 400;
   letter-spacing: -0.02em;
-  margin: 0 0 0.4rem;
+  margin: 0;
   color: var(--dark);
   line-height: 1.2;
   text-decoration: underline;
@@ -689,8 +702,16 @@ body[data-slug="index"] {
   text-decoration-color: transparent;
   text-underline-offset: 6px;
   transition: text-decoration-color 0.3s ease;
-  border: none;
-  padding: 0;
+}
+
+.eye-curated-desc {
+  display: block;
+  font-family: var(--bodyFont);
+  font-size: 0.95rem;
+  color: var(--darkgray);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 58ch;
 }
 
 .eye-curated-meta {
@@ -704,14 +725,6 @@ body[data-slug="index"] {
   margin-bottom: 0.85rem;
 }
 
-.eye-curated-body p {
-  font-family: var(--bodyFont);
-  font-size: 0.95rem;
-  color: var(--darkgray);
-  line-height: 1.65;
-  margin: 0;
-  max-width: 58ch;
-}
 
 // ── Primary 3 主軸 magazine-style grid ─────────────────
 
@@ -739,9 +752,9 @@ body[data-slug="index"] {
 }
 
 .eye-primary-grid a {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
-  padding: 3rem 2.5rem 2.5rem;
+  padding: 3rem 2.5rem 2.5rem !important;
   height: 100%;
   text-decoration: none !important;
   color: var(--dark);
@@ -772,7 +785,10 @@ body[data-slug="index"] {
   font-feature-settings: "tnum";
 }
 
-.eye-primary-grid h2 {
+.eye-primary-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
   font-family: var(--headerFont);
   font-size: clamp(2.2rem, 3.5vw, 2.8rem);
   font-weight: 300;
@@ -780,11 +796,16 @@ body[data-slug="index"] {
   line-height: 1;
   margin: 0 0 1rem;
   color: var(--dark);
-  border: none;
-  padding: 0;
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
+}
+
+.eye-primary-desc {
+  display: block;
+  font-family: var(--bodyFont);
+  font-size: 0.92rem;
+  color: var(--darkgray);
+  line-height: 1.6;
+  margin: 0 0 auto;
+  max-width: 26ch;
 }
 
 .eye-primary-count {
@@ -1612,20 +1633,31 @@ a:focus-visible,
   }
 }
 
+// 適用 .eye-stats 不論在 .eye-hero 內或獨立的情況
+.eye-stats,
 .eye-hero .eye-stats {
   display: flex;
   gap: 4rem;
-  margin-top: 4rem;
+  margin: 2rem 0 4rem;
   flex-wrap: wrap;
-  padding-top: 2rem;
+  padding: 2rem 0;
   border-top: var(--hairline);
+  border-bottom: var(--hairline);
 }
 
+.eye-hero .eye-stats {
+  margin: 4rem 0 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.eye-stats > div,
 .eye-hero .eye-stats > div {
   display: flex;
   flex-direction: column;
 }
 
+.eye-stats strong,
 .eye-hero .eye-stats strong {
   font-size: 2.4rem;
   font-weight: 300;
@@ -1635,7 +1667,8 @@ a:focus-visible,
   letter-spacing: -0.03em;
 }
 
-.eye-hero .eye-stats span {
+.eye-stats > div > span,
+.eye-hero .eye-stats > div > span {
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.24em;
@@ -1689,11 +1722,11 @@ a:focus-visible,
 }
 
 .eye-grid a {
-  display: block;
-  background: transparent;
+  display: block !important;
+  background: transparent !important;
   border: none;
-  padding: 2.5rem 2rem 2.5rem;
-  text-decoration: none;
+  padding: 2.5rem 2rem 2.5rem !important;
+  text-decoration: none !important;
   color: var(--dark);
   transition: background 0.25s ease;
   position: relative;
@@ -2316,14 +2349,16 @@ article .meta {
 }
 
 .eye-works-grid > li > a {
-  display: block;
-  text-decoration: none;
+  display: block !important;
+  text-decoration: none !important;
   color: inherit;
-  background: transparent;
+  background: transparent !important;
   overflow: hidden;
   border: none;
+  padding: 0 !important;
 
-  .eye-work-meta h3 {
+  .eye-work-meta h3,
+  .eye-work-title {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-decoration-color: transparent;
@@ -2338,7 +2373,8 @@ article .meta {
   border-color: transparent;
   opacity: 1;
 
-  .eye-work-meta h3 {
+  .eye-work-meta h3,
+  .eye-work-title {
     text-decoration-color: var(--dark);
   }
 }
@@ -2388,7 +2424,9 @@ article .meta {
   padding: 0;
 }
 
-.eye-work-meta h3 {
+.eye-work-meta h3,
+.eye-work-title {
+  display: block;
   font-family: var(--headerFont);
   font-size: 1.15rem;
   font-weight: 500;

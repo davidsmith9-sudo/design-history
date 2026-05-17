@@ -12,27 +12,25 @@
   border-bottom: none;
   isolation: isolate;
 
-  // 毛玻璃漸層 — 向下延伸 32px,模糊強度與透明度同步漸退
+  // 毛玻璃 — 主體區段近乎不透明,僅底端 14px 漸退避免硬邊
   &::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: -32px;
+    bottom: -14px;
     z-index: -1;
     pointer-events: none;
     backdrop-filter: blur(16px) saturate(1.25);
     -webkit-backdrop-filter: blur(16px) saturate(1.25);
     background: linear-gradient(
       to bottom,
-      rgba(251, 250, 247, 0.92) 0%,
-      rgba(251, 250, 247, 0.78) 45%,
-      rgba(251, 250, 247, 0.4) 80%,
+      rgba(251, 250, 247, 0.98) 0%,
+      rgba(251, 250, 247, 0.96) 80%,
+      rgba(251, 250, 247, 0.6) 96%,
       rgba(251, 250, 247, 0) 100%
     );
-    mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
     transition: opacity 0.25s ease;
   }
 
@@ -59,9 +57,9 @@
 :root[saved-theme="dark"] .topnav::before {
   background: linear-gradient(
     to bottom,
-    rgba(20, 20, 19, 0.92) 0%,
-    rgba(20, 20, 19, 0.78) 45%,
-    rgba(20, 20, 19, 0.4) 80%,
+    rgba(20, 20, 19, 0.98) 0%,
+    rgba(20, 20, 19, 0.96) 80%,
+    rgba(20, 20, 19, 0.6) 96%,
     rgba(20, 20, 19, 0) 100%
   );
 }

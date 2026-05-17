@@ -75,24 +75,27 @@ python run.py to-markdown Q19799
 | DOAJ | ✓ | 無 | 開放取用學術期刊 |
 | Internet Archive | ✓ | 無 | 電子書 + 歷史文獻 |
 | MoMA | ✓ | 無(需下載資料) | 跑 `run.py moma-import` 一次性下載 ~30MB |
-| Vitra Design Museum | stub | — | 無公開 API,留 TODO |
-| Design Museum London | stub | — | 無公開 API,留 TODO |
+| Design Museum London | ✓ | 無 | HTML scrape,主要是展覽/活動/文章 |
+| Vitra Design Museum | stub | — | SPA + 無公開 API → 需 Playwright 才能爬 |
 
 ## 已知限制
 
-1. **大陸繁體 vs 台灣繁體**:Wikidata 部分 QID 只設了通用 `zh` label(大陸繁體變體,如「勒·柯布西耶」),沒有 `zh-tw` label(台灣變體「勒·柯比意」)。Wikipedia 抓回的主標題會用 variant=zh-tw 轉換成台灣繁體,但 `[[wiki-link]]` 內的關聯人物/作品名稱會留在 Wikidata 原始 label,審稿時可能要手動改字。
+1. **大陸繁體 → 台灣繁體自動轉換已啟用**:OpenCC `s2twp` + 自訂設計史譯名字典(`src/utils/zh_convert.py`)。覆蓋已知:勒·柯布西耶 → 勒·柯比意、包豪斯 → 包浩斯、康定斯基 → 康丁斯基、弗蘭克·勞埃德·賴特 → 弗蘭克·洛伊·萊特、安迪·沃霍爾 → 安迪·沃荷,等等。沒覆蓋到的請加進 `CUSTOM_TW` dict。
 
 2. **type 偵測**:目前只覆蓋常見類型(`流派 / 人物 / 作品`)的 instance_of QID 子集,落在「未分類」的請手動補規則或加入 `TYPE_RULES`。
 
 3. **不直接寫入 `content/`**:所有輸出都進 `data/markdown/` 供審稿,刻意不自動覆蓋線上內容。
 
-4. **百度百科幾乎只能在中國 IP 工作**:Baidu Baike 對境外 IP 回 403 Forbidden(IP geofencing + 瀏覽器指紋驗證)。Scraper 程式碼完整,要啟用請其中一種:
+4. **百度百科需 proxy**:Baidu Baike 對境外 IP 回 403 Forbidden(IP geofencing + 瀏覽器指紋)。要啟用請其中一種:
    - 在中國境內執行
-   - 設定環境變數 `HTTPS_PROXY=http://your-china-proxy:port`(requests 會自動透過 proxy)
-   - 或考慮改用本身有 zh-cn variant 的 Wikipedia(我們已經抓了,內容覆蓋率對設計史足夠)
+   - `.env` 設定 `BAIDU_PROXY=http://your-china-proxy:port`(只 Baidu 走 proxy,其他來源不受影響)
+   - 或設 `HTTPS_PROXY=...`(全部來源都走 proxy)
+   - 不啟用也沒關係 — Wikipedia 的 `zh-hans` variant 已涵蓋大部分簡體內容
 
-5. **Met / V&A 搜尋結果可能不相關**:博物館 API 的關鍵字搜尋是廣義的 — 例如搜「Bauhaus」,Met 可能回傳「Egyptian Book of the Dead」(因為某個藏品的元資料含 "house" 字)。V&A 比 Met 精確得多。審稿時請挑選真正相關的條目,其餘刪除。
+5. **Vitra Design Museum 是 stub**:他們的數位 collection 是純 SPA(`<div id="app"></div>` + JS bundles),沒有可發現的 backend API。要實作需 Playwright/Selenium。詳細註解在 `src/sources/vitra.py`。
 
-6. **MoMA 需先下載資料**:跑 `python run.py moma-import`(一次性 ~30 MB)才會把 MoMA 結果納入。沒下載則自動跳過。
+6. **Met / V&A 搜尋結果可能不相關**:博物館 API 的關鍵字搜尋是廣義的 — 例如搜「Le Corbusier」,Met 可能回傳「Charles Le Brun」「Le Nain」(姓氏含 "Le")。V&A 比 Met 精確得多。審稿時請挑選真正相關的條目,其餘刪除。
 
-7. **Europeana / Smithsonian 需 API key**:免費申請,把 key 放進 `.env`(複製 `.env.example`)。沒設則自動跳過。
+7. **MoMA 需先下載資料**:跑 `python run.py moma-import`(一次性 ~30 MB)才會把 MoMA 結果納入。沒下載則自動跳過。
+
+8. **Europeana / Smithsonian 需 API key**:免費申請,把 key 放進 `.env`(複製 `.env.example`)。沒設則自動跳過。

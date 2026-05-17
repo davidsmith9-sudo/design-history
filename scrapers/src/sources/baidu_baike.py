@@ -7,6 +7,7 @@ respect their server.
 """
 from __future__ import annotations
 
+import os
 import re
 from typing import Any, Optional
 from urllib.parse import quote
@@ -31,6 +32,19 @@ class BaiduBaike(BaseSource):
 
     def __init__(self) -> None:
         super().__init__()
+        # Optional proxy specifically for Baidu — useful for users with a VPN /
+        # mainland-China proxy who want only Baidu requests routed through it,
+        # without affecting Wikipedia/Met/etc. Env var BAIDU_PROXY or
+        # BAIDUBAIKE_PROXY (e.g. "http://localhost:7890" or
+        # "socks5://user:pass@host:port").
+        proxy = (
+            os.environ.get("BAIDU_PROXY")
+            or os.environ.get("BAIDUBAIKE_PROXY")
+            or ""
+        ).strip()
+        if proxy:
+            self.session.proxies = {"http": proxy, "https": proxy}
+
         # Baidu has aggressive anti-bot. Send a full browser-like header set.
         # Even so, requests from outside mainland China may be 403'd — see
         # README "已知限制" section.

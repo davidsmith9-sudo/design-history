@@ -91,6 +91,13 @@ CUSTOM_TW: dict[str, str] = {
     "戛納": "坎城",
     "舊金山": "舊金山",  # same
     "聖彼得堡": "聖彼得堡",  # same
+
+    # === Reversals: OpenCC over-converts these for our site's voice ===
+    # OpenCC s2twp converts 家具 → 傢俱 (the more "classical" Taiwan form), but
+    # the site uses 家具 (modern) 30× more often. Convert back.
+    "傢俱": "家具",
+    "傢俱設計": "家具設計",
+    "傢俱設計師": "家具設計師",
 }
 
 
