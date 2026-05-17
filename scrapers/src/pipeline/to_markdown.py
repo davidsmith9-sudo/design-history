@@ -11,6 +11,8 @@ import re
 from pathlib import Path
 from typing import Any, Optional
 
+from src.utils.zh_convert import to_taiwan
+
 # Wikidata QIDs that indicate "this is X" — used to pick a content type.
 # Curated subset; expand as needed.
 TYPE_RULES: list[tuple[str, set[str]]] = [
@@ -101,8 +103,8 @@ def _label(qid_or_obj: Any, label_map: dict[str, dict[str, str]], lang_priority:
     """Resolve a {qid: ...} reference to a human-readable label.
 
     Priority: Taiwan zh (zh-tw) → zh-hant → generic zh → zh-hk → zh-hans → en.
-    Wikidata's `zh-hant` label often uses 大陸繁體 vocabulary (e.g. 包豪斯) — we
-    want 台灣繁體 vocabulary (e.g. 包浩斯) to match the existing site's voice.
+    Non-zh-tw labels are passed through `to_taiwan` to convert 大陸繁體
+    vocabulary (e.g. 柯布西耶 → 柯比意) using OpenCC + custom design dict.
     """
     if not isinstance(qid_or_obj, dict) or "qid" not in qid_or_obj:
         return None
@@ -110,8 +112,12 @@ def _label(qid_or_obj: Any, label_map: dict[str, dict[str, str]], lang_priority:
     labels = label_map.get(qid, {})
     for lang in lang_priority:
         if lang in labels:
-            return labels[lang]
-    return qid  # fallback to QID if no label
+            value = labels[lang]
+            # Apply Taiwan-繁體 normalization for any zh variant.
+            if lang.startswith("zh") and lang != "zh-tw":
+                value = to_taiwan(value)
+            return value
+    return qid
 
 
 def _format_year(time_obj: Any) -> Optional[str]:
@@ -160,7 +166,8 @@ def _pick_title(wd: dict[str, Any], wiki: dict[str, Any]) -> str:
       - title: the canonical article title (not auto-converted) → 包豪斯
       - display_title: HTML-wrapped converted title → <span...>包浩斯</span>
     For zh-tw variant we want the converted form, so strip HTML from display_title.
-    Wikidata's zh-hant label often uses 大陸繁體 vocabulary (e.g. 包豪斯) — avoid.
+    Wikidata's zh-hant label often uses 大陸繁體 vocabulary (e.g. 包豪斯) — we
+    apply `to_taiwan` as a final safety pass.
     """
     if "zh-hant" in wiki:
         s = wiki["zh-hant"].get("summary") or {}
@@ -168,13 +175,16 @@ def _pick_title(wd: dict[str, Any], wiki: dict[str, Any]) -> str:
         if dt:
             cleaned = _strip_html(dt)
             if cleaned:
-                return cleaned
+                return to_taiwan(cleaned)
         if s.get("title"):
-            return s["title"]
+            return to_taiwan(s["title"])
     labels = wd.get("labels", {})
     for lang in ("zh-tw", "zh-hant", "zh", "zh-hk", "zh-hans", "zh-cn", "en"):
         if lang in labels:
-            return labels[lang]
+            val = labels[lang]
+            if lang.startswith("zh") and lang != "zh-tw":
+                val = to_taiwan(val)
+            return val
     return wd["qid"]
 
 
@@ -192,11 +202,14 @@ def _pick_description(wd: dict[str, Any], wiki: dict[str, Any]) -> Optional[str]
     if "zh-hant" in wiki:
         s = wiki["zh-hant"].get("summary") or {}
         if s.get("description"):
-            return s["description"]
+            return to_taiwan(s["description"])
     descriptions = wd.get("descriptions", {})
     for lang in ("zh-tw", "zh-hant", "zh", "zh-hk", "en"):
         if lang in descriptions:
-            return descriptions[lang]
+            val = descriptions[lang]
+            if lang.startswith("zh") and lang != "zh-tw":
+                val = to_taiwan(val)
+            return val
     return None
 
 
@@ -323,13 +336,13 @@ def to_markdown(record: dict[str, Any]) -> tuple[str, str]:
     if extract:
         body.append("## 簡述")
         if extract_lang == "zh-hant":
-            body.append("(來源:中文維基百科 — 繁體變體)")
+            body.append("(來源:中文維基百科 — 繁體變體,已自動轉台灣用語)")
         elif extract_lang == "zh-hans":
-            body.append("(來源:中文維基百科 — 簡體變體)")
+            body.append("(來源:中文維基百科 — 簡體變體,已自動轉台灣用語)")
         elif extract_lang == "en":
             body.append("(來源:英文維基百科,待翻譯)")
         body.append("")
-        body.append(extract)
+        body.append(to_taiwan(extract) if extract_lang and extract_lang.startswith("zh") else extract)
         body.append("")
 
     if "zh-hans" in wiki and "zh-hant" in wiki:

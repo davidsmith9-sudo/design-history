@@ -4,3 +4,8 @@ lxml>=5.0
 pyyaml>=6.0
 python-slugify>=8.0
 tenacity>=8.2
+
+# 簡體/大陸繁體 → 台灣繁體 轉換。優先用 C-binding 版(快、完整字典);
+# 若無法安裝再 fall back 到純 Python 版。
+opencc>=1.1.6 ; platform_system == "Windows"
+opencc-python-reimplemented>=0.1.7 ; platform_system != "Windows"

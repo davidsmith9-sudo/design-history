@@ -36,6 +36,13 @@ function loadManifest(): Record<string, ManifestEntry> {
   return manifestCache!
 }
 
+function normalizeKey(src: string): string {
+  // /99-素材/.../紅屋.jpg 直接用
+  // ../99-素材/.../紅屋.jpg → /99-素材/.../紅屋.jpg
+  if (src.startsWith("/")) return src
+  return `/${src.replace(/^(?:\.\.?\/)+/, "")}`
+}
+
 export const ResponsiveImageRewrite: QuartzTransformerPlugin = () => {
   return {
     name: "ResponsiveImageRewrite",
@@ -43,6 +50,8 @@ export const ResponsiveImageRewrite: QuartzTransformerPlugin = () => {
       return [
         () => (tree: any) => {
           const manifest = loadManifest()
+          const manifestEmpty = Object.keys(manifest).length === 0
+
           visit(tree, "element", (node: any, index: number | null, parent: any) => {
             if (node.tagName !== "img") return
             if (!parent || index == null) return
@@ -56,14 +65,14 @@ export const ResponsiveImageRewrite: QuartzTransformerPlugin = () => {
             if (!RASTER_RE.test(src)) return
             if (SUFFIX_RE.test(src)) return
 
-            if (!props.srcset) props.srcset = buildSrcset(src)
-            if (!props.sizes) props.sizes = DEFAULT_SIZES
+            // 始終補 loading / decoding(這兩個不依賴衍生圖)
             if (!props.loading) props.loading = "lazy"
             if (!props.decoding) props.decoding = "async"
 
-            // 從 manifest 補 width/height + LQIP
-            const key = src.startsWith("/") ? src : `/${src}`
+            const key = normalizeKey(src)
             const meta = manifest[key]
+
+            // 從 manifest 補 width / height / LQIP(若有)
             if (meta) {
               if (meta.w && !props.width) props.width = meta.w
               if (meta.h && !props.height) props.height = meta.h
@@ -74,6 +83,14 @@ export const ResponsiveImageRewrite: QuartzTransformerPlugin = () => {
                 props["data-lqip"] = "true"
               }
             }
+
+            // ── 關鍵防禦:沒 manifest 條目 → 不包 picture,不加 srcset
+            // 這樣即使 Cloudflare emitter 沒生衍生圖,img 用原圖能正常顯示
+            if (!meta || manifestEmpty) return
+
+            // 從這裡開始才包 srcset + picture(衍生圖確認在 manifest 中)
+            if (!props.srcset) props.srcset = buildSrcset(src)
+            if (!props.sizes) props.sizes = DEFAULT_SIZES
 
             const isWebpAlready = /\.webp$/i.test(src)
             if (isWebpAlready) return
