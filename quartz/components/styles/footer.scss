@@ -10,24 +10,6 @@ footer {
   color: var(--gray);
   letter-spacing: 0.02em;
 
-  // 漸層髮絲線 — 與 topnav::after 同款,兩端淡出
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      var(--lightgray) 15%,
-      var(--lightgray) 85%,
-      transparent 100%
-    );
-    opacity: 0.7;
-  }
-
   // 上方延伸的毛玻璃漸層遮罩 — 讓內容看起來淡入 footer
   &::after {
     content: "";
