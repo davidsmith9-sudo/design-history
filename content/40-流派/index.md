@@ -64,7 +64,7 @@ title: 流派
 <li class="eye-era-divider-row" data-era="medieval"><span class="era-divider-tc">中世紀</span><span class="era-divider-en">Medieval</span><span class="era-divider-range">700 — 1300</span></li>
 
 <li data-era="medieval" data-region="islamic"><a href="伊斯蘭幾何設計">
-<div class="eye-work-image eye-work-image--placeholder"><span>700</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/阿罕布拉宮.jpg" alt="伊斯蘭幾何設計代表作:阿罕布拉宮" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>伊斯蘭幾何設計</h3>
 <span class="eye-work-byline">中東 / 北非 / 西班牙 · 700–現在</span>
@@ -102,7 +102,7 @@ title: 流派
 </a></li>
 
 <li data-era="renaissance" data-region="east-asia"><a href="浮世繪">
-<div class="eye-work-image eye-work-image--placeholder"><span>1660</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/神奈川衝浪裏.jpg" alt="浮世繪代表作:神奈川衝浪裏" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>浮世繪</h3>
 <span class="eye-work-byline">日本 · 1660–1900</span>
@@ -113,7 +113,7 @@ title: 流派
 <li class="eye-era-divider-row" data-era="industrial"><span class="era-divider-tc">工業革命末期</span><span class="era-divider-en">Late Industrial</span><span class="era-divider-range">1860 — 1910</span></li>
 
 <li data-era="industrial" data-region="europe"><a href="工藝美術運動">
-<div class="eye-work-image eye-work-image--placeholder"><span>1860</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/紅屋.jpg" alt="工藝美術運動代表作:紅屋" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>工藝美術運動</h3>
 <span class="eye-work-byline">英國 · 1860–1910</span>
@@ -131,7 +131,7 @@ title: 流派
 </a></li>
 
 <li data-era="industrial" data-region="europe"><a href="維也納分離派">
-<div class="eye-work-image eye-work-image--placeholder"><span>1897</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/古斯塔夫·克林姆.jpg" alt="維也納分離派代表人物:克林姆" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>維也納分離派</h3>
 <span class="eye-work-byline">奧地利 · 1897–1905</span>
@@ -142,7 +142,7 @@ title: 流派
 <li class="eye-era-divider-row" data-era="modern"><span class="era-divider-tc">現代主義</span><span class="era-divider-en">Modernism</span><span class="era-divider-range">1913 — 1955</span></li>
 
 <li data-era="modern" data-region="europe"><a href="構成主義">
-<div class="eye-work-image eye-work-image--placeholder"><span>1913</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/第三國際紀念塔.jpg" alt="構成主義代表作:第三國際紀念塔" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>構成主義</h3>
 <span class="eye-work-byline">蘇聯 · 1913–1930</span>
@@ -178,7 +178,7 @@ title: 流派
 </a></li>
 
 <li data-era="modern" data-region="global"><a href="裝飾藝術">
-<div class="eye-work-image eye-work-image--placeholder"><span>1920</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/克萊斯勒大廈.jpg" alt="裝飾藝術代表作:克萊斯勒大廈" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>裝飾藝術</h3>
 <span class="eye-work-byline">全球 · 1920–1939</span>
@@ -196,7 +196,7 @@ title: 流派
 </a></li>
 
 <li data-era="modern" data-region="east-asia"><a href="日本民藝運動">
-<div class="eye-work-image eye-work-image--placeholder"><span>1925</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/蝴蝶凳.jpg" alt="日本民藝運動精神代表:柳宗理蝴蝶凳" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>日本民藝運動</h3>
 <span class="eye-work-byline">日本 · 1925–現在</span>
@@ -216,7 +216,7 @@ title: 流派
 <li class="eye-era-divider-row" data-era="postmodern"><span class="era-divider-tc">後現代 · 當代</span><span class="era-divider-en">Postmodern — Contemporary</span><span class="era-divider-range">1955 — 1990</span></li>
 
 <li data-era="postmodern" data-region="europe"><a href="普普藝術">
-<div class="eye-work-image eye-work-image--placeholder"><span>1955</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/安迪·沃荷.jpg" alt="普普藝術代表人物:安迪·沃荷" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>普普藝術</h3>
 <span class="eye-work-byline">英 / 美 · 1955–1970</span>
@@ -234,7 +234,7 @@ title: 流派
 </a></li>
 
 <li data-era="postmodern" data-region="europe"><a href="孟菲斯設計">
-<div class="eye-work-image eye-work-image--placeholder"><span>1981</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/Miss Blanche 椅.jpg" alt="孟菲斯設計代表作:Miss Blanche 椅(倉俁史朗)" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>孟菲斯設計</h3>
 <span class="eye-work-byline">義大利 · 1981–1987</span>

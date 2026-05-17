@@ -33,7 +33,7 @@ tags:
 <li class="eye-era-divider-row"><span class="era-divider-tc">工業末期 · 機能主義萌芽</span><span class="era-divider-en">Functionalism takes shape</span><span class="era-divider-range">1896 — 1908</span></li>
 
 <li><a href="形式追隨功能">
-<div class="eye-work-image eye-work-image--placeholder"><span>1896</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/路易斯·沙利文.jpg" alt="提出者:路易斯·沙利文" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>形式追隨功能</h3>
 <span class="eye-work-byline">路易斯·沙利文 · 1896</span>
@@ -42,7 +42,7 @@ tags:
 </a></li>
 
 <li><a href="有機建築">
-<div class="eye-work-image eye-work-image--placeholder"><span>1908</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/落水山莊.jpg" alt="有機建築代表作:落水山莊(萊特)" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>有機建築</h3>
 <span class="eye-work-byline">弗蘭克·洛伊·萊特 · 1908</span>
@@ -51,7 +51,7 @@ tags:
 </a></li>
 
 <li><a href="裝飾與罪惡">
-<div class="eye-work-image eye-work-image--placeholder"><span>1908</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/人物/阿道夫·路斯.jpg" alt="提出者:阿道夫·路斯" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>裝飾與罪惡</h3>
 <span class="eye-work-byline">阿道夫·路斯 · 1908</span>
@@ -62,7 +62,7 @@ tags:
 <li class="eye-era-divider-row"><span class="era-divider-tc">現代主義初期 · 教育宣言</span><span class="era-divider-en">Modernist Manifesto</span><span class="era-divider-range">1919</span></li>
 
 <li><a href="包浩斯宣言">
-<div class="eye-work-image eye-work-image--placeholder"><span>1919</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/法古斯工廠.jpg" alt="包浩斯精神代表:法古斯工廠" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>包浩斯宣言</h3>
 <span class="eye-work-byline">華特·葛羅培斯 · 1919</span>

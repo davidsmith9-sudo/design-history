@@ -34,7 +34,7 @@ tags:
 </a></li>
 
 <li><a href="中世紀設計">
-<div class="eye-work-image eye-work-image--placeholder"><span>中</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/阿罕布拉宮.jpg" alt="中世紀設計代表:阿罕布拉宮(1238)" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>中世紀設計</h3>
 <span class="eye-work-byline">500 — 1400</span>
@@ -52,7 +52,7 @@ tags:
 </a></li>
 
 <li><a href="工業革命與設計">
-<div class="eye-work-image eye-work-image--placeholder"><span>工</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/紅屋.jpg" alt="工業革命末期代表:紅屋(1859)" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>工業革命與設計</h3>
 <span class="eye-work-byline">1760 — 1910</span>
@@ -61,7 +61,7 @@ tags:
 </a></li>
 
 <li><a href="現代主義">
-<div class="eye-work-image eye-work-image--placeholder"><span>現</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/包浩斯德紹校舍.jpg" alt="現代主義代表:包浩斯德紹校舍(1925)" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>現代主義</h3>
 <span class="eye-work-byline">1910 — 1960</span>
@@ -70,7 +70,7 @@ tags:
 </a></li>
 
 <li><a href="後現代主義">
-<div class="eye-work-image eye-work-image--placeholder"><span>後</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/畢爾包古根漢美術館.jpg" alt="後現代代表:畢爾包古根漢美術館(1997)" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>後現代主義</h3>
 <span class="eye-work-byline">1960 — 1990</span>
@@ -79,7 +79,7 @@ tags:
 </a></li>
 
 <li><a href="當代設計">
-<div class="eye-work-image eye-work-image--placeholder"><span>當</span></div>
+<div class="eye-work-image"><img src="/99-素材/images/作品/中央電視台總部大樓.jpg" alt="當代設計代表:中央電視台總部大樓(2012)" loading="lazy" /></div>
 <div class="eye-work-meta">
 <h3>當代設計</h3>
 <span class="eye-work-byline">1990 — 現在</span>
