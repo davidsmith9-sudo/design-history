@@ -1,53 +1,1624 @@
 @use "./base.scss";
+@use "./variables.scss" as *;
+
+// Noto Serif TC / Noto Sans TC 透過 Head.tsx 的 <link> 直接載入,
+// 不在這裡 @import — lightningcss 嚴格要求 @import 必須在最頂端
 
 // ─────────────────────────────────────────────────────────
-// 設計史筆記 — eyecannndy-inspired styles
-//   配色靠 quartz.config.ts 的 colors 變數,這裡只動 layout / typography
+// 設計史筆記 — Norm Architects / Frama editorial style
+//   paper white + graphite + hairline borders + max whitespace
+//   配色靠 quartz.config.ts 的 colors 變數
 // ─────────────────────────────────────────────────────────
 
-// ── Display typography ──
-//   標題加重粗、字距收緊,給設計類網站該有的 visual weight
+:root {
+  --headerFont: "Fraunces", "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --bodyFont: "Inter", "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --hairline: 1px solid var(--lightgray);
+  --hairline-strong: 1px solid var(--darkgray);
+}
+
+// ── Global ──────────────────────────────────────────────
+
+body {
+  font-feature-settings: "kern", "liga", "calt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 移除所有圓角 — 編輯型極簡風用直角
+article img,
+article pre,
+article table,
+.callout,
+.popover-inner,
+.popover,
+.search-result,
+.eye-grid a,
+.eye-works-grid > li > a,
+.eye-filter-btn,
+.search-button,
+.eye-work-image,
+.expand {
+  border-radius: 0 !important;
+}
+
+// ── Display typography ──────────────────────────────────
 
 article > h1,
 article > h2,
-article > h3 {
-  font-weight: 700;
-  letter-spacing: -0.01em;
+article > h3,
+article > h4 {
+  font-family: var(--headerFont);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--dark);
 }
 
 article > h1 {
-  font-size: 2.4rem;
-  line-height: 1.1;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 400;
+  line-height: 1.05;
+  margin: 0 0 2rem;
+  letter-spacing: -0.025em;
 }
 
-// ── Hero block (landing page 用) ──
+article > h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 4rem 0 1.25rem;
+  padding-top: 2rem;
+  border-top: var(--hairline);
+}
+
+article > h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+}
+
+article p {
+  line-height: 1.75;
+  color: var(--darkgray);
+  font-size: 1rem;
+}
+
+// ── TL;DR 一句話讀懂(自動 promotion 的第一個 blockquote)──
+
+.center > article:has(.article-hero) > blockquote.article-tldr,
+.center > article:has(.article-hero) blockquote.article-tldr {
+  position: relative;
+  margin: 0 0 3rem;
+  padding: 2rem 2rem 2rem 2.5rem;
+  background: var(--light);
+  filter: brightness(0.985);
+  border: none;
+  border-left: 3px solid var(--secondary);
+  max-width: none !important;
+
+  &::before {
+    content: "一句話讀懂 · TL;DR";
+    display: block;
+    font-family: var(--bodyFont);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--secondary);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  p {
+    margin: 0;
+    font-family: var(--headerFont);
+    font-style: normal;
+    font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--dark);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    max-width: 48ch;
+  }
+
+  p + p {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--darkgray);
+    font-weight: 400;
+  }
+}
+
+// 一旦 promotion 為 TL;DR,就不再套到「Lead paragraph」與 dropcap
+// (這個 blockquote 出現後,後面的 p:first-of-type 不再算「第一段」)
+
+// ── Lead paragraph(詳情頁第一段) ────────────────────
+
+// 配合 drop-cap:第一段升級為 lead — 大一階字 + 鬆 letter-spacing + 較深 color
+.center > article:has(.article-hero) > p:first-of-type {
+  font-family: var(--bodyFont);
+  font-size: 1.18rem;
+  line-height: 1.7;
+  color: var(--darkgray);
+  letter-spacing: 0.005em;
+  margin-bottom: 1.75rem;
+}
+
+// ── Inline code 從 box 改為下底線 ──────────────────────
+
+.center > article:has(.article-hero) :not(pre) > code {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--lightgray);
+  border-radius: 0 !important;
+  padding: 0.05em 0.15em !important;
+  font-family: var(--codeFont);
+  font-size: 0.9em;
+  color: var(--dark);
+}
+
+// ── Figure 編號 + Caption ─────────────────────────────
+
+// 整個 article 範圍裡為包含 img/picture 的段落自動編號
+.center > article:has(.article-hero) {
+  counter-reset: figure section;
+}
+
+// 為包含 img/picture 的 p 加上 Fig. NN ── 前綴
+.center > article:has(.article-hero) > p:has(> img),
+.center > article:has(.article-hero) > p:has(> picture) {
+  counter-increment: figure;
+  position: relative;
+  padding-top: 1.8rem;
+  margin-top: 2.5rem;
+}
+
+.center > article:has(.article-hero) > p:has(> img)::before,
+.center > article:has(.article-hero) > p:has(> picture)::before {
+  content: "Fig. " counter(figure, decimal-leading-zero) " ──";
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--bodyFont);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--secondary);
+  font-weight: 500;
+  font-feature-settings: "tnum";
+}
+
+// markdown 慣例:![alt](img.jpg)\n*caption text* → <p><img></p><p><em>...</em></p>
+// 把緊接 img/picture 段落後的 em 視為 caption
+.center > article:has(.article-hero) p:has(> img) + p > em:only-child,
+.center > article:has(.article-hero) p:has(> picture) + p > em:only-child {
+  display: block;
+  font-family: var(--bodyFont);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--gray);
+  text-align: left;
+  padding-top: 0.6rem;
+  margin-top: -1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--lightgray);
+  letter-spacing: 0.01em;
+  line-height: 1.55;
+}
+
+// caption 前綴顯示 ── 同一個 figure 編號,讓圖文配對
+// (用 sibling combinator + counter inheritance:caption 的父 p 不增加 counter,
+//  所以這裡用 counter() 取上一次 increment 的值)
+.center > article:has(.article-hero) p:has(> img) + p > em:only-child::before,
+.center > article:has(.article-hero) p:has(> picture) + p > em:only-child::before {
+  content: "Fig. " counter(figure, decimal-leading-zero) " ── ";
+  color: var(--secondary);
+  font-style: normal;
+  font-family: var(--bodyFont);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  margin-right: 0.2em;
+  font-feature-settings: "tnum";
+}
+
+// ── Pull-quote — Obsidian callout [!quote] ─────────────
+
+.callout[data-callout="quote"] {
+  margin: 3.5rem 0;
+  padding: 2.5rem 0;
+  background: transparent !important;
+  border: none !important;
+  border-top: 1px solid var(--darkgray);
+  border-bottom: 1px solid var(--darkgray);
+  border-radius: 0 !important;
+  text-align: center;
+  max-width: none !important;
+
+  & .callout-title {
+    display: none;
+  }
+
+  & .callout-content {
+    font-family: var(--headerFont);
+    font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    color: var(--dark);
+    max-width: 32ch;
+    margin: 0 auto;
+
+    & p {
+      margin: 0;
+      color: var(--dark);
+      line-height: 1.3;
+    }
+
+    & p + p {
+      margin-top: 1rem;
+      font-family: var(--bodyFont);
+      font-style: normal;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      color: var(--gray);
+      font-weight: 500;
+    }
+  }
+}
+
+// ── Drop-cap & 章節編號(僅詳情頁) ────────────────────
+
+// 詳情頁正文「第一段」首字放大為 drop-cap
+//   只在第一個 H2 / 圖 / pre 之前的 <p> 套用
+.center > article:has(.article-hero) > p:first-of-type::first-letter {
+  font-family: var(--headerFont);
+  font-size: 4.5rem;
+  font-weight: 300;
+  line-height: 0.85;
+  float: left;
+  margin: 0.35rem 0.6rem -0.1rem 0;
+  color: var(--dark);
+  letter-spacing: -0.04em;
+  font-feature-settings: "tnum";
+}
+
+@media all and ($mobile) {
+  .center > article:has(.article-hero) > p:first-of-type::first-letter {
+    font-size: 3.4rem;
+    margin: 0.2rem 0.4rem 0 0;
+  }
+}
+
+// 章節編號:詳情頁 article > h2 加 CSS counter
+//   landing / list / 視覺化的 h2 不算
+.center > article:has(.article-hero) {
+  counter-reset: section;
+}
+
+.center > article:has(.article-hero) > h2 {
+  counter-increment: section;
+  position: relative;
+  padding-left: 4.5rem;
+  padding-top: 2.5rem;
+  border-top: none;
+  margin-top: 4rem;
+}
+
+.center > article:has(.article-hero) > h2::before {
+  content: counter(section, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 2.7rem;
+  font-family: var(--bodyFont);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: var(--gray);
+  font-weight: 500;
+  font-feature-settings: "tnum";
+}
+
+.center > article:has(.article-hero) > h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3rem;
+  height: 1px;
+  background: var(--darkgray);
+}
+
+@media all and ($mobile) {
+  .center > article:has(.article-hero) > h2 {
+    padding-left: 0;
+    padding-top: 2.5rem;
+  }
+  .center > article:has(.article-hero) > h2::before {
+    position: static;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .center > article:has(.article-hero) > h2::after {
+    width: 2rem;
+  }
+}
+
+// ── Landing 背景 SVG 線條 pattern ──────────────────────
+//   只有 body[data-slug="index"] 才套上極淡橫向線(模擬時間軸刻度感)
+
+body[data-slug="index"] {
+  background-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 99.5%,
+      rgba(26, 26, 26, 0.04) 99.5%,
+      rgba(26, 26, 26, 0.04) 100%
+    );
+  background-size: 100% 80px;
+  background-attachment: fixed;
+}
+
+:root[saved-theme="dark"] body[data-slug="index"] {
+  background-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 99.5%,
+      rgba(251, 250, 247, 0.04) 99.5%,
+      rgba(251, 250, 247, 0.04) 100%
+    );
+}
+
+// ── 閱讀版心收緊(僅詳情頁/長文,landing 與 list 不受限) ─
+//   套用於有 article-hero 的頁面,正文文字元素收緊到 ~65 字元
+
+.center > article:has(.article-hero) > p,
+.center > article:has(.article-hero) > ul,
+.center > article:has(.article-hero) > ol,
+.center > article:has(.article-hero) > blockquote,
+.center > article:has(.article-hero) > h2,
+.center > article:has(.article-hero) > h3,
+.center > article:has(.article-hero) > h4,
+.center > article:has(.article-hero) > h5,
+.center > article:has(.article-hero) > .eye-section-label {
+  max-width: 36rem;
+}
+
+.center > article:has(.article-hero) > p {
+  font-size: 1.05rem;
+}
+
+// 圖片、表格、mermaid、widgets 不受版心限制(可寬版)
+.center > article:has(.article-hero) > .expand,
+.center > article:has(.article-hero) > pre,
+.center > article:has(.article-hero) > figure,
+.center > article:has(.article-hero) > .table-container,
+.center > article:has(.article-hero) > p:has(> img:only-child),
+.center > article:has(.article-hero) > p:has(> .external-embed),
+.center > article:has(.article-hero) > .eye-timeline,
+.center > article:has(.article-hero) > .eye-works-grid {
+  max-width: none;
+}
+
+.center > article:has(.article-hero) > .article-hero {
+  max-width: none;
+}
+
+// EyeBacklinks 不限寬
+.center > article:has(.article-hero) > .eye-backlinks {
+  max-width: none;
+}
+
+// ── Hero block (landing page) ───────────────────────────
 
 .eye-hero {
-  margin: 1rem 0 4rem;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--lightgray);
+  margin: 4rem 0 6rem;
+  padding-bottom: 4rem;
+  border-bottom: var(--hairline);
 }
 
 .eye-hero h1 {
-  font-size: clamp(2.4rem, 6vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  margin: 0 0 1rem;
+  font-family: var(--headerFont);
+  font-size: clamp(2.6rem, 7.5vw, 5.5rem);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  margin: 0 0 2rem;
+  color: var(--dark);
+  border: none;
+  padding: 0;
 }
 
 .eye-hero p {
-  font-size: 1.1rem;
-  max-width: 52ch;
+  font-family: var(--bodyFont);
+  font-size: 1.05rem;
+  max-width: 54ch;
   color: var(--darkgray);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.eye-hero-lede {
+  font-family: var(--headerFont);
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
   line-height: 1.55;
+  max-width: 56ch;
+  color: var(--darkgray);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  margin: 0 0 2.5rem;
+}
+
+.eye-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 2rem 0 0;
+  font-family: var(--bodyFont);
+}
+
+.eye-hero-range {
+  font-family: var(--headerFont);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  color: var(--dark);
+  font-weight: 400;
+}
+
+.eye-hero-sep {
+  color: var(--gray);
+}
+
+.eye-hero-tagline {
+  font-size: 0.85rem;
+  color: var(--gray);
+  letter-spacing: 0.02em;
+}
+
+.eye-section-lede {
+  max-width: 60ch;
+  font-size: 0.94rem;
+  color: var(--darkgray);
+  line-height: 1.7;
+  margin: -1rem 0 2.5rem;
+}
+
+.eye-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin: 2rem 0 4rem;
+
+  @media all and ($mobile) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  & > div > p:first-child {
+    font-family: var(--bodyFont);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
+    color: var(--gray);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: var(--hairline);
+  }
+
+  & ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  & ul li {
+    padding: 0.5rem 0;
+    border-bottom: var(--hairline);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.eye-colophon {
+  margin: 6rem 0 3rem;
+  padding: 2rem 0 0;
+  border-top: var(--hairline);
+  font-family: var(--bodyFont);
+  font-size: 0.85rem;
+  color: var(--gray);
+  letter-spacing: 0.02em;
+}
+
+// ── Landing 三條捷徑「Use this site」─────────────────
+
+.eye-paths {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: var(--hairline);
+  border-left: var(--hairline);
+
+  @media all and ($mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.eye-paths > li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-right: var(--hairline);
+  border-bottom: var(--hairline);
+}
+
+.eye-paths a {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2.25rem 1.85rem;
+  height: 100%;
+  background: transparent !important;
+  text-decoration: none !important;
+  color: var(--dark);
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: var(--light);
+    filter: brightness(0.97);
+
+    .eye-path-num {
+      color: var(--secondary);
+      letter-spacing: 0.18em;
+    }
+
+    .eye-path-body h3 {
+      text-decoration-color: var(--dark);
+    }
+  }
+}
+
+.eye-path-num {
+  font-family: var(--bodyFont);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--gray);
+  font-weight: 500;
+  font-feature-settings: "tnum";
+  transition: color 0.25s ease, letter-spacing 0.3s ease;
+}
+
+.eye-path-body h3 {
+  font-family: var(--headerFont);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 0.7rem;
+  color: var(--dark);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: transparent;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 0.25s ease;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.eye-path-body p {
+  font-family: var(--bodyFont);
+  font-size: 0.9rem;
+  color: var(--darkgray);
+  line-height: 1.6;
+  margin: 0;
+
+  strong {
+    font-weight: 500;
+    color: var(--dark);
+  }
+}
+
+// ── Curated「Where to start」精選區 ────────────────────
+
+.eye-curated {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 5rem;
+  border-top: var(--hairline);
+}
+
+.eye-curated li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: var(--hairline);
+}
+
+.eye-curated a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  padding: 2rem 0.5rem;
+  text-decoration: none !important;
+  color: var(--dark);
+  background: transparent !important;
+  transition: padding-left 0.3s ease, background 0.3s ease;
+
+  &:hover {
+    padding-left: 1.5rem;
+    background: linear-gradient(to right, var(--light) 0%, transparent 100%);
+
+    .eye-curated-body h3 {
+      text-decoration-color: var(--dark);
+    }
+  }
+}
+
+.eye-curated-num {
+  font-family: var(--headerFont);
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--gray);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-feature-settings: "tnum";
+  padding-top: 0.25rem;
+  min-width: 3.5ch;
+}
+
+.eye-curated-body h3 {
+  font-family: var(--headerFont);
+  font-size: 1.65rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.4rem;
+  color: var(--dark);
+  line-height: 1.2;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: transparent;
+  text-underline-offset: 6px;
+  transition: text-decoration-color 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+.eye-curated-meta {
+  display: block;
+  font-family: var(--bodyFont);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gray);
+  font-weight: 500;
+  margin-bottom: 0.85rem;
+}
+
+.eye-curated-body p {
+  font-family: var(--bodyFont);
+  font-size: 0.95rem;
+  color: var(--darkgray);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 58ch;
+}
+
+// ── Primary 3 主軸 magazine-style grid ─────────────────
+
+.eye-primary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 5rem;
+  border-top: var(--hairline);
+  border-left: var(--hairline);
+
+  @media all and ($mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.eye-primary-grid li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-right: var(--hairline);
+  border-bottom: var(--hairline);
+}
+
+.eye-primary-grid a {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 2.5rem 2.5rem;
+  height: 100%;
+  text-decoration: none !important;
+  color: var(--dark);
+  background: transparent !important;
+  transition: background 0.3s ease;
+  position: relative;
+  min-height: 320px;
+
+  &:hover {
+    background: var(--light);
+    filter: brightness(0.97);
+
+    .eye-primary-cta {
+      letter-spacing: 0.32em;
+      color: var(--dark);
+    }
+  }
+}
+
+.eye-primary-num {
+  font-family: var(--bodyFont);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--gray);
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+  font-feature-settings: "tnum";
+}
+
+.eye-primary-grid h2 {
+  font-family: var(--headerFont);
+  font-size: clamp(2.2rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0 0 1rem;
+  color: var(--dark);
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.eye-primary-count {
+  font-family: var(--bodyFont);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--gray);
+  letter-spacing: 0.08em;
+  margin-left: 0.25rem;
+}
+
+.eye-primary-grid p {
+  font-family: var(--bodyFont);
+  font-size: 0.92rem;
+  color: var(--darkgray);
+  line-height: 1.6;
+  margin: 0 0 auto;
+  max-width: 26ch;
+}
+
+.eye-primary-cta {
+  font-family: var(--bodyFont);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--darkgray);
+  font-weight: 500;
+  margin-top: 2.5rem;
+  transition: letter-spacing 0.35s ease, color 0.25s ease;
+}
+
+// ── Index 次要索引列(精簡橫條式) ─────────────────────
+
+.eye-index-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 5rem;
+  border-top: var(--hairline);
+}
+
+.eye-index-list li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: var(--hairline);
+}
+
+.eye-index-list a {
+  display: grid;
+  grid-template-columns: 8rem 7rem 1fr auto;
+  gap: 2rem;
+  align-items: baseline;
+  padding: 1.35rem 0.5rem;
+  text-decoration: none !important;
+  color: var(--dark);
+  background: transparent !important;
+  transition: padding-left 0.25s ease, background 0.25s ease;
+
+  @media all and ($mobile) {
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem 1rem;
+    padding: 1.25rem 0.5rem;
+
+    .eye-index-en {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .eye-index-desc {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      margin-top: 0.35rem;
+    }
+  }
+
+  &:hover {
+    padding-left: 1.25rem;
+    background: linear-gradient(to right, var(--light) 0%, transparent 50%);
+
+    .eye-index-tc {
+      color: var(--dark);
+    }
+  }
+}
+
+.eye-index-tc {
+  font-family: var(--headerFont);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--dark);
+  transition: color 0.2s ease;
+}
+
+.eye-index-en {
+  font-family: var(--bodyFont);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.eye-index-desc {
+  font-family: var(--bodyFont);
+  font-size: 0.85rem;
+  color: var(--darkgray);
+  line-height: 1.5;
+}
+
+.eye-index-count {
+  font-family: var(--bodyFont);
+  font-size: 0.7rem;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+  font-feature-settings: "tnum";
+}
+
+// ── About 頁的 Reset 偏好區 ────────────────────────────
+
+.about-reset-pane {
+  margin: 1.5rem 0 3rem;
+  padding: 2rem 1.75rem;
+  background: var(--light);
+  filter: brightness(0.985);
+  border: 1px solid var(--lightgray);
+
+  p {
+    margin: 0 0 1.25rem;
+    font-family: var(--bodyFont);
+    font-size: 0.9rem;
+    color: var(--darkgray);
+    line-height: 1.6;
+  }
+
+  .about-reset-result {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-size: 0.78rem;
+    color: var(--secondary);
+    letter-spacing: 0.02em;
+  }
+}
+
+.about-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0.55rem 1.1rem;
+  background: transparent;
+  border: 1px solid var(--lightgray);
+  font-family: var(--bodyFont);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--darkgray);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--dark);
+    color: var(--dark);
+    background: var(--light);
+  }
+}
+
+// ── Tag pages ──────────────────────────────────────────
+
+.tag-page {
+  .article-hero--tag .article-hero-title {
+    font-family: var(--headerFont);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+  }
+
+  // 單一 tag 頁的 page-listing
+  .tag-page-listing {
+    margin-top: 3rem;
+    border-top: 1px solid var(--lightgray);
+
+    & ul.section-ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    & li.section-li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-bottom: 1px solid var(--lightgray);
+    }
+
+    & li.section-li > .section {
+      display: grid;
+      grid-template-columns: 7rem 1fr auto;
+      gap: 1.5rem;
+      align-items: baseline;
+      padding: 1.25rem 0.5rem;
+      transition: padding-left 0.25s ease, background 0.25s ease;
+
+      &:hover {
+        padding-left: 1.25rem;
+        background: linear-gradient(to right, var(--light) 0%, transparent 60%);
+      }
+
+      @media all and ($mobile) {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+    }
+
+    & .meta {
+      font-family: var(--bodyFont);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--gray);
+      font-weight: 500;
+      opacity: 1 !important;
+      margin: 0 !important;
+    }
+
+    & .desc h3 {
+      font-family: var(--headerFont);
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+
+    & .desc h3 a {
+      color: var(--dark);
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+      background: transparent !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      transition: text-decoration-color 0.2s ease;
+
+      &:hover {
+        text-decoration-color: var(--dark);
+      }
+    }
+
+    & .tags {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    & .tags li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    & .tags a.tag-link {
+      font-family: var(--bodyFont);
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gray);
+      background: transparent !important;
+      border: 1px solid var(--lightgray);
+      padding: 0.15rem 0.5rem !important;
+      border-radius: 0 !important;
+      text-decoration: none !important;
+      font-weight: 500;
+      line-height: 1.3;
+
+      &::before {
+        content: "#";
+        color: var(--gray);
+      }
+
+      &:hover {
+        border-color: var(--dark);
+        color: var(--dark);
+      }
+    }
+  }
+}
+
+// Tag index 頁(所有 tags 列表)
+.tag-page--index {
+  .tag-index-list {
+    margin: 3rem 0;
+    border-top: 1px solid var(--lightgray);
+  }
+
+  .tag-index-section {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--lightgray);
+
+    .tag-index-section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tag-index-section-title {
+      font-family: var(--headerFont);
+      font-size: 1.45rem;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      margin: 0;
+      padding: 0;
+      border: none;
+
+      a.tag-link {
+        color: var(--dark);
+        background: transparent !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        text-decoration: none;
+
+        &::before {
+          content: "#";
+          color: var(--secondary);
+        }
+      }
+    }
+
+    .tag-index-section-count {
+      font-family: var(--bodyFont);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--gray);
+      font-feature-settings: "tnum";
+      margin-left: auto;
+    }
+
+    .tag-index-section-lede {
+      color: var(--darkgray);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0 0 1rem;
+      max-width: 60ch;
+    }
+
+    .tag-index-section-more {
+      font-family: var(--bodyFont);
+      font-size: 0.78rem;
+      margin: 1rem 0 0;
+
+      a {
+        color: var(--secondary);
+        background: transparent !important;
+        padding: 0 !important;
+        text-decoration: none;
+        letter-spacing: 0.02em;
+
+        &:hover {
+          text-decoration: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 3px;
+        }
+      }
+    }
+  }
+}
+
+// ── 404 page ───────────────────────────────────────────
+
+.not-found-page {
+  max-width: 720px;
+  margin: 6rem auto;
+
+  .not-found-hero {
+    padding: 0 0 4rem;
+    border-bottom: 1px solid var(--lightgray);
+  }
+
+  .not-found-eyebrow {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+    font-family: var(--bodyFont);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--secondary);
+    font-weight: 500;
+  }
+
+  .not-found-eyebrow-sep {
+    color: var(--lightgray);
+  }
+  .not-found-eyebrow-tc {
+    color: var(--darkgray);
+    text-transform: none;
+    letter-spacing: 0.16em;
+    font-family: var(--headerFont);
+    font-size: 0.7rem;
+  }
+
+  .not-found-code {
+    font-family: var(--headerFont);
+    font-size: clamp(5rem, 16vw, 11rem);
+    font-weight: 200;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    margin: 0 0 2rem;
+    color: var(--dark);
+    border: none !important;
+    padding: 0 !important;
+    font-feature-settings: "tnum";
+  }
+
+  .not-found-lede {
+    font-family: var(--headerFont);
+    font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+    line-height: 1.55;
+    color: var(--darkgray);
+    max-width: 50ch;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .not-found-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin: 3rem 0 0;
+    border-left: 1px solid var(--lightgray);
+
+    @media all and ($mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .not-found-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.75rem 1.5rem;
+    text-decoration: none !important;
+    background: transparent !important;
+    border-right: 1px solid var(--lightgray);
+    border-bottom: 1px solid var(--lightgray);
+    border-top: 1px solid var(--lightgray);
+    transition: background 0.2s ease, padding-left 0.25s ease;
+
+    &:hover {
+      background: var(--light);
+      filter: brightness(0.97);
+      padding-left: 1.85rem;
+    }
+
+    .not-found-cta-tc {
+      font-family: var(--headerFont);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--dark);
+      letter-spacing: -0.01em;
+    }
+    .not-found-cta-en {
+      font-family: var(--bodyFont);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      color: var(--gray);
+      font-weight: 500;
+    }
+  }
+}
+
+// ── Filter empty state — 居中 SVG 線條 illustration ───
+
+.eye-filter-empty {
+  position: relative;
+  padding: 4rem 2rem 3.5rem !important;
+  text-align: center;
+  display: none;
+  font-family: var(--headerFont);
+  font-size: 1.1rem;
+  color: var(--darkgray);
+  border-top: 1px solid var(--lightgray);
+  border-bottom: 1px solid var(--lightgray);
+
+  &.show {
+    display: block;
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' fill='none' stroke='%238A867F' stroke-width='1.2'%3E%3Ccircle cx='25' cy='25' r='15'/%3E%3Cpath d='M36 36 L50 50' stroke-linecap='round'/%3E%3Cpath d='M19 25 L31 25' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.6;
+  }
+
+  &::after {
+    content: "Try another filter combination · 試試其他組合";
+    display: block;
+    font-family: var(--bodyFont);
+    font-size: 0.78rem;
+    color: var(--gray);
+    margin-top: 0.6rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+// ── Print stylesheet ───────────────────────────────────
+
+@media print {
+  // 隱藏所有 chrome
+  .topnav,
+  .sidebar,
+  .chapter-strip,
+  #cursor-follower,
+  .eye-timeline,
+  .eye-genealogy,
+  .search-button,
+  footer ul,
+  .navigation-progress {
+    display: none !important;
+  }
+
+  body {
+    padding-top: 0 !important;
+    background: white !important;
+    color: black !important;
+    font-family: "Noto Serif TC", serif;
+    font-size: 11pt;
+    line-height: 1.55;
+  }
+
+  .page > #quartz-body {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "grid-header"
+      "grid-center"
+      "grid-footer" !important;
+    column-gap: 0 !important;
+  }
+
+  .center > article {
+    max-width: none !important;
+    animation: none !important;
+  }
+
+  .article-hero {
+    page-break-after: avoid;
+    border-bottom: 0.5pt solid black;
+  }
+
+  .article-hero-title {
+    color: black !important;
+    font-size: 32pt !important;
+  }
+
+  // 連結後加 inline URL
+  article a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555;
+    word-break: break-all;
+  }
+  article a[href^="#"]::after,
+  article a[href^="/"]::after {
+    content: "";
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+    color: black !important;
+  }
+
+  img,
+  pre,
+  blockquote {
+    page-break-inside: avoid;
+  }
+
+  .eye-works-grid,
+  .eye-grid,
+  .eye-curated,
+  .eye-primary-grid,
+  .eye-index-list {
+    display: block !important;
+    border: none !important;
+
+    & > li {
+      page-break-inside: avoid;
+      border: none !important;
+      padding: 0.5cm 0;
+      border-bottom: 0.5pt solid #ccc !important;
+    }
+  }
+}
+
+// ── i18n:語系切換 ─────────────────────────────────────
+// <html data-lang="tc">(預設):顯示 TC,顯示 EN 副標,但隱藏 .lang-en-only
+// <html data-lang="en">:隱藏 .lang-tc-only,套上以下 .lang-en-only
+
+// 預設 data-lang 不存在或為 tc 時:.lang-en-only 隱藏
+:root:not([data-lang="en"]) .lang-en-only,
+:root[data-lang="tc"] .lang-en-only {
+  display: none !important;
+}
+
+// data-lang=en 時:隱藏 TC 文字、顯示 EN 等價物
+:root[data-lang="en"] .lang-tc-only {
+  display: none !important;
+}
+:root[data-lang="en"] .lang-en-only {
+  display: initial;
+}
+
+// 雙語並列元素(eyebrow / brand / nav):en 模式下隱藏 TC 部分
+:root[data-lang="en"] .topnav-brand-tc,
+:root[data-lang="en"] .topnav-link-tc,
+:root[data-lang="en"] .topnav-drawer-tc,
+:root[data-lang="en"] .article-hero-type-tc,
+:root[data-lang="en"] .article-hero-type-sep,
+:root[data-lang="en"] .eye-hero .eye-stats span {
+  display: none;
+}
+
+// en 模式下 stats 文字只保留前段(把「Movements 流派」變成「Movements」)
+:root[data-lang="en"] .eye-hero .eye-stats > div::after {
+  content: attr(data-en-label);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--gray);
+  margin-top: 0.75rem;
+  font-family: var(--bodyFont);
+  font-weight: 500;
+  display: block;
+}
+
+// 內容頁:若 frontmatter lang=en,則只在 en 模式顯示
+//   markdown 端可透過 <span class="lang-en-only">...</span> 包語系專屬塊
+//   或在 frontmatter 加 lang: en,該檔 slug 被 explorer 加上 [data-page-lang=en],
+//   data-lang=tc 時整頁淡出提示「This page is English-only · 切換語系」
+//   (本輪只提供 CSS 鉤子,實際 Explorer 過濾留待後續)
+
+// ── Accessibility ───────────────────────────────────────
+
+// 鍵盤焦點環 — 滑鼠點不會出現,只在 Tab 焦點時顯示
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--dark);
+  outline-offset: 4px;
+  border-radius: 0;
+}
+
+// SVG 連結(時間軸節點)的 focus-visible
+.eye-timeline-link:focus-visible {
+  outline: 2px solid var(--dark);
+  outline-offset: 2px;
+}
+
+.eye-timeline-link:focus-visible .eye-timeline-dot {
+  r: 6;
+}
+
+// 輸入框類用較柔和的焦點
+input:focus-visible,
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline-offset: 3px;
+}
+
+// Search modal input 焦點(內部已 border-color 處理,outline 不需重疊)
+.search-bar:focus-visible {
+  outline: none;
+}
+
+// 跳到主要內容(在 viewport 外,Tab focus 時才顯示)
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.75rem 1.25rem;
+  background: var(--dark);
+  color: var(--light);
+  font-family: var(--bodyFont);
+  font-size: 0.85rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: top 0.2s ease;
+
+  &:focus-visible {
+    top: 1rem;
+    outline: 2px solid var(--dark);
+    outline-offset: 3px;
+  }
+}
+
+// 減動效偏好:關閉所有非必要動畫,保留 fade 與 color 變化
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  // 完全關閉滑鼠跟隨等裝飾性動畫
+  .cursor-follower,
+  .eye-cursor-follower {
+    display: none !important;
+  }
+}
+
+// ── Mobile-specific refinements ─────────────────────────
+
+@media all and ($mobile) {
+  // hero 收緊
+  .eye-hero {
+    margin: 1.5rem 0 3.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .eye-hero h1 {
+    font-size: clamp(2.2rem, 11vw, 3.4rem);
+    margin: 0 0 1.5rem;
+  }
+
+  .eye-hero-lede {
+    font-size: 1rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .eye-hero-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    margin-top: 1.5rem;
+  }
+
+  .eye-hero-sep {
+    display: none;
+  }
+
+  // stats 行間距收緊
+  .eye-hero .eye-stats {
+    gap: 1.75rem 2.25rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .eye-hero .eye-stats strong {
+    font-size: 1.8rem;
+  }
+
+  // 分類 grid 縮 padding
+  .eye-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eye-grid a {
+    padding: 1.75rem 1.5rem;
+    min-height: 0;
+  }
+
+  .eye-grid a strong {
+    font-size: 1.35rem;
+  }
+
+  // section label 距離縮
+  .eye-section-label {
+    margin: 3.5rem 0 1.5rem;
+  }
+
+  // 隱藏左側 sidebar(行動裝置改用 topnav 抽屜導覽)
+  .page > #quartz-body .sidebar.left {
+    display: none;
+  }
+
+  // 隱藏右側 sidebar(graph/backlinks 在 mobile 上沒空間)
+  .page > #quartz-body .sidebar.right {
+    display: none;
+  }
+
+  // 主內容區佔滿
+  .page > #quartz-body {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "grid-header"
+      "grid-center"
+      "grid-footer" !important;
+  }
+
+  // Mermaid 橫向捲動
+  pre:has(> code.mermaid),
+  .expand {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  // 文章標題縮小
+  article > h1 {
+    font-size: 1.7rem;
+  }
+
+  article > h2 {
+    font-size: 1.25rem;
+    margin: 3rem 0 1rem;
+    padding-top: 1.5rem;
+  }
 }
 
 .eye-hero .eye-stats {
   display: flex;
-  gap: 2.5rem;
-  margin-top: 2rem;
+  gap: 4rem;
+  margin-top: 4rem;
   flex-wrap: wrap;
+  padding-top: 2rem;
+  border-top: var(--hairline);
 }
 
 .eye-hero .eye-stats > div {
@@ -56,160 +1627,165 @@ article > h1 {
 }
 
 .eye-hero .eye-stats strong {
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 2.4rem;
+  font-weight: 300;
   font-family: var(--headerFont);
-  color: var(--secondary);
+  color: var(--dark);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .eye-hero .eye-stats span {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.24em;
   color: var(--gray);
-  margin-top: 0.4rem;
+  margin-top: 0.75rem;
+  font-family: var(--bodyFont);
+  font-weight: 500;
 }
 
-// ── Section labels (大寫粗體小標) ──
+// ── Section labels ──────────────────────────────────────
 
 .eye-section-label {
   display: block;
-  font-family: var(--headerFont);
-  font-size: 0.72rem;
+  font-family: var(--bodyFont);
+  font-size: 0.68rem;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.26em;
   color: var(--gray);
-  margin: 3rem 0 1rem;
-  font-weight: 600;
+  margin: 5rem 0 2rem;
+  font-weight: 500;
+  padding-bottom: 1rem;
+  border-bottom: var(--hairline);
 }
 
 .eye-section-label::before {
-  content: "—— ";
+  content: "── ";
   color: var(--secondary);
+  letter-spacing: 0;
+  margin-right: 0.15em;
 }
 
-// ── Category card grid (分類入口) ──
+// ── Category grid (分類入口) ────────────────────────────
 
 .eye-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem 0 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0;
+  margin: 0 0 5rem;
   padding: 0;
   list-style: none;
+  border-top: var(--hairline);
+  border-left: var(--hairline);
 }
 
 .eye-grid li {
   margin: 0;
   padding: 0;
   list-style: none;
+  border-right: var(--hairline);
+  border-bottom: var(--hairline);
 }
 
 .eye-grid a {
   display: block;
   background: transparent;
-  border: 1px solid var(--lightgray);
-  border-radius: 5px;
-  padding: 1.25rem 1.25rem 1.5rem;
+  border: none;
+  padding: 2.5rem 2rem 2.5rem;
   text-decoration: none;
   color: var(--dark);
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  transition: background 0.25s ease;
   position: relative;
   overflow: hidden;
+  min-height: 180px;
+  height: 100%;
 }
 
 .eye-grid a::after {
   content: "→";
   position: absolute;
-  right: 1rem;
-  top: 1rem;
-  font-size: 1.1rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  font-size: 1rem;
   color: var(--gray);
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: transform 0.25s ease, color 0.25s ease;
+  font-family: var(--bodyFont);
 }
 
 .eye-grid a:hover {
-  border-color: var(--secondary);
-  background: var(--highlight);
-  transform: translateY(-2px);
+  background: var(--light);
+  filter: brightness(0.97);
 }
 
 .eye-grid a:hover::after {
-  transform: translate(4px, -2px);
-  color: var(--secondary);
+  transform: translateX(6px);
+  color: var(--dark);
 }
 
 .eye-grid a strong {
   display: block;
   font-family: var(--headerFont);
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.4rem;
+  font-size: 1.65rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+  color: var(--dark);
 }
 
 .eye-grid a strong .eye-count {
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--gray);
-  margin-left: 0.4rem;
-  letter-spacing: 0;
+  margin-left: 0.6rem;
+  letter-spacing: 0.1em;
   font-family: var(--bodyFont);
+  vertical-align: middle;
 }
 
 .eye-grid a span.eye-desc {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--darkgray);
-  line-height: 1.5;
-  opacity: 0.85;
+  line-height: 1.6;
+  opacity: 0.9;
+  font-family: var(--bodyFont);
+  margin-top: 0.5rem;
 }
 
-// ── Mermaid container 微調 + 文字對比修正 ──
+// ── Sidebar / Explorer ──────────────────────────────────
 
-.expand {
-  background: var(--lightgray);
-  border-radius: 5px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-}
-
-// ── Sidebar 樣式微調 — 配新 Adobe 色票 ──
-
-// PageTitle:站台標題加粗 + 字距收緊
 .page-title,
 h2.page-title a {
   font-family: var(--headerFont);
-  font-weight: 800;
+  font-weight: 400;
   letter-spacing: -0.02em;
   color: var(--dark);
+  font-size: 1.15rem;
 }
 
-// Sidebar h3 / Explorer 「目錄」標題 等小標都用 eye-section-label 風格
 .sidebar h3,
 button.desktop-explorer h2,
 button.mobile-explorer h2 {
-  font-family: var(--headerFont);
-  font-size: 0.72rem !important;
+  font-family: var(--bodyFont);
+  font-size: 0.65rem !important;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-weight: 600;
+  letter-spacing: 0.26em;
+  font-weight: 500;
   color: var(--gray);
 }
 
-// Explorer:資料夾名收斂、檔案連結縮緊
 .folder-container > div > a,
 .folder-container > div > button > span {
   color: var(--darkgray) !important;
-  font-weight: 600;
-  font-size: 0.88rem !important;
+  font-weight: 500;
+  font-size: 0.85rem !important;
+  font-family: var(--bodyFont);
 }
 
 .folder-container > div > a:hover,
 .folder-container > div > button:hover > span {
-  color: var(--secondary) !important;
+  color: var(--dark) !important;
 }
 
 .folder-icon {
@@ -217,137 +1793,160 @@ button.mobile-explorer h2 {
 }
 
 .folder-icon:hover {
-  color: var(--secondary) !important;
+  color: var(--dark) !important;
 }
 
 .explorer-content ul li > a {
-  font-size: 0.85rem;
-  padding: 1px 0;
+  font-size: 0.82rem;
+  padding: 2px 0;
   display: inline-block;
+  color: var(--darkgray);
+  font-family: var(--bodyFont);
 
   &.active {
-    color: var(--secondary) !important;
+    color: var(--dark) !important;
     font-weight: 600;
     opacity: 1;
+    border-bottom: 1px solid var(--dark);
   }
 
   &:hover {
-    color: var(--secondary);
+    color: var(--dark);
     opacity: 1;
   }
 }
 
-// Search 輸入框
+// ── Search ──────────────────────────────────────────────
+
 .search-button {
   background: transparent !important;
-  border: 1px solid var(--lightgray) !important;
-  border-radius: 5px;
+  border: var(--hairline) !important;
   color: var(--gray) !important;
-  transition: border-color 0.18s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  font-family: var(--bodyFont);
 
   &:hover {
-    border-color: var(--secondary) !important;
+    border-color: var(--dark) !important;
     color: var(--dark) !important;
   }
 
   & p {
     color: var(--gray) !important;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
 }
 
-// Search modal — 結果用主題色
-.search-result {
-  border-radius: 5px;
-}
+// ── ToC ─────────────────────────────────────────────────
 
-// ToC active 連結
 .toc-content ul li > a.in-view {
-  color: var(--secondary) !important;
+  color: var(--dark) !important;
   font-weight: 600;
+  border-left: 2px solid var(--dark);
+  padding-left: 0.6rem;
+  margin-left: -0.6rem;
 }
 
-// ── 統一所有矩形 5px 圓角 ──
+// ── Article images & media ──────────────────────────────
 
-article img,
-article pre,
-article table,
-.callout,
-.popover-inner,
-.popover {
-  border-radius: 5px;
-}
-
-// 主圖加大 + 視覺強化
 article img {
   max-width: 100%;
   height: auto;
-  margin: 1rem 0;
-  border: 1px solid var(--lightgray);
-  transition: filter 0.3s ease;
+  margin: 2rem 0;
+  border: var(--hairline);
+  // 阻止 iOS Safari 長按彈出 OS-level「儲存圖像」選單
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+// 文章內被允許選取的內文
+article p,
+article h1,
+article h2,
+article h3,
+article blockquote,
+article li {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+// LQIP placeholder — img 載入前顯示模糊預覽,載入後自然蓋掉
+img[data-lqip] {
+  background-color: var(--lightgray);
+}
+
+// 全頁啟用 safe-area
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
 
 article img:hover {
-  filter: saturate(1.08) brightness(1.02);
+  filter: none;
 }
 
-// HeroImage transformer 把「## 主圖」搬到頂部後,用這個 class 包住
 .eye-hero-image {
-  margin: 0 0 1.5rem;
+  margin: 0 0 2rem;
 
   img {
     width: 100%;
     max-height: 540px;
     object-fit: cover;
     margin: 0;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    border: var(--hairline);
+    box-shadow: none;
   }
 }
 
 article :not(pre) > code {
-  border-radius: 3px;
+  border-radius: 0;
+  background: var(--light);
+  border: var(--hairline);
+  padding: 0.1em 0.4em;
+  font-family: var(--codeFont);
+  font-size: 0.88em;
 }
 
-// Mermaid SVG rect 直接用 rx/ry 屬性圓角
+// ── Mermaid ─────────────────────────────────────────────
+
+.expand {
+  background: transparent;
+  padding: 2rem 0;
+  margin: 2.5rem 0;
+  border-top: var(--hairline);
+  border-bottom: var(--hairline);
+}
+
 .mermaid .node rect,
 .mermaid .node polygon,
 .mermaid .cluster rect,
 .mermaid .task,
-.mermaid .grid .tick line {
-  rx: 5px;
-  ry: 5px;
-}
-
-// Gantt task bar 圓角
+.mermaid .grid .tick line,
 .mermaid .task0,
 .mermaid .task1,
 .mermaid .task2,
 .mermaid .task3,
 .mermaid .taskText,
 .mermaid rect.task {
-  rx: 5px;
-  ry: 5px;
+  rx: 0;
+  ry: 0;
 }
 
-// flowchart 節點掛了 click → 給滑鼠提示 + hover 高亮
 .mermaid g.node {
   cursor: pointer;
-  transition: filter 0.2s ease, transform 0.2s ease;
+  transition: filter 0.2s ease;
 }
 
 .mermaid g.node:hover {
-  filter: brightness(1.15) saturate(1.1);
+  filter: brightness(1.1);
 }
 
 .mermaid g.node:hover rect {
-  stroke-width: 3px;
+  stroke-width: 2.5px;
 }
 
-// flowchart 用 classDef 指定的 fill 是深色,文字強制米白以確保對比
 .mermaid {
-  // foreignObject 內的 HTML span(Mermaid 10+ flowchart 預設)
   g.node.pre foreignObject span,
   g.node.mod foreignObject span,
   g.node.pomo foreignObject span,
@@ -357,11 +1956,10 @@ article :not(pre) > code {
   g.node.pre .nodeLabel p,
   g.node.mod .nodeLabel p,
   g.node.pomo .nodeLabel p {
-    color: #fafaf7 !important;
-    fill: #fafaf7 !important;
+    color: #fbfaf7 !important;
+    fill: #fbfaf7 !important;
   }
 
-  // 確保所有 mermaid 文字至少有最低對比
   .edgeLabel,
   .edgeLabel p,
   .edgeLabel span,
@@ -376,72 +1974,198 @@ article :not(pre) > code {
   }
 }
 
-// ── 全域連結 hover 細調 ──
+// ── Links ───────────────────────────────────────────────
 
-a.internal:hover,
-a:not(.internal):hover {
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+a {
+  font-weight: 500;
 }
 
-// ── Article meta(分類頁) ──
+article a.internal,
+article a:not(.internal) {
+  color: var(--dark);
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--lightgray);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+article a.internal:hover,
+article a:not(.internal):hover {
+  color: var(--dark);
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--secondary);
+  text-underline-offset: 4px;
+}
+
+// 卡片內的連結不要底線
+.eye-grid a,
+.eye-works-grid a,
+.eye-grid a:hover,
+.eye-works-grid a:hover,
+nav a,
+nav a:hover {
+  text-decoration: none !important;
+  background: transparent !important;
+}
+
+// 全站 .internal 預設那層淡底色去掉
+a.internal {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  padding: 0;
+}
+
+// hr & misc 圓角
+hr,
+audio,
+video,
+iframe.pdf,
+.external-embed.youtube,
+code,
+figure[data-rehype-pretty-code-figure] > [data-rehype-pretty-code-title],
+pre,
+.text-highlight {
+  border-radius: 0 !important;
+}
+
+// blockquote (base.scss 用 secondary 邊色 → 改成 darkgray 細線)
+article blockquote,
+blockquote {
+  border-left: 1px solid var(--darkgray);
+}
+
+// ── Article meta ────────────────────────────────────────
 
 article .meta {
-  font-family: var(--headerFont);
+  font-family: var(--bodyFont);
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
   color: var(--gray);
+  font-weight: 500;
 }
 
-// ── Grid 篩選器 ──
+// ── Sort toolbar(作品 grid 上方) ───────────────────────
+
+.eye-sort {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0 0;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px dashed var(--lightgray);
+}
+
+.eye-sort-label {
+  font-family: var(--bodyFont);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--gray);
+  font-weight: 500;
+  margin-right: 0.8rem;
+}
+
+.eye-sort-btn {
+  font-family: var(--bodyFont);
+  font-size: 0.78rem;
+  background: transparent;
+  border: 1px solid var(--lightgray);
+  color: var(--darkgray);
+  padding: 0.3rem 0.85rem;
+  border-radius: 0;
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+
+  em {
+    font-style: normal;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--gray);
+    margin-left: 0.3rem;
+  }
+
+  &:hover {
+    border-color: var(--darkgray);
+    color: var(--dark);
+  }
+
+  &.is-active {
+    background: var(--secondary);
+    color: var(--light);
+    border-color: var(--secondary);
+
+    em {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+
+@media all and ($mobile) {
+  .eye-sort {
+    .eye-sort-btn em {
+      display: none;
+    }
+  }
+}
+
+// ── Filter chips ────────────────────────────────────────
 
 .eye-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  margin: 1.5rem 0 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--lightgray);
+  gap: 2.5rem;
+  margin: 2rem 0 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: var(--hairline);
 }
 
 .eye-filter-group {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 .eye-filter-label {
-  font-family: var(--headerFont);
-  font-size: 0.7rem;
+  font-family: var(--bodyFont);
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
   color: var(--gray);
-  font-weight: 600;
-  margin-right: 0.4rem;
+  font-weight: 500;
+  margin-right: 0.8rem;
 }
 
 .eye-filter-btn {
-  font-family: inherit;
-  font-size: 0.82rem;
+  font-family: var(--bodyFont);
+  font-size: 0.78rem;
   background: transparent;
-  border: 1px solid var(--lightgray);
+  border: var(--hairline);
   color: var(--darkgray);
-  padding: 0.25rem 0.7rem;
-  border-radius: 5px;
+  padding: 0.35rem 0.85rem;
+  border-radius: 0;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.18s ease;
+  letter-spacing: 0.02em;
 }
 
 .eye-filter-btn:hover {
-  border-color: var(--secondary);
-  color: var(--secondary);
+  border-color: var(--dark);
+  color: var(--dark);
 }
 
 .eye-filter-btn.active {
   background: var(--secondary);
-  color: #fafaf6;
+  color: var(--light);
   border-color: var(--secondary);
 }
 
@@ -449,27 +2173,140 @@ article .meta {
   display: none;
 }
 
+// Sort 非年代序時,era divider 沒意義 → 隱藏
+.eye-works-grid.hide-era-dividers > li.eye-era-divider-row {
+  display: none !important;
+}
+
+// 時代分節 marker — grid 全寬橫條
+.eye-works-grid > li.eye-era-divider-row {
+  grid-column: 1 / -1;
+  list-style: none;
+  margin: 3rem 0 0.5rem;
+  padding: 1.5rem 0 1rem;
+  border-top: 1px solid var(--lightgray);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  &:first-child {
+    margin-top: 0;
+    padding-top: 0.5rem;
+    border-top: none;
+  }
+}
+
+.eye-works-grid > li.eye-era-divider-row .era-divider-tc {
+  font-family: var(--headerFont);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--dark);
+  letter-spacing: -0.005em;
+}
+
+.eye-works-grid > li.eye-era-divider-row .era-divider-en {
+  font-family: var(--bodyFont);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--secondary);
+  font-weight: 500;
+  margin-left: 0.6rem;
+}
+
+.eye-works-grid > li.eye-era-divider-row .era-divider-range {
+  font-family: var(--bodyFont);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  font-feature-settings: "tnum";
+  margin-left: auto;
+}
+
+// 第一個 era divider 不需要上方那條線(已是 grid 開頭)
+.eye-works-grid {
+  > li.eye-era-divider-row:first-child {
+    border-top: none;
+  }
+}
+
 .eye-filter-empty {
   color: var(--gray);
   font-size: 0.9rem;
-  padding: 2rem;
+  padding: 3rem;
   text-align: center;
   display: none;
+  font-family: var(--bodyFont);
+  border-top: var(--hairline);
+  border-bottom: var(--hairline);
 }
 
 .eye-filter-empty.show {
   display: block;
 }
 
-// ── 作品 / 人物 grid 卡片(視覺技法庫核心格) ──
+// ── 作品 / 人物 卡片 grid (gallery) ─────────────────────
 
 .eye-works-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-auto-flow: dense;
+  gap: 3.5rem 2rem;
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0 3rem;
+  margin: 2rem 0 5rem;
+}
+
+// 行動版 tap-to-reveal:卡片進入視窗時模擬 hover
+@media all and (max-width: 800px) {
+  .eye-works-grid > li.is-in-view > a {
+    .eye-work-meta h3 {
+      text-decoration-color: var(--secondary) !important;
+    }
+    .eye-work-image img {
+      transform: scale(1.02);
+    }
+  }
+
+  // 行動版也保留 asymmetric 節奏:每 5 個 1 個 portrait,讓視覺有起伏
+  .eye-works-grid > li:nth-child(5n + 3):not(.eye-filter-hidden) {
+    .eye-work-image {
+      aspect-ratio: 3 / 4.5;
+    }
+  }
+}
+
+// Asymmetric editorial 節奏:每 7 個 1 個橫向 featured(2 欄寬,圖片更大)
+@media all and (min-width: 800px) {
+  .eye-works-grid > li:nth-child(7n + 1):not(.eye-filter-hidden) {
+    grid-column: span 2;
+
+    .eye-work-image {
+      aspect-ratio: 16 / 9;
+    }
+
+    .eye-work-meta h3 {
+      font-size: 1.45rem;
+      font-weight: 500;
+    }
+
+    .eye-work-byline {
+      font-size: 0.88rem;
+    }
+
+    .eye-work-tag {
+      font-size: 0.68rem;
+    }
+  }
+
+  // 每 11 個 1 個 portrait(細長 — 用 3/4 比例,標題下方多一行 placeholder text)
+  .eye-works-grid > li:nth-child(11n + 4):not(.eye-filter-hidden):not(:nth-child(7n + 1)) {
+    .eye-work-image {
+      aspect-ratio: 3 / 5;
+    }
+  }
 }
 
 .eye-works-grid > li {
@@ -482,24 +2319,37 @@ article .meta {
   display: block;
   text-decoration: none;
   color: inherit;
-  background: var(--lightgray);
-  border-radius: 5px;
+  background: transparent;
   overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  border: 1px solid transparent;
+  border: none;
+
+  .eye-work-meta h3 {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
+    text-underline-offset: 5px;
+    transition: text-decoration-color 0.3s ease;
+  }
 }
 
 .eye-works-grid > li > a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
-  border-color: var(--secondary);
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
+  opacity: 1;
+
+  .eye-work-meta h3 {
+    text-decoration-color: var(--dark);
+  }
 }
 
 .eye-work-image {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: var(--lightgray);
+  background: var(--light);
   position: relative;
+  border: var(--hairline);
+  margin-bottom: 1.25rem;
 }
 
 .eye-work-image img {
@@ -507,72 +2357,196 @@ article .meta {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
-  filter: saturate(0.92);
+  transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);
+  filter: none;
+  margin: 0 !important;
+  border: none !important;
 }
 
 .eye-works-grid > li > a:hover .eye-work-image img {
-  transform: scale(1.04);
-  filter: saturate(1.05);
+  transform: scale(1.03);
+  filter: none;
 }
 
 .eye-work-image--placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--lightgray) 0%, var(--highlight) 100%);
-  color: var(--secondary);
+  background: var(--light);
+  color: var(--gray);
 }
 
 .eye-work-image--placeholder span {
   font-family: var(--headerFont);
-  font-size: 2.6rem;
-  font-weight: 800;
+  font-size: 3rem;
+  font-weight: 300;
   letter-spacing: -0.04em;
-  opacity: 0.55;
+  opacity: 0.4;
 }
 
 .eye-work-meta {
-  padding: 0.85rem 1rem 1.05rem;
+  padding: 0;
 }
 
 .eye-work-meta h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-family: var(--headerFont);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
   margin: 0 0 0.3rem;
   color: var(--dark);
   line-height: 1.3;
+  border: none;
+  padding: 0;
 }
 
 .eye-work-byline {
   display: block;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--darkgray);
-  margin-bottom: 0.4rem;
-  opacity: 0.85;
+  margin-bottom: 0.5rem;
+  font-family: var(--bodyFont);
 }
 
 .eye-work-tag {
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--secondary);
-  font-weight: 600;
-  font-family: var(--headerFont);
-}
-
-// ── 篩選 / 章節分隔 ──
-
-.eye-era-marker {
-  display: block;
-  font-family: var(--headerFont);
-  font-size: 0.7rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.22em;
   color: var(--gray);
-  margin: 2.5rem 0 1rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid var(--lightgray);
-  font-weight: 600;
+  font-weight: 500;
+  font-family: var(--bodyFont);
+}
+
+// ── 我的收藏頁卡片移除按鈕 ─────────────────────────────
+
+.eye-works-grid > li {
+  position: relative;
+}
+
+.saved-remove {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--lightgray);
+  background: rgba(251, 250, 247, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--gray);
+  cursor: pointer;
+  z-index: 3;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  opacity: 0;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--secondary);
+    color: var(--secondary);
+    opacity: 1;
+  }
+}
+
+.eye-works-grid > li:hover .saved-remove,
+.eye-works-grid > li:focus-within .saved-remove {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .saved-remove {
+    opacity: 1;
+  }
+}
+
+// ── 卡片角標 status badge(JS 注入) ─────────────────
+
+.eye-status-badge {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.18rem 0.45rem;
+  border: 1px solid var(--lightgray);
+  background: rgba(251, 250, 247, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--bodyFont);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  color: var(--darkgray);
+  line-height: 1;
+  z-index: 2;
+
+  .eye-status-symbol {
+    font-size: 0.7rem;
+    font-family: var(--headerFont);
+  }
+
+  &--draft {
+    color: var(--gray);
+    border-style: dashed;
+    .eye-status-symbol {
+      color: var(--gray);
+    }
+  }
+
+  &--stub {
+    .eye-status-symbol {
+      color: var(--secondary);
+    }
+  }
+
+  &--full {
+    border-color: var(--secondary);
+    .eye-status-symbol {
+      color: var(--secondary);
+    }
+  }
+}
+
+.eye-work-image {
+  position: relative;
+}
+
+// li 沒有 image 容器時(理論頁 placeholder 卡片)直接掛在 a 上
+.eye-works-grid > li > a {
+  position: relative;
+}
+
+:root[saved-theme="dark"] .eye-status-badge {
+  background: rgba(20, 20, 19, 0.88);
+}
+
+// ── Era marker ──────────────────────────────────────────
+
+.eye-era-marker {
+  display: block;
+  font-family: var(--bodyFont);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--gray);
+  margin: 4rem 0 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: var(--hairline);
+  font-weight: 500;
+}
+
+// ── Blockquote (editorial pull-quote feel) ──────────────
+
+article blockquote {
+  border-left: 1px solid var(--darkgray);
+  padding: 0.5rem 0 0.5rem 2rem;
+  margin: 2.5rem 0;
+  color: var(--darkgray);
+  font-style: normal;
+  font-family: var(--bodyFont);
+  font-size: 0.95rem;
+  line-height: 1.7;
 }

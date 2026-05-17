@@ -1,5 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
+import { editorialImage } from "./quartz/util/ogTemplate"
 
 /**
  * Quartz 4 Configuration
@@ -12,7 +13,13 @@ const config: QuartzConfig = {
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
-    analytics: null,
+    // Privacy-friendly analytics — Plausible (預設) / Umami(註解開關)
+    analytics: {
+      provider: "plausible",
+      // host: "your-plausible-host.example", // 自架時填,使用官方雲端可留空
+    },
+    // 若要改用 Umami:
+    // analytics: { provider: "umami", websiteId: "<your-umami-website-id>" },
     locale: "zh-TW",
     baseUrl: "design-history.pages.dev",
     ignorePatterns: ["private", "templates", "_templates", ".obsidian"],
@@ -21,32 +28,32 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Noto Serif TC",
-        body: "Noto Sans TC",
+        header: { name: "Fraunces", weights: [300, 400, 500, 600, 700] },
+        body: { name: "Inter", weights: [400, 500, 600, 700] },
         code: "IBM Plex Mono",
       },
       colors: {
         lightMode: {
-          light: "#fafaf6",
-          lightgray: "#e0ddd6",
-          gray: "#8b8579",
-          darkgray: "#2a2826",
-          dark: "#0f1e1c",
-          secondary: "#D64C1B",
-          tertiary: "#07655A",
-          highlight: "rgba(214, 76, 27, 0.08)",
-          textHighlight: "rgba(181, 254, 141, 0.65)",
+          light: "#FBFAF7",
+          lightgray: "#D8D5CC",
+          gray: "#8A867F",
+          darkgray: "#3A3835",
+          dark: "#1A1A1A",
+          secondary: "#7A2E2A",
+          tertiary: "#6B6963",
+          highlight: "rgba(122, 46, 42, 0.06)",
+          textHighlight: "rgba(122, 46, 42, 0.14)",
         },
         darkMode: {
-          light: "#15192a",
-          lightgray: "#2a2e42",
-          gray: "#6f7388",
-          darkgray: "#e8e6df",
-          dark: "#fafaf6",
-          secondary: "#D64C1B",
-          tertiary: "#59CAA2",
-          highlight: "rgba(214, 76, 27, 0.14)",
-          textHighlight: "rgba(181, 254, 141, 0.35)",
+          light: "#141413",
+          lightgray: "#3A3835",
+          gray: "#8A867F",
+          darkgray: "#D8D5CC",
+          dark: "#FBFAF7",
+          secondary: "#C56862",
+          tertiary: "#9A968E",
+          highlight: "rgba(197, 104, 98, 0.10)",
+          textHighlight: "rgba(197, 104, 98, 0.18)",
         },
       },
     },
@@ -66,6 +73,8 @@ const config: QuartzConfig = {
       }),
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
       Plugin.HeroImage(),
+      Plugin.ResponsiveImageRewrite(),
+      Plugin.TldrPromote(),
       Plugin.GitHubFlavoredMarkdown(),
       Plugin.TableOfContents(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
@@ -84,11 +93,12 @@ const config: QuartzConfig = {
         enableRSS: true,
       }),
       Plugin.Assets(),
+      Plugin.ResponsiveImages(),
+      Plugin.StatusManifest(),
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
-      // Comment out CustomOgImages to speed up build time
-      Plugin.CustomOgImages(),
+      Plugin.CustomOgImages({ imageStructure: editorialImage }),
     ],
   },
 }

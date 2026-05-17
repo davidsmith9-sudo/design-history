@@ -53,12 +53,27 @@ export default ((opts?: Partial<TagContentOptions>) => {
         tagItemMap.set(tag, allPagesWithTag(tag))
       }
       return (
-        <div class="popover-hint">
-          <article class={classes}>
-            <p>{content}</p>
-          </article>
-          <p>{i18n(cfg.locale).pages.tagContent.totalTags({ count: tags.length })}</p>
-          <div>
+        <div class="popover-hint tag-page tag-page--index">
+          <header class="article-hero article-hero--tag">
+            <div class="article-hero-eyebrow">
+              <span class="article-hero-type-en">Index</span>
+              <span class="article-hero-type-sep">·</span>
+              <span class="article-hero-type-tc">標籤索引</span>
+            </div>
+            <h1 class="article-hero-title">Tags</h1>
+            <dl class="article-hero-meta">
+              <div class="article-hero-meta-row">
+                <dt>Total</dt>
+                <dd>{tags.length}</dd>
+              </div>
+            </dl>
+          </header>
+          {content && (
+            <article class={classes} style={{ marginBottom: "2rem" }}>
+              <p>{content}</p>
+            </article>
+          )}
+          <div class="tag-index-list">
             {tags.map((tag) => {
               const pages = tagItemMap.get(tag)!
               const listProps = {
@@ -78,30 +93,27 @@ export default ((opts?: Partial<TagContentOptions>) => {
               const href = resolveRelative(fileData.slug!, tagListingPage)
 
               return (
-                <div>
-                  <h2>
-                    <a class="internal tag-link" href={href}>
-                      {tag}
-                    </a>
-                  </h2>
-                  {content && <p>{content}</p>}
+                <section class="tag-index-section">
+                  <header class="tag-index-section-head">
+                    <h2 class="tag-index-section-title">
+                      <a class="internal tag-link" href={href}>
+                        {tag}
+                      </a>
+                    </h2>
+                    <span class="tag-index-section-count">{pages.length}</span>
+                  </header>
+                  {content && <p class="tag-index-section-lede">{content}</p>}
                   <div class="page-listing">
-                    <p>
-                      {i18n(cfg.locale).pages.tagContent.itemsUnderTag({ count: pages.length })}
-                      {pages.length > options.numPages && (
-                        <>
-                          {" "}
-                          <span>
-                            {i18n(cfg.locale).pages.tagContent.showingFirst({
-                              count: options.numPages,
-                            })}
-                          </span>
-                        </>
-                      )}
-                    </p>
                     <PageList limit={options.numPages} {...listProps} sort={options?.sort} />
+                    {pages.length > options.numPages && (
+                      <p class="tag-index-section-more">
+                        <a class="internal" href={href}>
+                          顯示全部 {pages.length} 個 →
+                        </a>
+                      </p>
+                    )}
                   </div>
-                </div>
+                </section>
               )
             })}
           </div>
@@ -115,13 +127,28 @@ export default ((opts?: Partial<TagContentOptions>) => {
       }
 
       return (
-        <div class="popover-hint">
-          <article class={classes}>{content}</article>
-          <div class="page-listing">
-            <p>{i18n(cfg.locale).pages.tagContent.itemsUnderTag({ count: pages.length })}</p>
-            <div>
-              <PageList {...listProps} sort={options?.sort} />
+        <div class="popover-hint tag-page">
+          <header class="article-hero article-hero--tag">
+            <div class="article-hero-eyebrow">
+              <span class="article-hero-type-en">Tag</span>
+              <span class="article-hero-type-sep">·</span>
+              <span class="article-hero-type-tc">標籤</span>
             </div>
+            <h1 class="article-hero-title">#{tag}</h1>
+            <dl class="article-hero-meta">
+              <div class="article-hero-meta-row">
+                <dt>Items</dt>
+                <dd>{pages.length}</dd>
+              </div>
+            </dl>
+          </header>
+          {content && (
+            <article class={classes} style={{ marginBottom: "2rem" }}>
+              {content}
+            </article>
+          )}
+          <div class="page-listing tag-page-listing">
+            <PageList {...listProps} sort={options?.sort} />
           </div>
         </div>
       )

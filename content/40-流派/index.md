@@ -41,6 +41,8 @@ title: 流派
 
 <ul class="eye-works-grid">
 
+<li class="eye-era-divider-row" data-era="ancient"><span class="era-divider-tc">古代</span><span class="era-divider-en">Ancient</span><span class="era-divider-range">前 1600 — 前 100</span></li>
+
 <li data-era="ancient" data-region="east-asia"><a href="中國書法傳統">
 <div class="eye-work-image eye-work-image--placeholder"><span>-1600</span></div>
 <div class="eye-work-meta">
@@ -59,6 +61,8 @@ title: 流派
 </div>
 </a></li>
 
+<li class="eye-era-divider-row" data-era="medieval"><span class="era-divider-tc">中世紀</span><span class="era-divider-en">Medieval</span><span class="era-divider-range">700 — 1300</span></li>
+
 <li data-era="medieval" data-region="islamic"><a href="伊斯蘭幾何設計">
 <div class="eye-work-image eye-work-image--placeholder"><span>700</span></div>
 <div class="eye-work-meta">
@@ -76,6 +80,8 @@ title: 流派
 <span class="eye-work-tag">中世紀</span>
 </div>
 </a></li>
+
+<li class="eye-era-divider-row" data-era="renaissance"><span class="era-divider-tc">文藝復興 · 近世</span><span class="era-divider-en">Renaissance — Early Modern</span><span class="era-divider-range">1400 — 1750</span></li>
 
 <li data-era="renaissance" data-region="europe"><a href="文藝復興建築">
 <div class="eye-work-image eye-work-image--placeholder"><span>1400</span></div>
@@ -104,6 +110,8 @@ title: 流派
 </div>
 </a></li>
 
+<li class="eye-era-divider-row" data-era="industrial"><span class="era-divider-tc">工業革命末期</span><span class="era-divider-en">Late Industrial</span><span class="era-divider-range">1860 — 1910</span></li>
+
 <li data-era="industrial" data-region="europe"><a href="工藝美術運動">
 <div class="eye-work-image eye-work-image--placeholder"><span>1860</span></div>
 <div class="eye-work-meta">
@@ -130,6 +138,8 @@ title: 流派
 <span class="eye-work-tag">工業革命末期</span>
 </div>
 </a></li>
+
+<li class="eye-era-divider-row" data-era="modern"><span class="era-divider-tc">現代主義</span><span class="era-divider-en">Modernism</span><span class="era-divider-range">1913 — 1955</span></li>
 
 <li data-era="modern" data-region="europe"><a href="構成主義">
 <div class="eye-work-image eye-work-image--placeholder"><span>1913</span></div>
@@ -202,6 +212,8 @@ title: 流派
 <span class="eye-work-tag">現代主義</span>
 </div>
 </a></li>
+
+<li class="eye-era-divider-row" data-era="postmodern"><span class="era-divider-tc">後現代 · 當代</span><span class="era-divider-en">Postmodern — Contemporary</span><span class="era-divider-range">1955 — 1990</span></li>
 
 <li data-era="postmodern" data-region="europe"><a href="普普藝術">
 <div class="eye-work-image eye-work-image--placeholder"><span>1955</span></div>

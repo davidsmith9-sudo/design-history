@@ -1,0 +1,295 @@
+@use "../../styles/variables.scss" as *;
+
+// 詳情頁右下浮動三鍵 + Cite modal
+.article-actions {
+  position: fixed;
+  bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  right: 28px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  @media all and (max-width: 1400px) {
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    right: 16px;
+  }
+
+  @media all and ($mobile) {
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    right: 16px;
+    flex-direction: row;
+  }
+}
+
+.article-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--lightgray);
+  cursor: pointer;
+  font-family: var(--bodyFont);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--darkgray);
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+  min-width: 44px;
+  min-height: 44px;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  svg {
+    color: var(--gray);
+    flex-shrink: 0;
+    transition: color 0.15s ease;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: var(--light);
+    filter: brightness(0.96);
+    color: var(--dark);
+
+    svg {
+      color: var(--secondary);
+    }
+  }
+
+  &.is-active {
+    color: var(--secondary);
+
+    svg {
+      color: var(--secondary);
+      fill: var(--secondary);
+      fill-opacity: 0.15;
+    }
+  }
+
+  @media all and ($mobile) {
+    padding: 0.6rem 0.7rem;
+    border-bottom: none;
+    border-right: 1px solid var(--lightgray);
+
+    &:last-of-type {
+      border-right: none;
+    }
+
+    .article-action-label {
+      display: none;
+    }
+  }
+}
+
+// Toast
+.article-action-toast {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translate(-12px, -50%);
+  background: var(--dark);
+  color: var(--light);
+  padding: 0.55rem 0.85rem;
+  font-family: var(--bodyFont);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.25s ease;
+}
+
+.article-action-toast.is-visible {
+  opacity: 1;
+  transform: translate(-16px, -50%);
+}
+
+@media all and ($mobile) {
+  .article-action-toast {
+    right: 0;
+    top: auto;
+    bottom: 100%;
+    transform: translate(0, -12px);
+
+    &.is-visible {
+      transform: translate(0, -16px);
+    }
+  }
+}
+
+// ── Cite modal ─────────────────────────────────────────
+
+.cite-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(251, 250, 247, 0.55);
+  backdrop-filter: blur(16px) saturate(1.25);
+  -webkit-backdrop-filter: blur(16px) saturate(1.25);
+  padding: 1rem;
+}
+
+.cite-modal[hidden] {
+  display: none !important;
+}
+
+.cite-modal.is-open {
+  display: flex;
+  animation: citeModalFadeIn 160ms ease both;
+}
+
+:root[saved-theme="dark"] .cite-modal {
+  background: rgba(20, 20, 19, 0.6);
+}
+
+@keyframes citeModalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cite-modal-inner {
+  width: 100%;
+  max-width: 680px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+  animation: citeModalScale 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes citeModalScale {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.cite-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--lightgray);
+
+  h3 {
+    margin: 0;
+    font-family: var(--headerFont);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--dark);
+    letter-spacing: -0.01em;
+    border: none !important;
+    padding: 0 !important;
+  }
+}
+
+.cite-modal-close {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--lightgray);
+  background: transparent;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--gray);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: var(--dark);
+    color: var(--dark);
+  }
+}
+
+.cite-modal-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+.cite-tab {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--lightgray);
+  cursor: pointer;
+  font-family: var(--bodyFont);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--darkgray);
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:last-of-type {
+    border-right: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: var(--light);
+    filter: brightness(0.96);
+    color: var(--dark);
+  }
+
+  &.is-active {
+    background: var(--secondary);
+    color: var(--light);
+  }
+}
+
+.cite-modal-body {
+  padding: 1.5rem;
+}
+
+.cite-output {
+  background: var(--light);
+  filter: brightness(0.98);
+  border: 1px solid var(--lightgray);
+  padding: 1.1rem 1.25rem;
+  font-family: var(--codeFont);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--dark);
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0 0 1.25rem;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 0;
+}
+
+.cite-copy {
+  font-family: var(--bodyFont);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  padding: 0.55rem 1.2rem;
+  background: var(--dark);
+  color: var(--light);
+  border: 1px solid var(--dark);
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--secondary);
+    border-color: var(--secondary);
+  }
+}

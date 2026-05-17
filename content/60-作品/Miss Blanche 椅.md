@@ -20,6 +20,10 @@ sources:
 status: stub
 ---
 
+## 主圖
+
+![Miss Blanche 椅](/99-素材/images/作品/Miss Blanche 椅.jpg)
+
 # Miss Blanche 椅
 
 > 倉俁史朗 1988 年設計,把紙玫瑰花瓣懸浮封存於透明亞克力中的椅子,被視為設計史中最詩意的單件家具之一

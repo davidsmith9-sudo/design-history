@@ -36,6 +36,77 @@ export default (() => {
     )
     const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
 
+    // ── Schema.org JSON-LD 結構化資料 ─────────────────
+    const fm: any = fileData.frontmatter ?? {}
+    const type = fm.type as string | undefined
+    const cleanWiki = (s: any): string =>
+      typeof s === "string" ? s.replace(/^\[\[/, "").replace(/\]\]$/, "").split("|")[0] : ""
+    const firstStr = (v: any): string => {
+      if (typeof v === "string") return cleanWiki(v)
+      if (Array.isArray(v) && v.length > 0) return cleanWiki(v[0])
+      return ""
+    }
+    const baseSite = cfg.baseUrl ? `https://${cfg.baseUrl}` : ""
+    const pageUrl = baseSite ? `${baseSite}/${fileData.slug ?? ""}` : ""
+    const siteName = "設計史筆記 Design History Notes"
+
+    let schema: any = null
+    if (type === "作品") {
+      schema = {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        name: title,
+        description,
+        url: pageUrl,
+        inLanguage: "zh-Hant",
+        dateCreated: fm.year != null ? String(fm.year) : undefined,
+        creator: firstStr(fm.designer) || undefined,
+        material: typeof fm.medium === "string" ? fm.medium : undefined,
+        locationCreated: typeof fm.location === "string" ? fm.location : undefined,
+        isPartOf: { "@type": "WebSite", name: siteName, url: baseSite },
+      }
+    } else if (type === "人物") {
+      schema = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: title,
+        alternateName: typeof fm.name_original === "string" ? fm.name_original : undefined,
+        birthDate: fm.birth != null ? String(fm.birth) : undefined,
+        deathDate: fm.death != null ? String(fm.death) : undefined,
+        nationality: typeof fm.nationality === "string" ? fm.nationality : undefined,
+        description,
+        url: pageUrl,
+        sameAs: Array.isArray(fm.sources)
+          ? fm.sources.filter((s: any) => typeof s === "string")
+          : undefined,
+      }
+    } else if (type === "流派" || type === "理論") {
+      schema = {
+        "@context": "https://schema.org",
+        "@type": "DefinedTerm",
+        name: title,
+        description,
+        url: pageUrl,
+        inDefinedTermSet: { "@type": "DefinedTermSet", name: siteName, url: baseSite },
+        ...(fm.year_start != null || fm.year != null
+          ? { dateCreated: String(fm.year_start ?? fm.year) }
+          : {}),
+      }
+    } else if (fileData.slug === "index" || fileData.slug === "/") {
+      schema = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: siteName,
+        url: baseSite,
+        description,
+        inLanguage: "zh-Hant",
+      }
+    }
+    if (schema) {
+      // 移除 undefined 值
+      schema = Object.fromEntries(Object.entries(schema).filter(([, v]) => v !== undefined))
+    }
+
     return (
       <head>
         <title>{title}</title>
@@ -45,6 +116,10 @@ export default (() => {
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" />
             <link rel="stylesheet" href={googleFontHref(cfg.theme)} />
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap"
+            />
             {cfg.theme.typography.title && (
               <link rel="stylesheet" href={googleFontSubsetHref(cfg.theme, cfg.pageTitle)} />
             )}
@@ -85,6 +160,13 @@ export default (() => {
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
+
+        {schema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        )}
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js

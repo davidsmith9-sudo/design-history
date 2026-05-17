@@ -1,0 +1,186 @@
+@use "sass:map";
+@use "../../styles/variables.scss" as *;
+
+.article-hero {
+  margin: 2rem 0 4rem;
+  padding: 0 0 3rem;
+  border-bottom: 1px solid var(--lightgray);
+
+  @media all and ($mobile) {
+    margin: 1rem 0 2.5rem;
+    padding-bottom: 2rem;
+  }
+}
+
+.article-hero-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.article-hero-eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-family: var(--bodyFont);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--gray);
+  font-weight: 500;
+
+  .article-hero-type-en {
+    color: var(--darkgray);
+  }
+  .article-hero-type-sep {
+    color: var(--lightgray);
+  }
+  .article-hero-type-tc {
+    letter-spacing: 0.16em;
+    font-family: var(--headerFont);
+    font-weight: 500;
+    font-size: 0.7rem;
+    color: var(--darkgray);
+    text-transform: none;
+  }
+}
+
+.article-hero-title {
+  font-family: var(--headerFont);
+  font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  color: var(--dark);
+  margin: 0;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.article-hero-subtitle {
+  margin: 0.75rem 0 0;
+  font-family: var(--headerFont);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--darkgray);
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+// ── 水平 meta strip ───────────────────────────────────
+
+.article-hero-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1.5rem 2rem;
+  margin: 2.5rem 0 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--lightgray);
+}
+
+.article-hero-meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.article-hero-meta dt {
+  font-family: var(--bodyFont);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.article-hero-meta dd {
+  margin: 0;
+  font-family: var(--headerFont);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--dark);
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+}
+
+.article-hero-meta-comma {
+  color: var(--gray);
+}
+
+.hero-meta-link {
+  color: var(--dark) !important;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--lightgray);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+
+  &:hover {
+    text-decoration-color: var(--dark);
+  }
+}
+
+// ── 狀態徽章(Draft / Stub / Full)─────────────────────
+
+.article-hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  font-family: var(--bodyFont);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--darkgray);
+  line-height: 1;
+
+  .article-hero-status-symbol {
+    font-size: 0.9rem;
+    line-height: 1;
+    font-family: var(--headerFont);
+  }
+
+  &.status-draft {
+    color: var(--gray);
+    border-color: var(--gray);
+    border-style: dashed;
+    .article-hero-status-symbol {
+      color: var(--gray);
+    }
+  }
+
+  &.status-stub {
+    color: var(--darkgray);
+    border-color: var(--darkgray);
+    .article-hero-status-symbol {
+      color: var(--secondary);
+    }
+  }
+
+  &.status-full {
+    color: var(--dark);
+    border-color: var(--secondary);
+    .article-hero-status-symbol {
+      color: var(--secondary);
+    }
+  }
+}
+
+// ── 變體微調 ───────────────────────────────────────────
+
+.article-hero--人物 .article-hero-title {
+  font-weight: 400;
+}
+
+.article-hero--作品 .article-hero-title {
+  font-style: italic;
+}

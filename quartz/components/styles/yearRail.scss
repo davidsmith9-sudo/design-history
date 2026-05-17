@@ -1,0 +1,228 @@
+@use "../../styles/variables.scss" as *;
+
+// 常駐右側垂直年代軸 — 設計史座標
+.year-rail {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  width: 56px;
+  height: 70vh;
+  max-height: 720px;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+
+  @media all and (max-width: 1400px) {
+    right: 12px;
+    width: 48px;
+  }
+
+  @media all and (max-width: 1100px) {
+    display: none;
+  }
+}
+
+.year-rail-track {
+  position: relative;
+  flex: 1;
+  width: 1px;
+  background: var(--lightgray);
+}
+
+// ── Era bands(縱向半透明色塊) ────────────────────────
+
+.year-rail-era {
+  position: absolute;
+  left: -1px;
+  width: 3px;
+  background: transparent;
+
+  &.era-ancient {
+    background: transparent;
+  }
+  &.era-industrial {
+    background: var(--darkgray);
+    opacity: 0.12;
+  }
+  &.era-modern {
+    background: var(--darkgray);
+    opacity: 0.32;
+  }
+  &.era-postmodern {
+    background: var(--darkgray);
+    opacity: 0.18;
+  }
+}
+
+.year-rail-era-label {
+  position: absolute;
+  left: 12px;
+  top: 0;
+  font-family: var(--bodyFont);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gray);
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.2s;
+}
+
+// hover rail 時整體 era label fade in
+.year-rail:hover .year-rail-era-label {
+  opacity: 0.7;
+}
+
+// ── 每 100 年 tick ─────────────────────────────────────
+
+.year-rail-tick {
+  position: absolute;
+  left: -4px;
+  width: 9px;
+  height: 1px;
+  background: var(--gray);
+  transform: translateY(-0.5px);
+
+  &::after {
+    content: attr(data-year);
+    position: absolute;
+    left: 14px;
+    top: -0.45rem;
+    font-family: var(--bodyFont);
+    font-size: 0.55rem;
+    color: var(--gray);
+    letter-spacing: 0.12em;
+    font-feature-settings: "tnum";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+}
+
+.year-rail:hover .year-rail-tick::after {
+  opacity: 0.6;
+}
+
+// ── Range bar(流派活動期 / 人物生卒期) ──────────────
+
+.year-rail-range {
+  position: absolute;
+  left: -2px;
+  width: 5px;
+  background: var(--secondary);
+  opacity: 0.6;
+  border-radius: 0;
+}
+
+// ── Active marker ─────────────────────────────────────
+
+.year-rail-marker {
+  position: absolute;
+  left: 0;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.year-rail-marker-dot {
+  width: 11px;
+  height: 11px;
+  background: var(--secondary);
+  border: 2px solid var(--light);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--secondary);
+  flex-shrink: 0;
+  position: relative;
+
+  // 觸控隱形 hit area 達 44x44(WCAG 2.5.5)
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -16px;
+    pointer-events: auto;
+  }
+
+  // 同心圓擴散 pulse(細節)
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--secondary);
+    border-radius: 50%;
+    opacity: 0.35;
+    animation: yearRailPulse 2.4s ease-out infinite;
+  }
+}
+
+.year-rail-marker-label {
+  font-family: var(--bodyFont);
+  font-size: 0.72rem;
+  color: var(--dark);
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  font-feature-settings: "tnum";
+  background: var(--light);
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--secondary);
+  white-space: nowrap;
+  margin-left: 1rem;
+  transform: translateX(0);
+}
+
+@keyframes yearRailPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .year-rail-marker-dot::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+// ── Caption(上下兩端年份) ─────────────────────────────
+
+.year-rail-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  align-items: center;
+  pointer-events: none;
+}
+
+.year-rail-caption-end {
+  position: absolute;
+  font-family: var(--headerFont);
+  font-size: 0.62rem;
+  color: var(--gray);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  font-feature-settings: "tnum";
+  text-align: center;
+  pointer-events: auto;
+}
+
+.year-rail-caption-end:first-child {
+  top: -1.6rem;
+}
+
+.year-rail-caption-end:last-child {
+  bottom: -1.6rem;
+}

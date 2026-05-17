@@ -27,6 +27,17 @@ import CursorFollower from "./CursorFollower"
 import EyeMeta from "./EyeMeta"
 import EyeBacklinks from "./EyeBacklinks"
 import GridFilter from "./GridFilter"
+import TopNav from "./TopNav"
+import Timeline from "./Timeline"
+import ArticleHero from "./ArticleHero"
+import ArticleRelated from "./ArticleRelated"
+import ArticleActions from "./ArticleActions"
+import ArticleSources from "./ArticleSources"
+import Genealogy from "./Genealogy"
+import ChapterStrip from "./ChapterStrip"
+import HeroIntro from "./HeroIntro"
+import YearRail from "./YearRail"
+import PageTransition from "./PageTransition"
 
 export {
   ArticleTitle,
@@ -58,4 +69,15 @@ export {
   EyeMeta,
   EyeBacklinks,
   GridFilter,
+  TopNav,
+  Timeline,
+  ArticleHero,
+  ArticleRelated,
+  ArticleActions,
+  ArticleSources,
+  Genealogy,
+  ChapterStrip,
+  HeroIntro,
+  YearRail,
+  PageTransition,
 }

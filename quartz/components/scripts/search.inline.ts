@@ -187,7 +187,24 @@ function highlightHTML(searchTerm: string, el: HTMLElement) {
   return html.body
 }
 
+let searchStatusManifest: Record<string, "draft" | "stub" | "full"> = {}
+let searchStatusLoaded = false
+const statusSymbolMap: Record<string, string> = { draft: "○", stub: "◐", full: "●" }
+const statusLabelMap: Record<string, string> = { draft: "Draft", stub: "Stub", full: "Full" }
+
+async function loadSearchStatus(): Promise<void> {
+  if (searchStatusLoaded) return
+  try {
+    const r = await fetch("/static/status-manifest.json")
+    if (r.ok) searchStatusManifest = await r.json()
+  } catch {
+    // ignore
+  }
+  searchStatusLoaded = true
+}
+
 async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: ContentIndex) {
+  await loadSearchStatus()
   const container = searchElement.querySelector(".search-container") as HTMLElement
   if (!container) return
 
@@ -220,6 +237,7 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
     appendLayout(preview)
   }
 
+  let previousFocus: HTMLElement | null = null
   function hideSearch() {
     container.classList.remove("active")
     searchBar.value = "" // clear the input when we dismiss the search
@@ -230,12 +248,20 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
     }
     searchLayout.classList.remove("display-results")
     searchType = "basic" // reset search type after closing
-    searchButton.focus()
+    // 還原焦點到開啟搜尋的元素(若可能),否則 fallback 到 searchButton
+    if (previousFocus && document.body.contains(previousFocus)) {
+      previousFocus.focus()
+    } else {
+      searchButton.focus()
+    }
+    previousFocus = null
   }
 
   function showSearch(searchTypeNew: SearchType) {
     searchType = searchTypeNew
     if (sidebar) sidebar.style.zIndex = "1"
+    // 記住開啟前的焦點(若是 keyboard 觸發)
+    previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null
     container.classList.add("active")
     searchBar.focus()
   }
@@ -280,29 +306,32 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
     } else if (e.key === "ArrowUp" || (e.shiftKey && e.key === "Tab")) {
       e.preventDefault()
       if (results.contains(document.activeElement)) {
-        // If an element in results-container already has focus, focus previous one
         const currentResult = currentHover
           ? currentHover
           : (document.activeElement as HTMLInputElement | null)
-        const prevResult = currentResult?.previousElementSibling as HTMLInputElement | null
+        let prev = currentResult?.previousElementSibling as HTMLElement | null
+        while (prev && !prev.classList.contains("result-card")) {
+          prev = prev.previousElementSibling as HTMLElement | null
+        }
         currentResult?.classList.remove("focus")
-        prevResult?.focus()
-        if (prevResult) currentHover = prevResult
-        await displayPreview(prevResult)
+        ;(prev as HTMLInputElement | null)?.focus()
+        if (prev) currentHover = prev as HTMLInputElement
+        await displayPreview(prev as HTMLInputElement | null)
       }
     } else if (e.key === "ArrowDown" || e.key === "Tab") {
       e.preventDefault()
-      // The results should already been focused, so we need to find the next one.
-      // The activeElement is the search bar, so we need to find the first result and focus it.
       if (document.activeElement === searchBar || currentHover !== null) {
         const firstResult = currentHover
           ? currentHover
           : (document.getElementsByClassName("result-card")[0] as HTMLInputElement | null)
-        const secondResult = firstResult?.nextElementSibling as HTMLInputElement | null
+        let next = firstResult?.nextElementSibling as HTMLElement | null
+        while (next && !next.classList.contains("result-card")) {
+          next = next.nextElementSibling as HTMLElement | null
+        }
         firstResult?.classList.remove("focus")
-        secondResult?.focus()
-        if (secondResult) currentHover = secondResult
-        await displayPreview(secondResult)
+        ;(next as HTMLInputElement | null)?.focus()
+        if (next) currentHover = next as HTMLInputElement
+        await displayPreview(next as HTMLInputElement | null)
       }
     }
   }
@@ -340,12 +369,19 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
 
   const resultToHTML = ({ slug, title, content, tags }: Item) => {
     const htmlTags = tags.length > 0 ? `<ul class="tags">${tags.join("")}</ul>` : ``
+    const status = searchStatusManifest[`/${slug}`]
+    const statusHtml = status
+      ? `<span class="result-status result-status--${status}" title="${statusLabelMap[status]}"><span aria-hidden="true">${statusSymbolMap[status]}</span> ${statusLabelMap[status]}</span>`
+      : ""
     const itemTile = document.createElement("a")
     itemTile.classList.add("result-card")
     itemTile.id = slug
     itemTile.href = resolveUrl(slug).toString()
     itemTile.innerHTML = `
-      <h3 class="card-title">${title}</h3>
+      <div class="result-card-head">
+        <h3 class="card-title">${title}</h3>
+        ${statusHtml}
+      </div>
       ${htmlTags}
       <p class="card-description">${content}</p>
     `
@@ -373,6 +409,27 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
     return itemTile
   }
 
+  // 把 slug 分類到 流派 / 人物 / 作品 等
+  const categoryMap: Array<[RegExp, { tc: string; en: string; order: number }]> = [
+    [/^40-流派/, { tc: "流派", en: "Movements", order: 1 }],
+    [/^50-人物/, { tc: "人物", en: "Figures", order: 2 }],
+    [/^60-作品/, { tc: "作品", en: "Works", order: 3 }],
+    [/^70-理論/, { tc: "理論", en: "Theories", order: 4 }],
+    [/^10-時代/, { tc: "時代", en: "Eras", order: 5 }],
+    [/^20-地區/, { tc: "地區", en: "Regions", order: 6 }],
+    [/^30-領域/, { tc: "領域", en: "Disciplines", order: 7 }],
+    [/^80-視覺化/, { tc: "視覺化", en: "Visualize", order: 8 }],
+    [/^00-總覽/, { tc: "總覽", en: "Overview", order: 9 }],
+  ]
+  const otherCat = { tc: "其他", en: "Other", order: 99 }
+
+  function categorize(slug: string) {
+    for (const [re, cat] of categoryMap) {
+      if (re.test(slug)) return cat
+    }
+    return otherCat
+  }
+
   async function displayResults(finalResults: Item[]) {
     removeAllChildren(results)
     if (finalResults.length === 0) {
@@ -381,7 +438,26 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
           <p>Try another search term?</p>
       </a>`
     } else {
-      results.append(...finalResults.map(resultToHTML))
+      // 依分類分組(保留組內原始排序 — title-match 優先)
+      const grouped: Map<string, { cat: typeof otherCat; items: Item[] }> = new Map()
+      for (const item of finalResults) {
+        const cat = categorize(item.slug)
+        const key = `${cat.order}:${cat.tc}`
+        if (!grouped.has(key)) grouped.set(key, { cat, items: [] })
+        grouped.get(key)!.items.push(item)
+      }
+
+      const sortedGroups = [...grouped.values()].sort((a, b) => a.cat.order - b.cat.order)
+
+      for (const { cat, items } of sortedGroups) {
+        const header = document.createElement("div")
+        header.className = "search-group-header"
+        header.innerHTML = `<span class="search-group-tc">${cat.tc}</span><span class="search-group-en">${cat.en}</span><span class="search-group-count">${items.length}</span>`
+        results.appendChild(header)
+        for (const item of items) {
+          results.appendChild(resultToHTML(item))
+        }
+      }
     }
 
     if (finalResults.length === 0 && preview) {
@@ -389,10 +465,12 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
       removeAllChildren(preview)
     } else {
       // focus on first result, then also dispatch preview immediately
-      const firstChild = results.firstElementChild as HTMLElement
-      firstChild.classList.add("focus")
-      currentHover = firstChild as HTMLInputElement
-      await displayPreview(firstChild)
+      const firstCard = results.querySelector(".result-card") as HTMLElement | null
+      if (firstCard) {
+        firstCard.classList.add("focus")
+        currentHover = firstCard as HTMLInputElement
+        await displayPreview(firstCard)
+      }
     }
   }
 

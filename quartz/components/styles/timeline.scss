@@ -1,0 +1,340 @@
+@use "../../styles/variables.scss" as *;
+
+.eye-timeline {
+  margin: 3rem 0 4rem;
+  border-top: 1px solid var(--lightgray);
+  border-bottom: 1px solid var(--lightgray);
+  padding: 2rem 0 1rem;
+  background: var(--light);
+}
+
+.eye-timeline-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid var(--lightgray);
+  margin-bottom: 0;
+}
+
+.eye-timeline-legend {
+  display: flex;
+  gap: 1.5rem;
+  font-family: var(--bodyFont);
+  font-size: 0.78rem;
+  color: var(--darkgray);
+}
+
+.eye-timeline-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+
+  i {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--dark);
+  }
+
+  &[data-cat="work"] i {
+    background: transparent;
+    border: 1px solid var(--dark);
+  }
+
+  em {
+    font-style: normal;
+    color: var(--gray);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    margin-left: 0.25rem;
+  }
+}
+
+.eye-timeline-meta {
+  font-family: var(--bodyFont);
+  font-size: 0.78rem;
+  color: var(--gray);
+  letter-spacing: 0.02em;
+
+  .eye-timeline-meta-range {
+    font-family: var(--headerFont);
+    color: var(--dark);
+    margin-right: 0.4rem;
+  }
+
+  .eye-timeline-meta-sep {
+    margin: 0 0.4rem;
+    color: var(--lightgray);
+  }
+}
+
+.eye-timeline-scroller {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray) transparent;
+  padding: 1rem 0;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--lightgray);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--gray);
+  }
+}
+
+.eye-timeline-svg {
+  display: block;
+  font-family: var(--bodyFont);
+}
+
+// ── 時期帶狀背景 ──
+.eye-timeline-era-band {
+  &.era-ancient {
+    fill: rgba(26, 26, 26, 0);
+  }
+  &.era-industrial {
+    fill: rgba(26, 26, 26, 0.018);
+  }
+  &.era-modern {
+    fill: rgba(26, 26, 26, 0.04);
+  }
+  &.era-postmodern {
+    fill: rgba(26, 26, 26, 0.018);
+  }
+}
+
+.eye-timeline-era-label {
+  font-family: var(--headerFont);
+  font-size: 14px;
+  font-weight: 500;
+  fill: var(--darkgray);
+  letter-spacing: -0.005em;
+}
+
+.eye-timeline-era-label-en {
+  font-family: var(--bodyFont);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  fill: var(--gray);
+  font-weight: 500;
+}
+
+.eye-timeline-era-divider {
+  stroke: var(--lightgray);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+
+// ── 主軸 ──
+.eye-timeline-axis {
+  stroke: var(--darkgray);
+  stroke-width: 1;
+}
+
+.eye-timeline-tick {
+  stroke: var(--darkgray);
+  stroke-width: 1;
+}
+
+.eye-timeline-tick-label {
+  font-family: var(--bodyFont);
+  font-size: 10px;
+  fill: var(--gray);
+  letter-spacing: 0.04em;
+}
+
+// ── 節點 ──
+.eye-timeline-stem {
+  stroke: var(--lightgray);
+  stroke-width: 1;
+
+  &.cat-movement {
+    stroke-dasharray: 1 2;
+  }
+}
+
+.eye-timeline-bar {
+  fill: var(--dark);
+
+  &.cat-work {
+    fill: var(--darkgray);
+  }
+}
+
+.eye-timeline-dot {
+  fill: var(--dark);
+  stroke: var(--light);
+  stroke-width: 2;
+  transition: r 0.18s ease;
+
+  &.cat-work {
+    fill: var(--light);
+    stroke: var(--dark);
+    stroke-width: 1.5;
+  }
+}
+
+.eye-timeline-link {
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover .eye-timeline-dot {
+    r: 6;
+  }
+
+  &:hover .eye-timeline-label {
+    fill: var(--dark);
+    font-weight: 600;
+  }
+
+  &:hover .eye-timeline-year {
+    fill: var(--darkgray);
+  }
+}
+
+.eye-timeline-label {
+  font-family: var(--headerFont);
+  font-size: 12px;
+  fill: var(--darkgray);
+  font-weight: 500;
+  transition: fill 0.15s ease, font-weight 0.15s ease;
+
+  &.cat-movement {
+    font-size: 13px;
+    fill: var(--dark);
+  }
+}
+
+.eye-timeline-year {
+  font-family: var(--bodyFont);
+  font-size: 9px;
+  fill: var(--gray);
+  letter-spacing: 0.04em;
+  transition: fill 0.15s ease;
+}
+
+// 滑鼠拖曳捲動的視覺暗示
+.eye-timeline-scroller::after {
+  content: "";
+  pointer-events: none;
+}
+
+// ── Toolbar 重排:filter chips + meta ───────────────────
+
+.eye-timeline-toolbar {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+
+  @media all and not ($mobile) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.eye-timeline-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.75rem;
+  align-items: center;
+}
+
+.eye-timeline-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.eye-timeline-filter-label {
+  font-family: var(--bodyFont);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--gray);
+  font-weight: 500;
+  margin-right: 0.6rem;
+}
+
+.eye-timeline-chip {
+  font-family: var(--bodyFont);
+  font-size: 0.78rem;
+  background: transparent;
+  border: 1px solid var(--lightgray);
+  color: var(--darkgray);
+  padding: 0.3rem 0.8rem;
+  border-radius: 0;
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+
+  em {
+    font-style: normal;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--gray);
+    margin-left: 0.25rem;
+  }
+
+  &:hover {
+    border-color: var(--darkgray);
+    color: var(--dark);
+  }
+
+  &.is-active {
+    background: var(--secondary);
+    color: var(--light);
+    border-color: var(--secondary);
+
+    em {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+
+// ── Density chart bars ────────────────────────────────
+
+.eye-timeline-density-bar {
+  fill: var(--darkgray);
+  opacity: 0.5;
+}
+
+.eye-timeline-density-axis {
+  stroke: var(--lightgray);
+  stroke-width: 1;
+}
+
+.eye-timeline-density-label {
+  font-family: var(--bodyFont);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  fill: var(--gray);
+  font-weight: 500;
+}
+
+// ── Dimmed era band(篩選後非當前 era 變淡) ───────────
+
+.eye-timeline-era-band.is-dimmed {
+  opacity: 0.3;
+}

@@ -263,6 +263,9 @@ export function renderPage(
     <html lang={lang} dir={direction}>
       <Head {...componentData} />
       <body data-slug={slug}>
+        <a href="#main-content" class="skip-to-content">
+          跳到主要內容 · Skip to content
+        </a>
         <div id="quartz-root" class="page">
           <Body {...componentData}>
             {LeftComponent}
@@ -279,6 +282,7 @@ export function renderPage(
                   ))}
                 </div>
               </div>
+              <a id="main-content" tabindex="-1" aria-hidden="true"></a>
               <Content {...componentData} />
               <hr />
               <div class="page-footer">

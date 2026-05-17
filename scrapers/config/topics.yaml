@@ -1,0 +1,37 @@
+# 抓取主題清單。以 Wikidata QID 作為主鍵,scraper 會用 QID 跨語對齊。
+#
+# 找 QID 的快速方法:
+#   python run.py lookup "Bauhaus" --lang en
+#   python run.py lookup "包浩斯"
+#
+# 維基百科同一個中文標題可能對應多個 QID(例如「包浩斯」可指學校、樂團、博物館),
+# 用 lookup 確認後再寫進這裡。
+
+# === 流派 / 運動 ===
+movements:
+  - qid: Q124354       # Bauhaus 包浩斯(學校與運動)
+  - qid: Q183122       # De Stijl 風格派
+  - qid: Q34636        # Art Nouveau 新藝術
+  - qid: Q173782       # Art Deco 裝飾藝術
+  - qid: Q11455        # Constructivism (art) 構成主義
+  - qid: Q193851       # Memphis Group 孟菲斯
+  - qid: Q570584       # International Style 國際樣式
+  - qid: Q956503       # Swiss Style (design) 瑞士國際主義
+
+# === 人物 ===
+people:
+  - qid: Q4724         # Le Corbusier 柯比意
+  - qid: Q44857        # Walter Gropius 葛羅培斯
+  - qid: Q44086        # Mies van der Rohe 密斯凡德羅
+  - qid: Q57341        # Charles Eames
+  - qid: Q63797        # Dieter Rams 迪特拉姆斯
+  - qid: Q314304       # Massimo Vignelli
+  - qid: Q298378       # Paul Rand
+  - qid: Q1741168      # Kenya Hara 原研哉
+
+# === 作品 ===
+works:
+  - qid: Q940746       # Villa Savoye 薩伏伊別墅
+  - qid: Q204881       # Helvetica
+  - qid: Q1281589      # Eames Lounge Chair
+  - qid: Q748020       # Wassily Chair 瓦西里椅
