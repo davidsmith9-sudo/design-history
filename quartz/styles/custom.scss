@@ -1413,6 +1413,124 @@ body[data-slug="index"] {
 }
 
 // ═══════════════════════════════════════════════════════
+// 移除所有背景裝飾元素(user override)
+// 留純色 background-color,清掉 gradient / blur / pattern / mask
+// ═══════════════════════════════════════════════════════
+
+// Landing 條紋背景 pattern
+body[data-slug="index"],
+:root[saved-theme="dark"] body[data-slug="index"] {
+  background-image: none !important;
+}
+
+// Topnav 毛玻璃 → 純色
+.topnav::before {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--light) !important;
+  bottom: 0 !important;
+}
+:root[saved-theme="dark"] .topnav::before {
+  background: var(--light) !important;
+}
+
+// ChapterStrip 毛玻璃 → 純色
+.chapter-strip {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--light) !important;
+}
+:root[saved-theme="dark"] .chapter-strip {
+  background: var(--light) !important;
+}
+
+// EN banner 毛玻璃 → 純色
+.lang-en-banner {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--light) !important;
+}
+
+// Footer 上方延伸毛玻璃漸層 → 移除
+footer::after {
+  display: none !important;
+}
+
+// Sidebar fade-mask → 移除
+.page > #quartz-body .sidebar {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+// Search modal 毛玻璃 + 漸層 → 純色半透明
+.search > .search-container,
+:root[saved-theme="dark"] .search > .search-container {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+// Cite modal 毛玻璃 → 純色半透明
+.cite-modal,
+:root[saved-theme="dark"] .cite-modal {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+// Status badge / saved-remove 等小元件的 backdrop-filter
+.eye-status-badge,
+.saved-remove,
+.article-actions {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+// Era band 半透明色塊(timeline / genealogy) → 移除
+.eye-timeline-era-band,
+.gen-band {
+  fill: transparent !important;
+  opacity: 0 !important;
+}
+
+// Density chart bar opacity 保留(它是資訊色塊),OK 不動
+
+// LQIP 載入動畫(就保留圖片背景,但漸層 placeholder 拿掉)
+.eye-work-image--placeholder {
+  background: var(--lightgray) !important;
+}
+
+// flowchart Mermaid 各 era band classDef 已經是純色,不動
+
+// 文章正文 inline code 之前的 var(--light) 底色 → 保留(屬於色塊)
+// 程式碼區塊 pre 同
+// 但 callout TL;DR 的 var(--light) brightness 過濾移除
+.center > article:has(.article-hero) > blockquote.article-tldr,
+.center > article:has(.article-hero) blockquote.article-tldr {
+  filter: none !important;
+  background: var(--light) !important;
+}
+
+// about-reset-pane 一樣
+.about-reset-pane {
+  filter: none !important;
+}
+
+// 任何 gradient 改成純色
+.eye-grid a:hover,
+.eye-paths a:hover,
+.eye-primary-grid a:hover,
+.eye-curated a:hover,
+.eye-index-list a:hover,
+.tag-page-listing li.section-li > .section:hover,
+.article-related-strip a:hover,
+.not-found-cta:hover,
+.article-sources-list a:hover {
+  background: var(--lightgray) !important;
+  filter: none !important;
+}
+
+// ═══════════════════════════════════════════════════════
 // 移除所有裝飾性橫線(user override)
 // 保留:卡片格子的縱向邊框、blockquote left border、文字底線(連結 hover)
 // ═══════════════════════════════════════════════════════
