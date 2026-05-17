@@ -1413,6 +1413,153 @@ body[data-slug="index"] {
 }
 
 // ═══════════════════════════════════════════════════════
+// 矩形圓角(user override)— 依大小階梯
+// xs ~3px (chips, badges, kbd)
+// sm ~6px (按鈕、輸入框、小元件)
+// md ~10px (卡片、modal 內框、圖片框)
+// lg ~16px (大區塊、hero block、pull-quote)
+// 貼邊 strip(topnav/chapter/banner/footer)保留直角
+// ═══════════════════════════════════════════════════════
+
+:root {
+  --r-xs: 3px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+}
+
+// XS — tiny chips / badges / kbd / inline pills
+.eye-filter-btn,
+.eye-sort-btn,
+.eye-timeline-chip,
+.eye-status-badge,
+.search-kbd,
+.tag-link,
+.topnav-lang-toggle,
+.topnav-random,
+.topnav-saved,
+.cite-tab,
+.article-action,
+.article-hero-status,
+.eye-bl-pill,
+.eye-meta-pill,
+.about-reset-btn,
+.cite-modal-close,
+.lang-en-banner-close,
+.result-status,
+.eye-genealogy-legend-item i {
+  border-radius: var(--r-xs) !important;
+}
+
+// 小到剛好的 X 按鈕
+.saved-remove {
+  border-radius: 50% !important;
+}
+
+// SM — buttons / inputs / 中小型 controls / cells
+.search-button,
+.search-bar,
+.eye-grid > li,
+.eye-paths > li,
+.eye-primary-grid > li,
+.eye-curated > li,
+.eye-index-list > li,
+.cite-copy,
+.topnav-drawer-tool,
+.lang-en-banner-resources a,
+.not-found-cta,
+.gen-arrow-marker,
+:not(pre) > code,
+.text-highlight,
+.highlight {
+  border-radius: var(--r-sm) !important;
+}
+
+// MD — cards / images / modals 內框 / code blocks
+.eye-grid a,
+.eye-paths a,
+.eye-primary-grid a,
+.eye-curated a,
+.eye-works-grid > li,
+.eye-works-grid > li > a,
+.eye-work-image,
+.eye-work-image img,
+article img,
+article pre,
+article table,
+.callout,
+.popover,
+.popover-inner,
+.search-result,
+.search-layout,
+.expand,
+.about-reset-pane,
+.tag-index-section,
+.cite-output,
+.article-actions,
+.eye-timeline,
+.eye-genealogy,
+.lang-en-banner,
+audio,
+video,
+iframe.pdf,
+.external-embed.youtube {
+  border-radius: var(--r-md) !important;
+}
+
+// 平台 picture/source 不直接吃 border-radius,但 img 已套
+picture {
+  border-radius: var(--r-md) !important;
+  overflow: hidden;
+}
+
+// LG — large blocks / hero / pull quotes / mini-flow
+.eye-hero,
+.article-hero,
+.article-sources,
+.article-related,
+.eye-backlinks,
+.tag-page-listing,
+.mini-flow,
+.cite-modal-inner,
+.callout[data-callout="quote"],
+.center > article:has(.article-hero) > blockquote.article-tldr,
+.center > article:has(.article-hero) blockquote.article-tldr,
+.eye-paths,
+.eye-grid,
+.eye-primary-grid,
+.eye-curated,
+.eye-index-list,
+.eye-works-grid {
+  border-radius: var(--r-lg) !important;
+}
+
+// 確保圓角不被內部內容打破
+.eye-work-image,
+.eye-grid a,
+.eye-paths a,
+.eye-primary-grid a,
+.eye-curated a,
+.article-related-strip a,
+.search-result,
+.eye-paths,
+.eye-grid,
+.eye-primary-grid,
+.eye-works-grid,
+.tag-page-listing,
+.cite-modal-inner {
+  overflow: hidden !important;
+}
+
+// Mermaid SVG 用 rx/ry 屬性(CSS 對 SVG rect 支援度低,但保留以便支援的瀏覽器)
+.mermaid .node rect,
+.mermaid .cluster rect,
+.mermaid rect.task {
+  rx: 6px !important;
+  ry: 6px !important;
+}
+
+// ═══════════════════════════════════════════════════════
 // 移除所有背景裝飾元素(user override)
 // 留純色 background-color,清掉 gradient / blur / pattern / mask
 // ═══════════════════════════════════════════════════════
