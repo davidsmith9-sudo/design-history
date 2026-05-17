@@ -1412,6 +1412,93 @@ body[data-slug="index"] {
   }
 }
 
+// ═══════════════════════════════════════════════════════
+// 移除所有裝飾性橫線(user override)
+// 保留:卡片格子的縱向邊框、blockquote left border、文字底線(連結 hover)
+// ═══════════════════════════════════════════════════════
+
+.eye-hero,
+.eye-stats,
+.eye-hero .eye-stats,
+.eye-section-label,
+.eye-filters,
+.eye-curated,
+.eye-curated > li,
+.eye-index-list,
+.eye-index-list > li,
+.eye-paths,
+.eye-paths > li,
+.eye-primary-grid,
+.eye-primary-grid > li,
+.eye-grid,
+.eye-grid > li,
+.eye-works-grid,
+.eye-works-grid > li,
+.eye-works-grid > li.eye-era-divider-row,
+.eye-era-marker,
+.eye-colophon,
+.eye-filter-empty,
+.expand,
+.article-hero,
+.article-hero-meta,
+.article-hero-status,
+.article-sources,
+.article-related,
+.eye-backlinks,
+.eye-bl-type,
+.eye-bl-list,
+.eye-bl-list > li,
+.eye-genealogy,
+.eye-genealogy-legend,
+.eye-timeline,
+.eye-timeline-toolbar,
+.mini-flow,
+.about-reset-pane,
+.not-found-hero,
+.not-found-cta,
+.callout[data-callout="quote"],
+.chapter-strip,
+.lang-en-banner,
+.tag-page-listing,
+.tag-page-listing li.section-li,
+.tag-index-list,
+.tag-index-section,
+.center > article > h2,
+.center > article:has(.article-hero) > p:has(> img),
+.center > article:has(.article-hero) > p:has(> picture),
+.center > article:has(.article-hero) p:has(> img) + p > em:only-child,
+.center > article:has(.article-hero) p:has(> picture) + p > em:only-child,
+.footnotes,
+footer {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+// h2 之前是 border-top + padding-top,移除 border 後 padding 也收回
+.center > article > h2 {
+  padding-top: 0 !important;
+}
+
+// 詳情頁文章 h2 同樣處理
+.center > article:has(.article-hero) > h2 {
+  padding-top: 2.5rem !important;
+}
+.center > article:has(.article-hero) > h2::after {
+  display: none !important;
+}
+
+// hr 也消滅(不只 .center > hr,任何 article 內的 hr)
+hr,
+article hr,
+.center hr {
+  display: none !important;
+}
+
+// 章節編號 (01 ──) 的短線(.center > article:has(.article-hero) > h2::after)
+.center > article:has(.article-hero) > h2::after {
+  display: none !important;
+}
+
 // ── i18n:語系切換 ─────────────────────────────────────
 // <html data-lang="tc">(預設):顯示 TC,顯示 EN 副標,但隱藏 .lang-en-only
 // <html data-lang="en">:隱藏 .lang-tc-only,套上以下 .lang-en-only
