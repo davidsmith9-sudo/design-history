@@ -103,3 +103,6 @@ status: stub
 - Steve Krug, *Don't Make Me Think*(2000)
 - Nielsen Norman Group — https://www.nngroup.com/
 - Smashing Magazine、A List Apart 等 Web 設計持續閱讀
+
+## 主圖
+![[99-素材/images/領域/UI-UX設計史.png]]
